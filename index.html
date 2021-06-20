@@ -12,23 +12,27 @@
             padding:0;
         }
         .wrap{
-            margin: 5px auto;
+            /* margin: 5px auto; */
             width:100%;
-            max-width: 512px;
+            /* max-width: 512px; */
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
             align-content: space-around;
         }
         .wrap .item{
-            width:30%;
+            width:100px;
             min-height: 100px;
             text-align: center;
+            background-color: antiquewhite;
+            margin-bottom: 20px;
+            border-radius: 10px;
         }
         .wrap .item .img_box{
             height:100px;
             overflow: hidden;
             position: relative;
+            border-radius: 10px;
         }
         .wrap .item .img_box img{
             height:100px;
@@ -40,13 +44,13 @@
 </head>
 <body>
     <div id="app">
-        <h3 style="text-align: center;">警察叔叔，就是这个人</h3>
+        <h3 style="text-align: center;margin: 10px;background-color: aqua;">测试。。。。</h3>
         <div class="wrap">
             <div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
                 <div class="img_box">
                     <img :src="'./imgs/'+item.img_url" :alt="item.name">
                 </div>
-                <p>{{item.name}}</p>
+                <p style="font-size: 15px;margin: 5px;">{{item.name}}</p>
             </div>
         </div>
     </div>
