@@ -1,0 +1,132 @@
+*,body{
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+html,body{
+    padding:0;
+    margin: 0;
+    width:100%;
+    height:100%;
+}
+
+
+
+/* 布局容器 */
+#wrap{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    background: #f8f1d7;
+    border-radius: 15px;
+}
+
+
+
+/* 标题容器 */
+#wrap .title{
+    width: 90%;
+    position: relative;
+    text-align: center;
+    margin: 10px auto 5px;
+}
+#wrap .title #name{
+    margin-bottom:5px;
+    line-height: 21px;
+    font-weight: 600;
+}
+#wrap .title #home{
+    line-height: 21px;
+    text-decoration: none;
+    position: absolute;
+    left:0;
+    top:0;
+}
+
+/* 纵向 */
+#wrap.normal .title{
+    width: 90%;
+}
+
+/* 横向 */
+#wrap.transverse .title{
+    width: 40%;
+}
+
+
+
+/* 游戏屏幕区 */
+
+/* 纵向 */
+#wrap.normal #show_box {
+    width: 90%;
+}
+
+/* 横向 */
+#wrap.transverse #show_box {
+    width: 40%;
+}
+
+/* 通用 */
+#wrap #show_box {
+    position: relative;
+    text-align: center;
+    margin: 5px auto;
+    background: url(../imgs/unload_bg.jpg);
+    background-size: 100% 100%;
+    font-size: 0;
+}
+
+#show_box #btn_load{
+    position: absolute;
+    color:#FF4500;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    cursor: pointer;
+    font-size: 15px;
+}
+
+
+
+/* canvas */
+/* 纵向 */
+#wrap.normal #show_box #nes-canvas {
+    width:100%;
+}
+/* 横向 */
+#wrap.transverse #show_box #nes-canvas {
+    width:100%;
+}
+
+
+/* 摇杆容器 */
+#wrap #direction{
+    z-index: 90;
+    position: absolute;
+    bottom:30px;
+    left:20px;
+    width:150px;
+    height:150px;
+    /* background-color:blue; */
+}
+
+
+
+/* 按钮容器 */
+#wrap #user_btn_box{
+    z-index: 90;
+    position: absolute;
+    bottom:30px;
+    right:20px;
+    width:170px;
+    height:170px;
+    /* background-color:blue; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+}

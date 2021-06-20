@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NES游戏模拟器</title>
+    <script src="./lib/vue.min.js"></script>
+    <script src="./lib/axios.min.js"></script>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+        }
+        .wrap{
+            margin: 5px auto;
+            width:100%;
+            max-width: 512px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-content: space-around;
+        }
+        .wrap .item{
+            width:30%;
+            min-height: 100px;
+            text-align: center;
+        }
+        .wrap .item .img_box{
+            height:100px;
+            overflow: hidden;
+            position: relative;
+        }
+        .wrap .item .img_box img{
+            height:100px;
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3 style="text-align: center;">警察叔叔，就是这个人</h3>
+        <div class="wrap">
+            <div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
+                <div class="img_box">
+                    <img :src="'./imgs/'+item.img_url" :alt="item.name">
+                </div>
+                <p>{{item.name}}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        data:{
+            game_list:[]
+        },
+        created(){
+            //获取游戏列表
+            this.getGameList()
+        },
+        methods:{
+            startGame(id){
+                window.location.assign('./game.html?id=${id}')
+            },
+            getGameList:async function(){
+                try{
+                    var result =  await axios.get('./game_list.json')
+                    this.game_list = result.data
+                }catch(err){
+                    console.log(err)
+                }
+            }
+        }
+    })
+</script>

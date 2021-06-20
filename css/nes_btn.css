@@ -1,0 +1,44 @@
+.nes_btn_box {
+    max-width: 170px;
+    max-height: 180px;
+    margin: 0 auto;
+    width:100%;
+    height:100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.nes_btn_box .btn {
+    height:30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: lightcoral;
+    color: lightcyan;
+    cursor: pointer;
+    border-radius: 5px;
+    opacity: 0.5;
+}
+/* 点击时按钮的背景色 */
+.nes_btn_box .btn.isTouch {
+    background-color: linen;
+}
+
+.nes_btn_box .btn-select,
+.nes_btn_box .btn-start {
+    width:40%;
+}
+.nes_btn_box .btn-ab {
+    width:80%;
+    height:60px;
+    line-height: 60px;
+}
+
+.nes_btn_box .btn-a,
+.nes_btn_box .btn-b {
+    width:46%;
+    height:60px;
+    line-height: 60px;
+}
