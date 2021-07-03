@@ -1,0 +1,117 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: YouYuan;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-image: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
+    background-image: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
+    background-image: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
+    background-image: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
+    background-repeat: no-repeat, no-repeat;
+    background-size: cover, cover;
+    background-position: center center, center center;
+    background-attachment: fixed, fixed;
+}
+
+.wrap {
+    position: absolute;
+    margin: 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    top: 60px;
+}
+
+.div1 {
+    position: fixed;
+    z-index: 99;
+    height: auto;
+    width: 100%;
+    text-align: center;
+    background-color: rgb(22, 160, 134);
+}
+
+.div1 .div2 {
+    display: inline-block;
+    margin: 10px;
+    background-color: rgb(30, 30, 30);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.div1 .div2 a{
+    text-decoration: none;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
+.wrap .item {
+    display: inline-block;
+    width: 15%;
+    min-height: 150px;
+    box-shadow: 0 10px 40px -10px rgb(255, 230, 0);
+    border: 2px solid rgb(255, 230, 0);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.wrap .item:hover {
+    box-shadow: 0 10px 40px -10px rgb(98, 0, 255);
+    border: 2px solid rgb(76, 0, 255);
+    transform: translate3d(0px, -8px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
+    transform-style: preserve-3d;
+    -webkit-transition: 0.2s linear;
+    transition: 0.2s linear;
+    cursor:pointer
+}
+
+.wrap .item .img_box {
+    display: block;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.wrap .item .img_box img {
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.wrap .item .p1 {
+    font-size: 15px;
+    color: honeydew;
+    margin: 0;
+}
+
+@media (max-width: 1250px) {
+    .wrap .item {
+        width: 15%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .wrap .item {
+        width: 18%;
+    }
+}
+
+@media (max-width: 600px) {
+    .wrap .item {
+        width: 30%;
+    }
+}
