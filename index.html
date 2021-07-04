@@ -26,7 +26,6 @@
                 <p class="p1">{{item.name}}</p>
             </div>
         </div>
-        <!-- <div style="position: fixed;background-color: blue;height: 300px;width: 90%;"></div> -->
     </div>
 </body>
 <script>
@@ -41,7 +40,7 @@
         },
         methods: {
             startGame(id) {
-                window.location.assign(`./game.html?id=${id}`)
+                window.open('./game.html?id='+`${id}`,'_self')
             },
             getGameList: async function () {
                 try {

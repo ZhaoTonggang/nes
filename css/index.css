@@ -25,7 +25,7 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: space-around;
-    top: 60px;
+    top: 50px;
 }
 
 .div1 {
@@ -39,7 +39,7 @@ body {
 
 .div1 .div2 {
     display: inline-block;
-    margin: 10px;
+    margin: 5px;
     background-color: rgb(30, 30, 30);
     border-radius: 10px;
     padding: 5px;
@@ -49,7 +49,7 @@ body {
     text-decoration: none;
     font-weight: bold;
     color: rgb(255, 255, 255);
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .wrap .item {

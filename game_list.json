@@ -11,7 +11,7 @@
     {"name":"热血物语中文版","rom_url":"热血物语中文版.nes","img_url":"热血物语中文版.gif","id":10,"isFourBtn":false},
     {"name":"热血格斗EX","rom_url":"热血格斗EX.nes","img_url":"热血格斗EX.png","id":11,"isFourBtn":false},
     {"name":"三目童子","rom_url":"三目童子.nes","img_url":"三目童子.jpg","id":12,"isFourBtn":true},
-    {"name":"忍者神龟格斗","rom_url":"忍者神龟格斗.nes","img_url":"忍者神龟格斗.gif","id":13,"isFourBtn":false},
+    {"name":"忍者神龟格斗","rom_url":"忍者神龟格斗.nes","img_url":"忍者神龟格斗.jpg","id":13,"isFourBtn":false},
     {"name":"忍者龙剑传3","rom_url":"忍者龙剑传3.nes","img_url":"忍者龙剑传3.jpg","id":14,"isFourBtn":true},
     {"name":"南北战争","rom_url":"南北战争.nes","img_url":"南北战争.jpg","id":15,"isFourBtn":true},
     {"name":"烈火92","rom_url":"烈火92.nes","img_url":"烈火92.png","id":16,"isFourBtn":false},
@@ -26,5 +26,6 @@
     {"name":"越野机车","rom_url":"越野机车.nes","img_url":"越野机车.jpg","id":25,"isFourBtn":true},
     {"name":"炸弹人2","rom_url":"炸弹人2.nes","img_url":"炸弹人2.jpg","id":26,"isFourBtn":true},
     {"name":"花式撞球","rom_url":"花式撞球.nes","img_url":"花式撞球.jpg","id":27,"isFourBtn":true},
-    {"name":"热血最强物语","rom_url":"热血最强物语.nes","img_url":"热血最强物语.png","id":28,"isFourBtn":false}
+    {"name":"热血最强物语","rom_url":"热血最强物语.nes","img_url":"热血最强物语.png","id":28,"isFourBtn":false},
+    {"name":"水浒传","rom_url":"水浒传.nes","img_url":"水浒传.jpg","id":29,"isFourBtn":true}
 ]
