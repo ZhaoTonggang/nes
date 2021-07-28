@@ -14,10 +14,10 @@ var audio_write_cursor = 0,
 	audio_read_cursor = 0;
 
 var nes = new jsnes.NES({
-	onFrame: function (framebuffer_24) {
+	onFrame: function(framebuffer_24) {
 		for (var i = 0; i < FRAMEBUFFER_SIZE; i++) framebuffer_u32[i] = 0xFF000000 | framebuffer_24[i];
 	},
-	onAudioSample: function (l, r) {
+	onAudioSample: function(l, r) {
 		audio_samples_L[audio_write_cursor] = l;
 		audio_samples_R[audio_write_cursor] = r;
 		audio_write_cursor = (audio_write_cursor + 1) & SAMPLE_MASK;
@@ -104,9 +104,9 @@ function nes_init(canvas_id) {
 	framebuffer_u32 = new Uint32Array(buffer);
 
 	// Setup audio.
-	// var contextClass =(window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext); 
-	// var audio_ctx = new contextClass();
-	var audio_ctx = new window.AudioContext();
+	var contextClass =(window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext); 
+	var audio_ctx = new contextClass();
+	// var audio_ctx = new window.AudioContext();
 	var script_processor = audio_ctx.createScriptProcessor(AUDIO_BUFFERING, 0, 2);
 	script_processor.onaudioprocess = audio_callback;
 	script_processor.connect(audio_ctx.destination);
@@ -131,7 +131,7 @@ function nes_load_url(canvas_id, path) {
 	req.overrideMimeType("text/plain; charset=x-user-defined");
 	req.onerror = () => console.log(`Error loading ${path}: ${req.statusText}`);
 
-	req.onload = function () {
+	req.onload = function() {
 		if (this.status === 200) {
 			//装载游戏数据
 			nes_boot(this.responseText);

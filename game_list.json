@@ -1,31 +1,141 @@
-[
-    {"name":"热血格斗中文","rom_url":"热血格斗传说中文版.nes","img_url":"热血格斗中文.jpg","id":1,"isFourBtn":false},
-    {"name":"超级玛丽","rom_url":"超级玛丽.nes","img_url":"超级玛丽.jpg","id":2,"isFourBtn":true},
-    {"name":"热血足球3AI","rom_url":"热血足球3AIvsAI.nes","img_url":"热血足球.gif","id":3,"isFourBtn":false},
-    {"name":"热血新纪录中文","rom_url":"热血新纪录中文.nes","img_url":"热血新纪录中文.jpg","id":4,"isFourBtn":false},
-    {"name":"双截龙3","rom_url":"双截龙3.nes","img_url":"双截龙3.png","id":5,"isFourBtn":false},
-    {"name":"忍者龙剑传2","rom_url":"忍者龙剑传2.nes","img_url":"忍者龙剑传2.jpg","id":6,"isFourBtn":true},
-    {"name":"超级魂斗罗","rom_url":"超级魂斗罗.nes","img_url":"超级魂斗罗.jpg","id":7,"isFourBtn":false},
-    {"name":"沙罗曼蛇","rom_url":"沙罗曼蛇.nes","img_url":"沙罗曼蛇.jpg","id":8,"isFourBtn":false},
-    {"name":"赤色要塞","rom_url":"赤色要塞.nes","img_url":"赤色要塞.jpg","id":9,"isFourBtn":false},
-    {"name":"热血物语中文版","rom_url":"热血物语中文版.nes","img_url":"热血物语中文版.gif","id":10,"isFourBtn":false},
-    {"name":"热血格斗EX","rom_url":"热血格斗EX.nes","img_url":"热血格斗EX.png","id":11,"isFourBtn":false},
-    {"name":"三目童子","rom_url":"三目童子.nes","img_url":"三目童子.jpg","id":12,"isFourBtn":true},
-    {"name":"忍者神龟格斗","rom_url":"忍者神龟格斗.nes","img_url":"忍者神龟格斗.jpg","id":13,"isFourBtn":false},
-    {"name":"忍者龙剑传3","rom_url":"忍者龙剑传3.nes","img_url":"忍者龙剑传3.jpg","id":14,"isFourBtn":true},
-    {"name":"南北战争","rom_url":"南北战争.nes","img_url":"南北战争.jpg","id":15,"isFourBtn":true},
-    {"name":"烈火92","rom_url":"烈火92.nes","img_url":"烈火92.png","id":16,"isFourBtn":false},
-    {"name":"双截龙2","rom_url":"双截龙2.nes","img_url":"双截龙2.jpg","id":17,"isFourBtn":false},
-    {"name":"魂斗罗","rom_url":"魂斗罗.nes","img_url":"魂斗罗.jpg","id":18,"isFourBtn":false},
-    {"name":"FC新人类","rom_url":"新人类.nes","img_url":"FC新人类.jpg","id":19,"isFourBtn":false},
-    {"name":"火箭车","rom_url":"火箭车.nes","img_url":"火箭车.jpg","id":20,"isFourBtn":true},
-    {"name":"坦克大战","rom_url":"坦克大战.nes","img_url":"坦克大战.jpg","id":21,"isFourBtn":true},
-    {"name":"影子传说","rom_url":"影子传说.nes","img_url":"影子传说.jpg","id":22,"isFourBtn":false},
-    {"name":"松鼠大作战","rom_url":"松鼠大作战.nes","img_url":"松鼠大作战.jpg","id":23,"isFourBtn":true},
-    {"name":"冒险岛","rom_url":"冒险岛.nes","img_url":"冒险岛.jpg","id":24,"isFourBtn":true},
-    {"name":"越野机车","rom_url":"越野机车.nes","img_url":"越野机车.jpg","id":25,"isFourBtn":true},
-    {"name":"炸弹人2","rom_url":"炸弹人2.nes","img_url":"炸弹人2.jpg","id":26,"isFourBtn":true},
-    {"name":"花式撞球","rom_url":"花式撞球.nes","img_url":"花式撞球.jpg","id":27,"isFourBtn":true},
-    {"name":"热血最强物语","rom_url":"热血最强物语.nes","img_url":"热血最强物语.png","id":28,"isFourBtn":false},
-    {"name":"水浒传","rom_url":"水浒传.nes","img_url":"水浒传.jpg","id":29,"isFourBtn":true}
-]
+[{
+	"id": 1,
+	"name": "热血格斗（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 2,
+	"name": "超级玛丽",
+	"isFourBtn": "true"
+}, {
+	"id": 3,
+	"name": "热血足球（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 4,
+	"name": "热血新纪录（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 5,
+	"name": "双截龙",
+	"isFourBtn": "false"
+}, {
+	"id": 6,
+	"name": "双截龙2（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 7,
+	"name": "双截龙3（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 8,
+	"name": "双截龙4",
+	"isFourBtn": "false"
+}, {
+	"id": 9,
+	"name": "忍者龙剑传",
+	"isFourBtn": "true"
+}, {
+	"id": 10,
+	"name": "忍者龙剑传2（中文版）",
+	"isFourBtn": "true"
+}, {
+	"id": 11,
+	"name": "忍者龙剑传3（中文版）",
+	"isFourBtn": "true"
+}, {
+	"id": 12,
+	"name": "超级魂斗罗（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 13,
+	"name": "沙罗曼蛇",
+	"isFourBtn": "true"
+}, {
+	"id": 14,
+	"name": "赤色要塞",
+	"isFourBtn": "false"
+}, {
+	"id": 15,
+	"name": "热血物语（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 16,
+	"name": "热血格斗EX",
+	"isFourBtn": "false"
+}, {
+	"id": 17,
+	"name": "三目童子（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 18,
+	"name": "忍者神龟2（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 19,
+	"name": "南北战争",
+	"isFourBtn": "false"
+}, {
+	"id": 20,
+	"name": "烈火92（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 21,
+	"name": "魂斗罗（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 22,
+	"name": "新人类（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 23,
+	"name": "火箭车",
+	"isFourBtn": "false"
+}, {
+	"id": 24,
+	"name": "坦克大战",
+	"isFourBtn": "false"
+}, {
+	"id": 25,
+	"name": "影子传说",
+	"isFourBtn": "false"
+}, {
+	"id": 26,
+	"name": "松鼠大作战（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 27,
+	"name": "冒险岛（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 28,
+	"name": "越野摩托",
+	"isFourBtn": "false"
+}, {
+	"id": 29,
+	"name": "炸弹人2",
+	"isFourBtn": "false"
+}, {
+	"id": 30,
+	"name": "雪人兄弟",
+	"isFourBtn": "false"
+}, {
+	"id": 31,
+	"name": "雪人兄弟（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 32,
+	"name": "月宫桌球（中文版）",
+	"isFourBtn": "false"
+}, {
+	"id": 33,
+	"name": "创世纪英雄（外星电脑）",
+	"isFourBtn": "false"
+}, {
+	"id": 34,
+	"name": "武林外传（南晶科技）",
+	"isFourBtn": "false"
+}, {
+	"id": 35,
+	"name": "最终幻想3（外星电脑）",
+	"isFourBtn": "false"
+}]

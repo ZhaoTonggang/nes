@@ -1,58 +1,57 @@
 <!DOCTYPE html>
 <html lang="zh-CN" onselectstart="return false" oncontextmenu=self.event.returnValue=false>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>红白天下</title>
-    <link rel="shortcut icon" href="./icon.png">
-    <script src="./lib/vue.min.js"></script>
-    <script src="./lib/axios.min.js"></script>
-    <link rel="stylesheet" href="./css/index.css">
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>红白天下</title>
+		<link rel="shortcut icon" href="./icon.png">
+		<script src="./lib/vue.min.js"></script>
+		<script src="./lib/axios.min.js"></script>
+		<link rel="stylesheet" href="./css/index.css">
+	</head>
 
-<body>
-    <div id="app">
-        <div class="div1">
-            <div class="div2">
-                <a href="./">红白天下•寓教于乐</a>
-            </div>
-        </div>
-        <div class="wrap">
-            <div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
-                <div class="img_box">
-                    <img :src="'./imgs/'+item.img_url" :alt="item.name">
-                </div>
-                <p class="p1">{{item.name}}</p>
-            </div>
-        </div>
-    </div>
-</body>
-<script>
-    var vm = new Vue({
-        el: "#app",
-        data: {
-            game_list: []
-        },
-        created() {
-            //获取游戏列表
-            this.getGameList()
-        },
-        methods: {
-            startGame(id) {
-                window.open('./game.html?id='+`${id}`,'_self')
-            },
-            getGameList: async function () {
-                try {
-                    var result = await axios.get('./game_list.json')
-                    this.game_list = result.data
-                } catch (err) {
-                    console.log(err)
-                }
-            }
-        }
-    })
-
-</script>
+	<body>
+		<div id="app">
+			<div class="div1">
+				<div class="div2">
+					<a href="./">红白天下•寓教于乐</a>
+				</div>
+			</div>
+			<div class="wrap">
+				<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
+					<div class="img_box">
+						<img :src="'./imgs/'+item.name+'.png'" :alt="item.name">
+					</div>
+					<p class="p1">{{item.name}}</p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				game_list: []
+			},
+			created() {
+				//获取游戏列表
+				this.getGameList()
+			},
+			methods: {
+				startGame(id) {
+					window.open('./game.html?id=' + `${id}`, '_self')
+				},
+				getGameList: async function() {
+					try {
+						var result = await axios.get('./game_list.json')
+						this.game_list = result.data
+					} catch (err) {
+						console.log(err)
+					}
+				}
+			}
+		})
+	</script>
 
 </html>
