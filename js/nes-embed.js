@@ -89,9 +89,9 @@ function keyboard(callback, event) {
 function nes_init(canvas_id) {
 	var canvas = document.getElementById(canvas_id);
 	//禁止双击缩放
-	// canvas.addEventListener('dblclick',function(e){
-	// 	e.preventDefault()
-	// })
+	canvas.addEventListener('dblclick',function(e){
+		e.preventDefault()
+	})
 	canvas_ctx = canvas.getContext("2d");
 	image = canvas_ctx.getImageData(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -104,7 +104,8 @@ function nes_init(canvas_id) {
 	framebuffer_u32 = new Uint32Array(buffer);
 
 	// Setup audio.
-	var contextClass =(window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window.oAudioContext || window.msAudioContext); 
+	var contextClass = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window
+		.oAudioContext || window.msAudioContext);
 	var audio_ctx = new contextClass();
 	// var audio_ctx = new window.AudioContext();
 	var script_processor = audio_ctx.createScriptProcessor(AUDIO_BUFFERING, 0, 2);
