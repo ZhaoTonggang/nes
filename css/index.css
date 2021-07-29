@@ -20,7 +20,7 @@ body {
 
 .wrap {
 	position: absolute;
-	margin: 10px 10px;
+	margin: 15px 10px 0 10px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -39,21 +39,14 @@ body {
 	height: auto;
 	text-align: center;
 	background-color: rgb(22, 160, 134);
-}
-
-.div1 .div2 {
-	display: inline-block;
-	margin: 5px;
-	background-color: rgb(30, 30, 30);
-	border-radius: 10px;
 	padding: 5px;
 }
 
-.div1 .div2 a {
+.div1 a {
 	text-decoration: none;
 	font-weight: bold;
 	color: rgb(255, 255, 255);
-	font-size: 15px;
+	font-size: 20px;
 }
 
 .wrap .item {
