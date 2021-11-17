@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="zh-CN" onselectstart="return false" oncontextmenu=self.event.returnValue=false>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>红白之家</title>
-		<link rel="shortcut icon" href="./icon.png">
-		<script src="./lib/vue.min.js"></script>
-		<script src="./lib/axios.min.js"></script>
-		<link rel="stylesheet" href="./css/index.css">
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>红白之家</title>
+	<script src="./lib/vue.min.js"></script>
+	<script src="./lib/axios.min.js"></script>
+	<link rel="stylesheet" href="./css/index.css">
+	<!--网站图标配置-->
+	<link rel="apple-touch-icon" sizes="192x192" href="./icons/192x192.png">
+	<link rel="icon" type="image/png" sizes="128x128" href="./icons/128x128.png">
+	<link rel="icon" type="image/png" sizes="144x144" href="./icons/144x144.png">
+	<link rel="icon" type="image/png" sizes="384x384" href="./icons/384x384.png">
+	<link rel="icon" type="image/png" sizes="512x512" href="./icons/512x512.png">
+	<!--PWA配置-->
+	<link rel="manifest" href="./manifest.json">
+</head>
 
-	<body>
-		<div id="app">
-			<div class="div1">
-				<!-- <div class="div2"> -->
-					<a href="./">红白之家</a>
-				<!-- </div> -->
-			</div>
-			<div class="wrap">
-				<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
-					<div class="img_box">
-						<img :src="'./imgs/'+item.name+'.png'" :alt="item.name">
-					</div>
-					<p class="p1">{{item.name}}</p>
+<body>
+	<div id="app">
+		<div class="div1">
+			<a href="./" title="在线畅玩小霸王经典游戏">红白之家</a>
+		</div>
+		<div class="wrap">
+			<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
+				<div class="img_box">
+					<img :src="'./imgs/'+item.name+'.png'" :alt="item.name" :title="item.name">
 				</div>
+				<p class="p1">{{item.name}}</p>
 			</div>
 		</div>
-	</body>
+	</div>
 	<script>
 		var vm = new Vue({
 			el: "#app",
@@ -40,9 +44,9 @@
 			},
 			methods: {
 				startGame(id) {
-					window.open('./game.html?id=' + `${id}`, '_self')
+					window.open('./game.html?=' + id, '_self')
 				},
-				getGameList: async function() {
+				getGameList: async function () {
 					try {
 						var result = await axios.get('./game_list.json')
 						this.game_list = result.data
@@ -53,5 +57,8 @@
 			}
 		})
 	</script>
+	<!--PWA配置-->
+	<script src="./js/pwa.js"></script>
+</body>
 
 </html>

@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html lang="zh" onselectstart="return false" oncontextmenu=self.event.returnValue=false>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1, maximum-scale=1">
-		<title>红白之家</title>
-		<link rel="shortcut icon" href="./icon.png">
-		<!-- 该页面样式文件 -->
-		<link rel="stylesheet" href="./css/game.css">
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1, maximum-scale=1">
+	<title>红白之家</title>
+	<!--网站图标配置-->
+	<link rel="apple-touch-icon" sizes="192x192" href="./icons/192x192.png">
+	<link rel="icon" type="image/png" sizes="128x128" href="./icons/128x128.png">
+	<link rel="icon" type="image/png" sizes="144x144" href="./icons/144x144.png">
+	<link rel="icon" type="image/png" sizes="384x384" href="./icons/384x384.png">
+	<link rel="icon" type="image/png" sizes="512x512" href="./icons/512x512.png">
+	<!--PWA配置-->
+	<link rel="manifest" href="./manifest.json">
+	<!-- 该页面样式文件 -->
+	<link rel="stylesheet" href="./css/game.css">
+</head>
 
-	<body>
-		<div id="wrap" class="transverse">
-			<div class="title">
-				<a href="./" id="home">返回首页</a>
-				<span id="name">热血格斗（中文版）</span>
-			</div>
-			<div id="show_box">
-				<h3 id="btn_load">
-					点击开始游戏</h3>
-				<canvas id="nes-canvas" width="256" height="240">
-			</div>
-			<!-- 摇杆容器 -->
-			<div id="direction"></div>
-			<!-- 按键容器 -->
-			<div id="user_btn_box"></div>
+<body>
+	<div id="wrap" class="transverse">
+		<div class="title">
+			<a href="./" id="home">返回首页</a>
+			<h1 id="name">热血格斗（中文版）</h1>
+			<span id="chongzhi">重置游戏</span>
 		</div>
-	</body>
+		<div id="show_box">
+			<h3 id="btn_load">
+				点击开始游戏
+			</h3>
+			<canvas id="nes-canvas" width="256" height="240">
+		</div>
+		<!-- 摇杆容器 -->
+		<div id="direction"></div>
+		<!-- 按键容器 -->
+		<div id="user_btn_box"></div>
+	</div>
 	<!-- 模拟器 -->
 	<script src="./js/jsnes.min.js"></script>
 	<script src="./js/nes-embed.js"></script>
@@ -46,21 +54,18 @@
 		// alert(document.documentElement.clientHeight)
 		//容器应该适应高度
 		// var canvas_box_width = device_w - 21 //减去
-
-		var gameInfo = null //全局保存游戏信息
-
+		//全局保存游戏信息
+		var gameInfo = null
 		//获取游戏列表，并init页面
 		getGameList(pageInit)
-
-		window.onload = function() {
-
+		window.onload = function () {
 			//禁止双击缩放
-			document.addEventListener('dblclick', function(e) {
+			document.addEventListener('dblclick', function (e) {
 				e.preventDefault()
 			})
 
 			//监听加载按钮
-			document.querySelector('#btn_load').onclick = function() {
+			document.querySelector('#btn_load').onclick = function () {
 				//如果游戏信息为空 则return
 				if (!gameInfo) return
 				//fullScreen(document.querySelector('#wrap'))
@@ -69,68 +74,81 @@
 				//隐藏加载按钮
 				this.style.display = 'none'
 			}
-
+			//重置游戏配置
+			document.querySelector('#chongzhi').onclick = function () {
+				window.location.reload()
+			}
 			//实例化NES按钮
 			var nesBtn = new VirtualNesBtn({
-				el: "#user_btn_box", //容器
+				//容器
+				el: "#user_btn_box",
+				//虚拟按钮按下时的回调 参数evt
 				btn_down_fn: (event) => {
 					keyboard(nes.buttonDown, event)
-				}, //虚拟按钮按下时的回调 参数evt
+				},
+				//虚拟按钮弹起时的回调 参数evt
 				btn_up_fn: (event) => {
 					keyboard(nes.buttonUp, event)
-				}, //虚拟按钮弹起时的回调 参数evt
-				keyCodes: [32, 13, 74, 75] //按顺序分别是 select start b a
+				},
+				//按顺序分别是 select start b a
+				keyCodes: [32, 13, 74, 75]
 			})
-
 			//NES按钮实例初始化
 			nesBtn.init()
 		}
-
 		//初次加载判断横竖屏
 		handleDirection()
-
 		//监听横竖屏切换
 		window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", handleDirection, false);
-
 		//获取游戏信息
-		function getGameList(cb) { //异步操作
-			axios.get('./game_list.json').then(function(res) {
+		function getGameList(cb) {
+			//异步操作
+			axios.get('./game_list.json').then(function (res) {
 				cb && cb(res.data)
-			}).catch(function(err) {
+			}).catch(function (err) {
 				console.log(err)
 			})
 		}
-
 		function pageInit(gameList) {
 			//获取id
-			var id = location.search.substring(4) || 1 //index就是id-1
+			//index就是id-1
+			var id = location.search.substring(2) || 1
+			//数据化获取的1d
+			id = decodeURI(id)
 			//获取游戏信息
+			// alert(id)
 			gameInfo = gameList[id - 1]
+			// alert(gameInfo)
 			//展示游戏名称
 			document.querySelector('#name').innerHTML = gameInfo.name
-
 			//根据游戏信息配置摇杆
 			var isFourBtn = gameInfo.isFourBtn
 			var color = isFourBtn ? 'lightcoral' : 'royalblue'
-
 			//实例化摇杆 摇杆配置依赖游戏信息
 			var joystick = new Joystick({
-				el: "#direction", //容器
-				color: color, //摇杆颜色
-				size: 120, //摇杆大小
-				isFourBtn: isFourBtn, //8键模式
-				keyCodes: [87, 83, 65, 68], //绑定 上下左右 到 WSAD键
-				rotate: 0, //页面强制横屏时使用90
+				//容器
+				el: "#direction",
+				//摇杆颜色
+				color: color,
+				//摇杆大小
+				size: 120,
+				//8键模式
+				isFourBtn: isFourBtn,
+				//绑定 上下左右 到 WSAD键
+				keyCodes: [87, 83, 65, 68],
+				//页面强制横屏时使用90
+				rotate: 0,
+				//按下时的回调
 				btn_down_fn: (event) => {
 					keyboard(nes.buttonDown, event)
-				}, //按下时的回调
+				},
+				//释放时的回调
 				btn_up_fn: (event) => {
 					keyboard(nes.buttonUp, event)
-				}, //释放时的回调
+				},
 			})
 			joystick.init()
 		}
-
 		//判断手机的横竖屏状态
 		function handleDirection() {
 			//alert(0)
@@ -143,7 +161,6 @@
 				setClass('transverse')
 			}
 		}
-
 		//根据手机屏幕方向设置class类
 		function setClass(direction) {
 			var wrap = document.querySelector("#wrap")
@@ -155,7 +172,6 @@
 				wrap.setAttribute('class', 'transverse')
 			}
 		}
-
 		// 封装进入全屏的函数
 		function fullScreen(node) {
 			// 判断浏览器是否支持全屏api
@@ -172,7 +188,6 @@
 				console.log("当前浏览器不支持全屏模式")
 			}
 		}
-
 		// 封装退出全屏的函数（直接esc键最简单）
 		function exitfullScreen() {
 			//判断是否已经进入全屏模式
@@ -191,5 +206,8 @@
 			}
 		}
 	</script>
+	<!--PWA配置-->
+	<script src="./js/pwa.js"></script>
+</body>
 
 </html>
