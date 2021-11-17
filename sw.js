@@ -3,7 +3,7 @@ const cacheStorageKey = "testCache-" + version;
 
 const cacheList = [
 "./", 
-"./imgs/",
+"./sw.js",
 "./game_list.json",
 "./index.html", 
 "./game.html",
