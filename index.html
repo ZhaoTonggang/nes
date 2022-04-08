@@ -1,64 +1,45 @@
 <!DOCTYPE html>
 <html lang="zh-CN" onselectstart="return false" oncontextmenu=self.event.returnValue=false>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>红白之家</title>
-	<script src="./lib/vue.min.js"></script>
-	<script src="./lib/axios.min.js"></script>
-	<link rel="stylesheet" href="./css/index.css">
-	<!--网站图标配置-->
-	<link rel="apple-touch-icon" sizes="192x192" href="./icons/192x192.png">
-	<link rel="icon" type="image/png" sizes="128x128" href="./icons/128x128.png">
-	<link rel="icon" type="image/png" sizes="144x144" href="./icons/144x144.png">
-	<link rel="icon" type="image/png" sizes="384x384" href="./icons/384x384.png">
-	<link rel="icon" type="image/png" sizes="512x512" href="./icons/512x512.png">
-	<!--PWA配置-->
-	<link rel="manifest" href="./manifest.json">
-</head>
-
-<body>
-	<div id="app">
-		<div class="div1">
-			<a href="./" title="在线畅玩小霸王经典游戏">红白之家</a>
-		</div>
-		<div class="wrap">
-			<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
-				<div class="img_box">
-					<img :src="'./imgs/'+item.name+'.png'" :alt="item.name" :title="item.name">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>红白之家 - 在线玩红白机游戏</title>
+		<link rel="stylesheet" href="./css/index.css">
+		<!--网站图标配置-->
+		<link rel="apple-touch-icon" sizes="192x192" href="./icons/192x192.png">
+		<link rel="icon" type="image/png" sizes="128x128" href="./icons/128x128.png">
+		<link rel="icon" type="image/png" sizes="144x144" href="./icons/144x144.png">
+		<link rel="icon" type="image/png" sizes="384x384" href="./icons/384x384.png">
+		<link rel="icon" type="image/png" sizes="512x512" href="./icons/512x512.png">
+		<!--PWA配置-->
+		<link rel="manifest" href="./manifest.json">
+	</head>
+	<body>
+		<div id="app">
+			<div class="div1">
+				<a href="./" title="在线畅玩小霸王经典游戏">红白之家</a>
+			</div>
+			<div class="wrap">
+				<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
+					<div class="img_box">
+						<img src="./icons/512x512.png" :src="'./imgs/'+item.name+'.png'" :alt="item.name"
+							:title="item.name">
+					</div>
+					<p class="p1">{{item.name}}</p>
 				</div>
-				<p class="p1">{{item.name}}</p>
 			</div>
 		</div>
-	</div>
-	<script>
-		var vm = new Vue({
-			el: "#app",
-			data: {
-				game_list: []
-			},
-			created() {
-				//获取游戏列表
-				this.getGameList()
-			},
-			methods: {
-				startGame(id) {
-					window.open('./game.html?=' + id, '_self')
-				},
-				getGameList: async function () {
-					try {
-						var result = await axios.get('./game_list.json')
-						this.game_list = result.data
-					} catch (err) {
-						console.log(err)
-					}
-				}
-			}
-		})
-	</script>
-	<!--PWA配置-->
-	<script src="./js/pwa.js"></script>
-</body>
+		<script src="./lib/vue.min.js"></script>
+		<script src="./lib/axios0.26.1.min.js"></script>
+		<!-- 页面逻辑 -->
+		<script src="./js/index.js"></script>
+		<!--PWA渐进式应用配置-->
+		<script async="async" type="module">
+			import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+			const el = document.createElement('pwa-update');
+			document.body.appendChild(el);
+		</script>
+	</body>
 
 </html>
