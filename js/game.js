@@ -1,12 +1,5 @@
-//获取屏幕宽度(包含浏览器地址栏)
-// var device_w = window.screen.width
-// alert(device_w)
-// alert(document.documentElement.clientWidth)
-// alert(document.documentElement.clientHeight)
-//容器应该适应高度
-// var canvas_box_width = device_w - 21 //减去
 //全局保存游戏信息
-var gameInfo = null
+let gameInfo = null
 //获取游戏列表，并init页面
 getGameList(pageInit)
 window.onload = function() {
@@ -30,7 +23,7 @@ window.onload = function() {
 		window.location.reload()
 	}
 	//实例化NES按钮
-	var nesBtn = new VirtualNesBtn({
+	let nesBtn = new VirtualNesBtn({
 		//容器
 		el: "#user_btn_box",
 		//虚拟按钮按下时的回调 参数evt
@@ -64,7 +57,7 @@ function getGameList(cb) {
 function pageInit(gameList) {
 	//获取id
 	//index就是id-1
-	var id = location.search.substring(2) || 1
+	let id = location.search.substring(2) || 1
 	//数据化获取的1d
 	id = decodeURI(id)
 	//获取游戏信息
@@ -76,18 +69,18 @@ function pageInit(gameList) {
 	// 修改title
 	document.title = gameInfo.name + ' - ' + '红白之家'
 	//根据游戏信息配置摇杆
-	var isFourBtn = gameInfo.isFourBtn
-	var color = isFourBtn ? 'lightcoral' : 'royalblue'
+	let isFourBtn = gameInfo.isFourBtn
+	let color = isFourBtn ? 'lightcoral' : 'royalblue'
 	//实例化摇杆 摇杆配置依赖游戏信息
-	var joystick = new Joystick({
+	let joystick = new Joystick({
 		//容器
 		el: "#direction",
 		//摇杆颜色
-		color: color,
+		color: 'red',
 		//摇杆大小
 		size: 120,
 		//8键模式
-		isFourBtn: isFourBtn,
+		// isFourBtn: isFourBtn,
 		//绑定 上下左右 到 WSAD键
 		keyCodes: [87, 83, 65, 68],
 		//页面强制横屏时使用90
@@ -117,7 +110,7 @@ function handleDirection() {
 }
 //根据手机屏幕方向设置class类
 function setClass(direction) {
-	var wrap = document.querySelector("#wrap")
+	let wrap = document.querySelector("#wrap")
 	if (direction === 'normal') {
 		//竖屏状态
 		wrap.setAttribute('class', 'normal')
@@ -145,7 +138,7 @@ function fullScreen(node) {
 // 封装退出全屏的函数（直接esc键最简单）
 function exitfullScreen() {
 	//判断是否已经进入全屏模式
-	var fullscreenElement = document.fullscreenElement || document.msFullscreenElement
+	let fullscreenElement = document.fullscreenElement || document.msFullscreenElement
 	if (!fullscreenElement) {
 		//console.log("不是全屏状态")
 		return

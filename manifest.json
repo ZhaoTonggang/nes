@@ -11,7 +11,7 @@
   "scope": "./",
   "start_url": "./",
   "related_applications": [],
-  "prefer_related_applications": "false",
+  "prefer_related_applications": false,
   "icons": [{
       "src": "./icons/72x72.png",
       "sizes": "72x72",

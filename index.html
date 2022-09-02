@@ -24,7 +24,7 @@
 				<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
 					<div class="img_box">
 						<img src="./icons/512x512.png" :src="'./imgs/'+item.name+'.png'" :alt="item.name"
-							:title="item.name">
+							:title="item.name" loading="lazy">
 					</div>
 					<p class="p1">{{item.name}}</p>
 				</div>

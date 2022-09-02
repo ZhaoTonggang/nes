@@ -1,5 +1,5 @@
 // 加载
-var vm = new Vue({
+let vm = new Vue({
 	el: "#app",
 	data: {
 		game_list: []
@@ -14,7 +14,7 @@ var vm = new Vue({
 		},
 		getGameList: async function() {
 			try {
-				var result = await axios.get('./game_list.json')
+				let result = await axios.get('./game_list.json')
 				this.game_list = result.data
 			} catch (err) {
 				console.log(err)
@@ -24,10 +24,10 @@ var vm = new Vue({
 })
 
 //网站标题自动判断
-var title = document.title;
+let title = document.title;
 
 function istitle() {
-	var isHidden = document.hidden;
+	let isHidden = document.hidden;
 	if (isHidden) {
 		//当窗口不可见
 		document.title = '(つ ェ ⊂)我藏好了哦~';
