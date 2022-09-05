@@ -23,12 +23,12 @@ function VirtualNesBtn(opt) {
 	this.btns_info[3].name = 'B'
 	this.btns_info[4].name = 'A'
 
-	//配置5个按钮的 keycode 默认为 空格 回车 J K 
+	//配置5个按钮的 keycode 默认为 空格 回车 V B 
 	this.btns_info[0].keyCode = opt.keyCodes && opt.keyCodes[0] || 32
 	this.btns_info[1].keyCode = opt.keyCodes && opt.keyCodes[1] || 13
 	this.btns_info[2].keyCode = 'macro_key'
-	this.btns_info[3].keyCode = opt.keyCodes && opt.keyCodes[2] || 74
-	this.btns_info[4].keyCode = opt.keyCodes && opt.keyCodes[3] || 75
+	this.btns_info[3].keyCode = opt.keyCodes && opt.keyCodes[2] || 86
+	this.btns_info[4].keyCode = opt.keyCodes && opt.keyCodes[3] || 66
 
 }
 
