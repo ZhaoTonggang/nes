@@ -19,11 +19,11 @@ function VirtualNesBtn(opt) {
 	//设定5个按钮的文本名称 "name"
 	this.btns_info[0].name = 'SELECT'
 	this.btns_info[1].name = 'START'
-	this.btns_info[2].name = 'c'
+	this.btns_info[2].name = 'C'
 	this.btns_info[3].name = 'B'
 	this.btns_info[4].name = 'A'
 
-	//配置5个按钮的 keycode 默认为 空格 回车 J K 
+	//配置5个按钮的 keycode 默认为 空格 回车 V B 
 	this.btns_info[0].keyCode = opt.keyCodes && opt.keyCodes[0] || 32
 	this.btns_info[1].keyCode = opt.keyCodes && opt.keyCodes[1] || 13
 	this.btns_info[2].keyCode = 'macro_key'
