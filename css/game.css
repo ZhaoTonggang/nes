@@ -24,10 +24,10 @@ body {
 	height: 100%;
 	text-align: center;
 	overflow: hidden;
-	background-image: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
-	background-image: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
-	background-image: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
-	background-image: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
+	background-image: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://pic.rmb.bdstatic.com/bjh/down/18c767facc7020b1bf4a2aee1ba0a0a0.gif");
+	background-image: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://pic.rmb.bdstatic.com/bjh/down/18c767facc7020b1bf4a2aee1ba0a0a0.gif");
+	background-image: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://pic.rmb.bdstatic.com/bjh/down/18c767facc7020b1bf4a2aee1ba0a0a0.gif");
+	background-image: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://pic.rmb.bdstatic.com/bjh/down/18c767facc7020b1bf4a2aee1ba0a0a0.gif");
 	background-repeat: no-repeat, no-repeat;
 	background-size: cover, cover;
 	background-position: center center, center center;
@@ -104,7 +104,7 @@ body {
 	display: inline-block;
 	position: relative;
 	text-align: center;
-	background: url(https://cartoon.heheda.top/url.php), no-repeat, center;
+	background: url(https://pic.rmb.bdstatic.com/bjh/down/18c767facc7020b1bf4a2aee1ba0a0a0.gif), no-repeat, center;
 	background-size: cover;
 	font-size: 0;
 }

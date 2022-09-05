@@ -26,7 +26,6 @@ let nes = new jsnes.NES({
 
 function onAnimationFrame() {
 	window.requestAnimationFrame(onAnimationFrame);
-
 	image.data.set(framebuffer_u8);
 	canvas_ctx.putImageData(image, 0, 0);
 }
@@ -41,7 +40,6 @@ function audio_callback(event) {
 
 	// Attempt to avoid buffer underruns.
 	if (audio_remain() < AUDIO_BUFFERING) nes.frame();
-
 	let dst_l = dst.getChannelData(0);
 	let dst_r = dst.getChannelData(1);
 	for (let j = 0; j < len; j++) {
@@ -55,31 +53,56 @@ function audio_callback(event) {
 
 //在此配置按键
 function keyboard(callback, event) {
-	let player = 1;
 	switch (event.keyCode) {
+		//玩家一
 		case 87: // UP   -  W
-			callback(player, jsnes.Controller.BUTTON_UP);
+			callback(1, jsnes.Controller.BUTTON_UP);
 			break;
 		case 83: // Down  --  S
-			callback(player, jsnes.Controller.BUTTON_DOWN);
+			callback(1, jsnes.Controller.BUTTON_DOWN);
 			break;
 		case 65: // Left  -- A
-			callback(player, jsnes.Controller.BUTTON_LEFT);
+			callback(1, jsnes.Controller.BUTTON_LEFT);
 			break;
 		case 68: // Right   -- D
-			callback(player, jsnes.Controller.BUTTON_RIGHT);
+			callback(1, jsnes.Controller.BUTTON_RIGHT);
 			break;
-		case 75: // K
-			callback(player, jsnes.Controller.BUTTON_A);
+		case 86: // V
+			callback(1, jsnes.Controller.BUTTON_A);
 			break;
-		case 74: // J
-			callback(player, jsnes.Controller.BUTTON_B);
+		case 66: // B
+			callback(1, jsnes.Controller.BUTTON_B);
 			break;
 		case 32: // 空格
-			callback(player, jsnes.Controller.BUTTON_SELECT);
+			callback(1, jsnes.Controller.BUTTON_SELECT);
 			break;
 		case 13: // 回车
-			callback(player, jsnes.Controller.BUTTON_START);
+			callback(1, jsnes.Controller.BUTTON_START);
+			break;
+			//玩家二
+		case 38: // UP   -  上
+			callback(2, jsnes.Controller.BUTTON_UP);
+			break;
+		case 40: // Down  --  下
+			callback(2, jsnes.Controller.BUTTON_DOWN);
+			break;
+		case 37: // Left  -- 左
+			callback(2, jsnes.Controller.BUTTON_LEFT);
+			break;
+		case 39: // Right   -- 右
+			callback(2, jsnes.Controller.BUTTON_RIGHT);
+			break;
+		case 80: // P
+			callback(2, jsnes.Controller.BUTTON_A);
+			break;
+		case 79: // O
+			callback(2, jsnes.Controller.BUTTON_B);
+			break;
+		case 189: // -
+			callback(2, jsnes.Controller.BUTTON_SELECT);
+			break;
+		case 187: // =
+			callback(2, jsnes.Controller.BUTTON_START);
 			break;
 		default:
 			break;
@@ -96,15 +119,12 @@ function nes_init(canvas_id) {
 	})
 	canvas_ctx = canvas.getContext("2d");
 	image = canvas_ctx.getImageData(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-
 	canvas_ctx.fillStyle = "black";
 	canvas_ctx.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-
 	// Allocate framebuffer array.
 	let buffer = new ArrayBuffer(image.data.length);
 	framebuffer_u8 = new Uint8ClampedArray(buffer);
 	framebuffer_u32 = new Uint32Array(buffer);
-
 	// Setup audio.
 	let contextClass = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window
 		.oAudioContext || window.msAudioContext);
@@ -128,7 +148,6 @@ function nes_load_data(canvas_id, rom_data) {
 //入口函数，调用它加载游戏
 function nes_load_url(canvas_id, path) {
 	nes_init(canvas_id);
-
 	let req = new XMLHttpRequest();
 	req.open("GET", path);
 	req.overrideMimeType("text/plain; charset=x-user-defined");
@@ -144,7 +163,6 @@ function nes_load_url(canvas_id, path) {
 			req.onerror();
 		}
 	};
-
 	req.send();
 }
 
