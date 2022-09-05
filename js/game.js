@@ -35,7 +35,7 @@ window.onload = function() {
 			keyboard(nes.buttonUp, event)
 		},
 		//按顺序分别是 select start b a
-		keyCodes: [32, 13, 66, 86]
+		keyCodes: [32, 13, 86, 66]
 	})
 	//NES按钮实例初始化
 	nesBtn.init()

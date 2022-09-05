@@ -27,8 +27,8 @@ function VirtualNesBtn(opt) {
 	this.btns_info[0].keyCode = opt.keyCodes && opt.keyCodes[0] || 32
 	this.btns_info[1].keyCode = opt.keyCodes && opt.keyCodes[1] || 13
 	this.btns_info[2].keyCode = 'macro_key'
-	this.btns_info[3].keyCode = opt.keyCodes && opt.keyCodes[2] || 66
-	this.btns_info[4].keyCode = opt.keyCodes && opt.keyCodes[3] || 86
+	this.btns_info[3].keyCode = opt.keyCodes && opt.keyCodes[2] || 86
+	this.btns_info[4].keyCode = opt.keyCodes && opt.keyCodes[3] || 66
 
 }
 

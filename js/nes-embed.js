@@ -67,10 +67,10 @@ function keyboard(callback, event) {
 		case 68: // Right   -- D
 			callback(1, jsnes.Controller.BUTTON_RIGHT);
 			break;
-		case 86: // V
+		case 66: // B
 			callback(1, jsnes.Controller.BUTTON_A);
 			break;
-		case 66: // B
+		case 86: // V
 			callback(1, jsnes.Controller.BUTTON_B);
 			break;
 		case 32: // 空格
