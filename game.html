@@ -23,13 +23,11 @@
 			<div class="title">
 				<a href="./" id="home">返回首页</a>
 				<h1 id="name">热血格斗（中文版）</h1>
-				<span id="chongzhi">重置游戏</span>
+				<span id="chongzhi" onclick="chongzai()">重置游戏</span>
 			</div>
 			<div id="show_box">
-				<h3 id="btn_load">
-					点击开始游戏
-				</h3>
-				<canvas id="nes-canvas" width="256" height="240">
+				<h3 id="btn_load" onclick="nesl()">点击开始游戏</h3>
+				<canvas id="nes-canvas" width="256" height="240"></canvas>
 			</div>
 			<!-- 摇杆容器 -->
 			<div id="direction"></div>

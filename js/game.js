@@ -7,20 +7,27 @@ window.onload = function() {
 	document.addEventListener('dblclick', function(e) {
 		e.preventDefault()
 	})
-
 	//监听加载按钮
 	document.querySelector('#btn_load').onclick = function() {
-		//如果游戏信息为空 则return
-		if (!gameInfo) return
-		//fullScreen(document.querySelector('#wrap'))
-		//加载游戏
-		nes_load_url("nes-canvas", "./roms/" + gameInfo.name + ".nes")
-		//隐藏加载按钮
-		this.style.display = 'none'
-	}
-	//重置游戏配置
-	document.querySelector('#chongzhi').onclick = function() {
-		window.location.reload()
+		if (gameInfo) {
+			//加载游戏
+			nes_load_url("nes-canvas", "./roms/" + gameInfo.name + ".nes")
+			//隐藏加载按钮
+			this.style.display = 'none'
+			//浏览器全屏
+			let de = document.querySelector('html') || document.documentElement;
+			if (de.requestFullscreen) {
+				de.requestFullscreen();
+			} else if (de.mozRequestFullScreen) {
+				de.mozRequestFullScreen();
+			} else if (de.webkitRequestFullScreen) {
+				de.webkitRequestFullScreen();
+			}
+		} else {
+			alert("数据获取失败！")
+			//如果游戏信息为空 则return
+			return
+		}
 	}
 	//实例化NES按钮
 	let nesBtn = new VirtualNesBtn({
@@ -40,10 +47,10 @@ window.onload = function() {
 	//NES按钮实例初始化
 	nesBtn.init()
 }
-//初次加载判断横竖屏
-handleDirection()
-//监听横竖屏切换
-window.addEventListener("onorientationchange" in window ? "orientationchange" : "resize", handleDirection, false);
+//重置游戏配置
+function chongzai() {
+	window.location.reload()
+}
 //获取游戏信息
 function getGameList(cb) {
 	//异步操作
@@ -61,9 +68,7 @@ function pageInit(gameList) {
 	//数据化获取的1d
 	id = decodeURI(id)
 	//获取游戏信息
-	// alert(id)
 	gameInfo = gameList[id - 1]
-	// alert(gameInfo)
 	//展示游戏名称
 	document.querySelector('#name').innerHTML = gameInfo.name
 	// 修改title
@@ -79,8 +84,6 @@ function pageInit(gameList) {
 		color: 'red',
 		//摇杆大小
 		size: 120,
-		//8键模式
-		// isFourBtn: isFourBtn,
 		//绑定 上下左右 到 WSAD键
 		keyCodes: [87, 83, 65, 68],
 		//页面强制横屏时使用90
@@ -96,63 +99,6 @@ function pageInit(gameList) {
 	})
 	joystick.init()
 }
-//判断手机的横竖屏状态
-function handleDirection() {
-	//alert(0)
-	if (window.orientation == 180 || window.orientation == 0) {
-		//竖屏状态
-		setClass('normal')
-	}
-	if (window.orientation == 90 || window.orientation == -90) {
-		//横屏状态
-		setClass('transverse')
-	}
-}
-//根据手机屏幕方向设置class类
-function setClass(direction) {
-	let wrap = document.querySelector("#wrap")
-	if (direction === 'normal') {
-		//竖屏状态
-		wrap.setAttribute('class', 'normal')
-	} else {
-		//横屏状态
-		wrap.setAttribute('class', 'transverse')
-	}
-}
-// 封装进入全屏的函数
-function fullScreen(node) {
-	// 判断浏览器是否支持全屏api
-	if (document.fullscreenEnabled || document.msFullscreenEnabled) {
-		// 判断是标准浏览器还是IE
-		if (node.requestFullscreen) {
-			// chrome和火狐
-			node.requestFullscreen()
-		} else if (node.msRequestFullscreen) {
-			// IE11
-			node.msRequestFullscreen()
-		}
-	} else {
-		console.log("当前浏览器不支持全屏模式")
-	}
-}
-// 封装退出全屏的函数（直接esc键最简单）
-function exitfullScreen() {
-	//判断是否已经进入全屏模式
-	let fullscreenElement = document.fullscreenElement || document.msFullscreenElement
-	if (!fullscreenElement) {
-		//console.log("不是全屏状态")
-		return
-	}
-	// 确保在非全屏状态才调用下面的代码，不然会弹警告
-	if (document.exitFullscreen) {
-		//标准浏览器
-		document.exitFullscreen()
-	} else if (document.msExitFullscreen) {
-		//IE浏览器
-		document.msExitFullscreen()
-	}
-}
-
 //密钥
 document.addEventListener("DOMContentLoaded", function(e) {
 	let Session = sessionStorage.getItem("nesHeheda") || 0

@@ -24,10 +24,10 @@ body {
 	height: 100%;
 	text-align: center;
 	overflow: hidden;
-	background-image: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
-	background-image: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
-	background-image: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
-	background-image: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgb(129, 208, 253)), url("https://cartoon.heheda.top/url.php");
+	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
+	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
+	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
+	background: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
 	background-repeat: no-repeat, no-repeat;
 	background-size: cover, cover;
 	background-position: center center, center center;
@@ -70,33 +70,7 @@ body {
 	font-size: 16px;
 	color: #551A8B;
 	font-weight: bold;
-	/* float: right; */
 	cursor: pointer;
-}
-
-/* 纵向 */
-#wrap.normal .title {
-	width: 90%;
-}
-
-/* 横向 */
-#wrap.transverse .title {
-	display: none;
-	width: 40%;
-}
-
-/* 游戏屏幕区 */
-
-/* 纵向 */
-#wrap.normal #show_box {
-	width: 100%;
-	height: auto;
-}
-
-/* 横向 */
-#wrap.transverse #show_box {
-	width: auto;
-	height: 100%;
 }
 
 /* 通用 */
@@ -104,7 +78,7 @@ body {
 	display: inline-block;
 	position: relative;
 	text-align: center;
-	background: url(https://cartoon.heheda.top/url.php), no-repeat, center;
+	background: url(../image/nesico.png), no-repeat, center;
 	background-size: cover;
 	font-size: 0;
 }
@@ -121,19 +95,6 @@ body {
 	background-color: rgba(0, 0, 0, 0.5);
 	padding: 5px;
 	border-radius: 10px;
-}
-
-/* canvas */
-/* 纵向 */
-#wrap.normal #show_box #nes-canvas {
-	width: 100%;
-	height: auto;
-}
-
-/* 横向 */
-#wrap.transverse #show_box #nes-canvas {
-	width: auto;
-	height: 100%;
 }
 
 /* 摇杆容器 */
@@ -206,4 +167,39 @@ body {
 	width: 46%;
 	height: 60px;
 	line-height: 60px;
+}
+
+/* 竖屏 */
+@media screen and (orientation: portrait) {
+	#wrap .title {
+		width: 90%;
+	}
+
+	#wrap #show_box {
+		width: 100%;
+		height: auto;
+	}
+
+	#wrap #show_box #nes-canvas {
+		width: 100%;
+		height: auto;
+	}
+}
+
+/* 横屏 */
+@media screen and (orientation: landscape) {
+	#wrap .title {
+		display: none;
+		width: 40%;
+	}
+
+	#wrap #show_box {
+		width: auto;
+		height: 100%;
+	}
+
+	#wrap #show_box #nes-canvas {
+		width: auto;
+		height: 100%;
+	}
 }
