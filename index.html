@@ -23,15 +23,15 @@
 			<div class="wrap">
 				<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
 					<div class="img_box">
-						<img src="./icons/512x512.png" :src="'./imgs/'+item.name+'.png'" :alt="item.name"
-							:title="item.name" loading="lazy">
+						<img :src="'./imgs/'+item.name+'.png'" :alt="item.name" :title="item.name"
+							src="./icons/512x512.png" title="加载中..." alt="加载中...">
 					</div>
 					<p class="p1">{{item.name}}</p>
 				</div>
 			</div>
 		</div>
-		<script src="./lib/vue.min.js"></script>
-		<script src="./lib/axios0.26.1.min.js"></script>
+		<script src="./lib/vue.global.prod.js"></script>
+		<script src="./lib/axios.min.js"></script>
 		<!-- 页面逻辑 -->
 		<script src="./js/index.js"></script>
 		<!--PWA渐进式应用配置-->

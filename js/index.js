@@ -1,8 +1,12 @@
 // 加载
-let vm = new Vue({
-	el: "#app",
-	data: {
-		game_list: []
+const {
+	createApp
+} = Vue
+createApp({
+	data() {
+		return {
+			game_list: []
+		}
 	},
 	created() {
 		//获取游戏列表
@@ -21,8 +25,7 @@ let vm = new Vue({
 			}
 		}
 	}
-})
-
+}).mount('#app')
 //网站标题自动判断
 let title = document.title;
 
@@ -38,6 +41,5 @@ function istitle() {
 	}
 };
 document.addEventListener('visibilitychange', istitle);
-
 //密钥
 sessionStorage.setItem("nesHeheda", "1")

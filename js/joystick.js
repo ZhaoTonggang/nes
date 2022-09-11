@@ -4,8 +4,7 @@ function Joystick(opts) {
 	//保存传入的配置信息
 	this.el = opts && opts.el
 	this.color = opts && opts.color || 'red'
-	this.size = opts && opts.size || 120
-	// this.isFourBtn = opts && opts.isFourBtn ?  true : false //默认4键模式 否则8键模式（左上/左下/右上/右下）
+	this.size = opts && opts.size || 100
 	this.keyCodes = opts && opts.keyCodes || [87, 83, 65, 68] //按顺序是上下左右 默认WSAD
 	this.btn_down_fn = opts && opts.btn_down_fn //fn 按下时的回调
 	this.btn_up_fn = opts && opts.btn_up_fn //fn 释放时的回调
@@ -27,13 +26,8 @@ function Joystick(opts) {
 
 Joystick.prototype.init = function() {
 	let me = this
-
-	//如果用户不阻止，则将用户容器设为相对定位 要在实例创建前设置
-	// if (me.relative) document.querySelector(me.el).style.position = 'relative'
-
 	//创建nipplejs实例
 	let manager = nipplejs.create(me.opts)
-
 	//事件监听
 	// manager.on('start', function(evt, data) {})
 	manager.on('move', function(evt, data) {
@@ -47,7 +41,7 @@ Joystick.prototype.init = function() {
 	document.querySelector(me.el).addEventListener('touchstart', function(evt) {
 		evt.preventDefault()
 	}, {
-		passive: true
+		passive: false
 	})
 }
 
@@ -55,7 +49,6 @@ Joystick.prototype.onMove = function(data) {
 	let me = this
 	//通过distance属性是否存在判断此次操作是否有效
 	if (!data.distance) return
-
 	//获取最新方向信息
 	let now_direction = me.getDirection(data)
 	//处理方向信息
@@ -73,12 +66,6 @@ Joystick.prototype.onEnd = function() {
 }
 
 Joystick.prototype.getDirection = function(data) {
-	// let me = this
-	//横屏时的角度转换
-	// if(me.isFourBtn){
-	//4键模式 直接返回
-	// return data.direction.angle
-	// }else{
 	//8键模式 根据角度值返回对应的方向
 	return this.transformDirection(data.angle.degree)
 	// }
@@ -139,7 +126,6 @@ Joystick.prototype.handleDirection = function(new_direction, old_direction) {
 		let old_arr = me.getCodeArr(old_direction)
 		let new_arr = me.getCodeArr(new_direction)
 		//找出已经发生改变的方向 例如 右上 -> 右下 需要将'上'取消掉，同时将'下'按下
-
 		//遍历新数组的元素，对比该元素是否存在旧数组中，如果不存在，即可得到 按下的 code_arr
 		let down_arr = new_arr.filter(code => {
 			return !old_arr.includes(code)
@@ -189,21 +175,18 @@ Joystick.prototype.getCodeArr = function(direction) {
 Joystick.prototype.handleCodeArr = function(type, arr) {
 	//type为up or down
 	//arr为需要处理的包含keyCode的数组
-
 	let me = this
 	let fn = me.btn_down_fn //默认为按下时的回调
 	if (type !== 'down') {
 		//如果不是down 说明是手势释放 需要调用释放按键的回调
 		fn = me.btn_up_fn
 	}
-
 	//遍历数组中的keyCode 逐个处理
 	for (let i = 0; i < arr.length; i++) {
 		//对keyCode进行包裹后
 		fn && fn(me.package(arr[i]))
 	}
 }
-
 //对keyCode进行封装
 Joystick.prototype.package = function(keyCode) {
 	let evt = {}

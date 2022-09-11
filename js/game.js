@@ -15,7 +15,7 @@ window.onload = function() {
 			//隐藏加载按钮
 			this.style.display = 'none'
 			//浏览器全屏
-			let de = document.querySelector('html') || document.documentElement;
+			let de = document.querySelector('body') || document.documentElement;
 			if (de.requestFullscreen) {
 				de.requestFullscreen();
 			} else if (de.mozRequestFullScreen) {
@@ -83,7 +83,7 @@ function pageInit(gameList) {
 		//摇杆颜色
 		color: 'red',
 		//摇杆大小
-		size: 120,
+		size: 100,
 		//绑定 上下左右 到 WSAD键
 		keyCodes: [87, 83, 65, 68],
 		//页面强制横屏时使用90

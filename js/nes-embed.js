@@ -1,18 +1,16 @@
+//屏幕宽度
 let SCREEN_WIDTH = 256;
+//屏幕高度
 let SCREEN_HEIGHT = 240;
 let FRAMEBUFFER_SIZE = SCREEN_WIDTH * SCREEN_HEIGHT;
-
-let canvas_ctx, image;
-let framebuffer_u8, framebuffer_u32;
-
+let canvas_ctx, image, framebuffer_u8, framebuffer_u32;
 let AUDIO_BUFFERING = 512;
 let SAMPLE_COUNT = 4 * 1024;
 let SAMPLE_MASK = SAMPLE_COUNT - 1;
 let audio_samples_L = new Float32Array(SAMPLE_COUNT);
 let audio_samples_R = new Float32Array(SAMPLE_COUNT);
-let audio_write_cursor = 0,
-	audio_read_cursor = 0;
-
+let audio_write_cursor = 0;
+let audio_read_cursor = 0;
 let nes = new jsnes.NES({
 	onFrame: function(framebuffer_24) {
 		for (let i = 0; i < FRAMEBUFFER_SIZE; i++) framebuffer_u32[i] = 0xFF000000 | framebuffer_24[i];
@@ -37,7 +35,6 @@ function audio_remain() {
 function audio_callback(event) {
 	let dst = event.outputBuffer;
 	let len = dst.length;
-
 	// Attempt to avoid buffer underruns.
 	if (audio_remain() < AUDIO_BUFFERING) nes.frame();
 	let dst_l = dst.getChannelData(0);
@@ -47,10 +44,8 @@ function audio_callback(event) {
 		dst_l[j] = audio_samples_L[src_idx];
 		dst_r[j] = audio_samples_R[src_idx];
 	}
-
 	audio_read_cursor = (audio_read_cursor + len) & SAMPLE_MASK;
 }
-
 //在此配置按键
 function keyboard(callback, event) {
 	switch (event.keyCode) {
@@ -115,7 +110,7 @@ function nes_init(canvas_id) {
 	canvas.addEventListener('dblclick', function(e) {
 		e.preventDefault()
 	}, {
-		passive: true
+		passive: false
 	})
 	canvas_ctx = canvas.getContext("2d");
 	image = canvas_ctx.getImageData(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -144,28 +139,25 @@ function nes_load_data(canvas_id, rom_data) {
 	nes_init(canvas_id);
 	nes_boot(rom_data);
 }
-
 //入口函数，调用它加载游戏
 function nes_load_url(canvas_id, path) {
 	nes_init(canvas_id);
 	let req = new XMLHttpRequest();
 	req.open("GET", path);
 	req.overrideMimeType("text/plain; charset=x-user-defined");
-	req.onerror = () => console.log(`Error loading ${path}: ${req.statusText}`);
-
+	req.onerror = () => console.log('这个错误发生在游戏加载环节');
 	req.onload = function() {
 		if (this.status === 200) {
 			//装载游戏数据
 			nes_boot(this.responseText);
 		} else if (this.status === 0) {
-			// Aborted, so ignore error
+			req.onerror();
 		} else {
 			req.onerror();
 		}
 	};
 	req.send();
 }
-
 document.addEventListener('keydown', (event) => {
 	keyboard(nes.buttonDown, event)
 });
