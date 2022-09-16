@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<title>红白之家 - 在线玩红白机游戏</title>
+		<title>红白机游戏盒 - 在线畅玩小霸王经典游戏</title>
 		<link rel="stylesheet" href="./css/index.css">
 		<!--网站图标配置-->
 		<link rel="apple-touch-icon" sizes="192x192" href="./icons/192x192.png">
@@ -16,18 +16,16 @@
 		<link rel="manifest" href="./manifest.json">
 	</head>
 	<body>
+		<div class="div1">
+			<a href="./" title="在线畅玩小霸王经典游戏">红白机游戏盒</a>
+		</div>
 		<div id="app">
-			<div class="div1">
-				<a href="./" title="在线畅玩小霸王经典游戏">红白之家</a>
-			</div>
-			<div class="wrap">
-				<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
-					<div class="img_box">
-						<img :src="'./imgs/'+item.name+'.png'" :alt="item.name" :title="item.name"
-							src="./icons/512x512.png" title="加载中..." alt="加载中...">
-					</div>
-					<p class="p1">{{item.name}}</p>
+			<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
+				<div class="img_box">
+					<img :src="'./imgs/'+item.name+'.png'" :alt="item.name" :title="item.name" src="./icons/512x512.png"
+						title="加载中..." alt="加载中...">
 				</div>
+				<p class="p1">{{item.name}}</p>
 			</div>
 		</div>
 		<script src="./lib/vue.global.prod.js"></script>

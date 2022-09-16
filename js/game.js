@@ -72,7 +72,7 @@ function pageInit(gameList) {
 	//展示游戏名称
 	document.querySelector('#name').innerHTML = gameInfo.name
 	// 修改title
-	document.title = gameInfo.name + ' - ' + '红白之家'
+	document.title = gameInfo.name + ' - ' + '红白机游戏盒'
 	//根据游戏信息配置摇杆
 	let isFourBtn = gameInfo.isFourBtn
 	let color = isFourBtn ? 'lightcoral' : 'royalblue'
