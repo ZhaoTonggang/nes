@@ -1,5 +1,5 @@
 //获取设备类型
-let isMobile = /mobile/i.test(navigator.userAgent);
+let isMobile = /(iPhone|iPod|Android|ios|iOS|iPad|WebOS|Symbian|Windows Phone|Phone)/i.test(navigator.userAgent);
 //设置操作方式
 let dire = document.getElementById("direction");
 let btne = document.getElementById("user_btn_box");
