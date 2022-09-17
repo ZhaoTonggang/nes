@@ -104,25 +104,27 @@ body {
 
 /* 摇杆容器 */
 #wrap #direction {
+	display: none;
 	z-index: 90;
 	position: absolute;
 	bottom: 35px;
 	left: 25px;
 	width: 150px;
 	height: 150px;
+	background: url(../image/yg.png) no-repeat center/cover;
 	cursor: move;
 	touch-action: none;
 }
 
 /* 按钮容器 */
 #wrap #user_btn_box {
+	display: none;
 	z-index: 90;
 	position: absolute;
 	bottom: 35px;
 	right: 25px;
 	width: 170px;
 	height: 190px;
-	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-content: space-around;
@@ -176,6 +178,40 @@ body {
 	width: 46%;
 	height: 60px;
 	line-height: 60px;
+}
+
+/* 按键映射说明 */
+#player1,
+#player2 {
+	display: none;
+	height: auto;
+	width: 140px;
+	bottom: 20px;
+	padding: 10px;
+	line-height: 30px;
+	position: absolute;
+	z-index: 90;
+	font-weight: bold;
+	font-size: 20px;
+	background-color: aqua;
+	border-radius: 20px;
+}
+
+#player1 {
+	left: 20px;
+}
+
+#player2 {
+	right: 20px;
+}
+
+.plp {
+	font-size: 30px;
+	line-height: 40px;
+}
+
+hr {
+	border-top: 5px double red;
 }
 
 /* 竖屏 */

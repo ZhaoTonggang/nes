@@ -1,3 +1,17 @@
+//获取设备类型
+let isMobile = /mobile/i.test(navigator.userAgent);
+//设置操作方式
+let dire = document.getElementById("direction");
+let btne = document.getElementById("user_btn_box");
+let play1 = document.getElementById("player1");
+let play2 = document.getElementById("player2");
+if (isMobile) {
+	dire.style.display = "block";
+	btne.style.display = "flex";
+} else {
+	play1.style.display = "block";
+	play2.style.display = "block";
+}
 //全局保存游戏信息
 let gameInfo = null
 //获取游戏列表，并init页面

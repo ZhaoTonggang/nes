@@ -126,17 +126,34 @@ body {
 @media (max-width: 600px) {
 	#app .item {
 		height: auto;
-		width: 100px;
+		width: 160px;
 	}
 
 	#app .item .img_box {
-		height: 100px;
-		width: 100px;
+		height: 160px;
+		width: 160px;
 	}
 
 	#app .item .img_box img {
-		height: 100px;
-		width: 100px;
+		height: 160px;
+		width: 160px;
+	}
+}
+
+@media (max-width:370px){
+	#app .item {
+		height: auto;
+		width: 130px;
+	}
+	
+	#app .item .img_box {
+		height: 130px;
+		width: 130px;
+	}
+	
+	#app .item .img_box img {
+		height: 130px;
+		width: 130px;
 	}
 }
 
