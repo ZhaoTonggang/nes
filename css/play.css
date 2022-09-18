@@ -1,0 +1,250 @@
+*,
+body {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	touch-action: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-family: YouYuan;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+/* 布局容器 */
+#wrap {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	overflow: hidden;
+	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
+	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
+	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
+	background: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
+	background-repeat: no-repeat, no-repeat;
+	background-size: cover, cover;
+	background-position: center center, center center;
+	background-attachment: fixed, fixed;
+}
+
+/* 标题容器 */
+#wrap .title {
+	width: 100%;
+	padding: 5px;
+	background-color: rgb(0, 195, 255, 0.5);
+	border-radius: 10px;
+	position: relative;
+	text-align: center;
+	margin: 10px auto;
+}
+
+#wrap .title #name {
+	margin-bottom: 5px;
+	line-height: 21px;
+	font-weight: bold;
+	font-size: 16px;
+	list-style: none;
+	display: inline;
+}
+
+#wrap .title #home {
+	line-height: 21px;
+	text-decoration: none;
+	position: absolute;
+	left: 10px;
+	font-weight: bold;
+}
+
+#wrap .title #chongzhi {
+	right: 10px;
+	position: absolute;
+	outline: none;
+	line-height: 21px;
+	font-size: 16px;
+	color: #551A8B;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+/* 通用 */
+#wrap #show_box {
+	display: inline-block;
+	position: relative;
+	text-align: center;
+	background: url(../image/nesico.png), no-repeat, center;
+	background-size: cover;
+	font-size: 0;
+}
+
+#wrap #show_box #nes-canvas {
+	touch-action: none;
+}
+
+#show_box #btn_load {
+	position: absolute;
+	color: #ff4400;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
+	font-size: 25px;
+	font-weight: bold;
+	background-color: rgba(225, 225, 225, 0.5);
+	padding: 5px;
+	border-radius: 10px;
+}
+
+/* 摇杆容器 */
+#wrap #direction {
+	display: none;
+	z-index: 90;
+	position: absolute;
+	bottom: 35px;
+	left: 25px;
+	width: 150px;
+	height: 150px;
+	background: url(../image/yg.png) no-repeat center/cover;
+	cursor: move;
+	touch-action: none;
+}
+
+/* 按钮容器 */
+#wrap #user_btn_box {
+	display: none;
+	z-index: 90;
+	position: absolute;
+	bottom: 35px;
+	right: 25px;
+	width: 170px;
+	height: 190px;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: space-around;
+	touch-action: none;
+}
+
+/*按钮样式*/
+.nes_btn_box {
+	max-width: 170px;
+	max-height: 200px;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: space-around;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.nes_btn_box .btn {
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	background-color: lightcoral;
+	color: lightcyan;
+	cursor: pointer;
+	border-radius: 10px;
+	opacity: 0.5;
+}
+
+/* 点击时按钮的背景色 */
+.nes_btn_box .btn.isTouch {
+	background-color: linen;
+}
+
+.nes_btn_box .btn-select,
+.nes_btn_box .btn-start {
+	width: 40%;
+	margin-bottom: 20px;
+}
+
+.nes_btn_box .btn-ab {
+	width: 80%;
+	height: 60px;
+	line-height: 60px;
+}
+
+.nes_btn_box .btn-a,
+.nes_btn_box .btn-b {
+	width: 46%;
+	height: 60px;
+	line-height: 60px;
+}
+
+/* 按键映射说明 */
+#player1,
+#player2 {
+	display: none;
+	height: auto;
+	width: 140px;
+	bottom: 20px;
+	padding: 10px;
+	line-height: 30px;
+	position: absolute;
+	z-index: 90;
+	font-weight: bold;
+	font-size: 20px;
+	background-color: aqua;
+	border-radius: 20px;
+}
+
+#player1 {
+	left: 20px;
+}
+
+#player2 {
+	right: 20px;
+}
+
+.plp {
+	font-size: 30px;
+	line-height: 40px;
+}
+
+hr {
+	border-top: 5px double red;
+}
+
+/* 竖屏 */
+@media screen and (orientation: portrait) {
+	#wrap .title {
+		width: 90%;
+	}
+
+	#wrap #show_box {
+		width: 100%;
+		height: auto;
+	}
+
+	#wrap #show_box #nes-canvas {
+		width: 100%;
+		height: auto;
+	}
+}
+
+/* 横屏 */
+@media screen and (orientation: landscape) {
+	#wrap .title {
+		display: none;
+		width: 40%;
+	}
+
+	#wrap #show_box {
+		width: auto;
+		height: 100%;
+	}
+
+	#wrap #show_box #nes-canvas {
+		width: auto;
+		height: 100%;
+	}
+}

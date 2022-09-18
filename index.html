@@ -20,10 +20,11 @@
 			<a href="./" title="在线畅玩小霸王经典游戏">红白机游戏盒</a>
 		</div>
 		<div id="app">
-			<div class="item" v-for="(item,index) in game_list" :key="index" @click="startGame(item.id)">
+			<div class="item" v-for="(item,index) in list" :key="index" @click="startGame(item.id)">
 				<div class="img_box">
-					<img :src="'./imgs/'+item.name+'.png'" :alt="item.name" :title="item.name" src="./icons/512x512.png"
+					<img :src="'./imgs/'+item.id+'.png'" :alt="item.name" :title="item.name" src="./icons/512x512.png"
 						title="加载中..." alt="加载中...">
+					<span class="p2" v-if="item.Version != ''">{{item.Version}}</span>
 				</div>
 				<p class="p1">{{item.name}}</p>
 			</div>

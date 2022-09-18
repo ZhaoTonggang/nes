@@ -5,7 +5,7 @@ const {
 createApp({
 	data() {
 		return {
-			game_list: []
+			list: []
 		}
 	},
 	created() {
@@ -14,12 +14,12 @@ createApp({
 	},
 	methods: {
 		startGame(id) {
-			window.open('./game.html?=' + id, '_self')
+			window.open('./play.html?=' + id, '_self')
 		},
 		getGameList: async function() {
 			try {
-				let result = await axios.get('./game_list.json')
-				this.game_list = result.data
+				let result = await axios.get('./list.json')
+				this.list = result.data
 			} catch (err) {
 				console.log(err)
 			}
