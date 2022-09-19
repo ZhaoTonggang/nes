@@ -36,42 +36,50 @@ body {
 }
 
 /* 标题容器 */
-#wrap .title {
-	width: 100%;
-	padding: 5px;
-	background-color: rgb(0, 195, 255, 0.5);
+.titler,
+.titlel {
+	position: absolute;
+	top: 20px;
+	background-color: aqua;
+	padding: 0 5px;
 	border-radius: 10px;
-	position: relative;
-	text-align: center;
-	margin: 10px auto;
+	display: flex;
 }
 
-#wrap .title #name {
-	margin-bottom: 5px;
-	line-height: 21px;
-	font-weight: bold;
-	font-size: 16px;
-	list-style: none;
-	display: inline;
+.titler {
+	left: 20px;
 }
 
-#wrap .title #home {
-	line-height: 21px;
-	text-decoration: none;
-	position: absolute;
-	left: 10px;
-	font-weight: bold;
+.titlel {
+	right: 20px;
 }
 
-#wrap .title #chongzhi {
-	right: 10px;
-	position: absolute;
-	outline: none;
-	line-height: 21px;
-	font-size: 16px;
-	color: #551A8B;
-	font-weight: bold;
+.titbut {
+	padding: 5px 10px;
+	background-color: aqua;
+	border: none;
+	border-radius: 10px;
 	cursor: pointer;
+}
+
+.titbut a {
+	text-decoration: none;
+}
+
+.titbut img {
+	height: 30px;
+}
+
+.titbut p {
+	color: #000000;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#name {
+	margin: auto;
+	font-weight: bold;
+	padding: 0 5px;
 }
 
 /* 通用 */
@@ -216,10 +224,6 @@ hr {
 
 /* 竖屏 */
 @media screen and (orientation: portrait) {
-	#wrap .title {
-		width: 90%;
-	}
-
 	#wrap #show_box {
 		width: 100%;
 		height: auto;
@@ -229,15 +233,23 @@ hr {
 		width: 100%;
 		height: auto;
 	}
+
+	.titlel,
+	.titler {
+		display: contents;
+	}
+
+	.titbut {
+		margin: 10px auto;
+	}
+
+	.titbut h1 {
+		display: none;
+	}
 }
 
 /* 横屏 */
 @media screen and (orientation: landscape) {
-	#wrap .title {
-		display: none;
-		width: 40%;
-	}
-
 	#wrap #show_box {
 		width: auto;
 		height: 100%;

@@ -21,6 +21,10 @@ window.onload = function() {
 	document.addEventListener('dblclick', function(e) {
 		e.preventDefault()
 	})
+	// 下载rom按钮
+	document.getElementById('drom').onclick = function() {
+		window.open('./roms/' + gameInfo.id + '.nes')
+	}
 	//监听加载按钮
 	document.querySelector('#btn_load').onclick = function() {
 		if (gameInfo) {
@@ -87,9 +91,6 @@ function pageInit(gameList) {
 	document.querySelector('#name').innerHTML = gameInfo.name
 	// 修改title
 	document.title = gameInfo.name + ' - ' + '红白机游戏盒'
-	//根据游戏信息配置摇杆
-	let isFourBtn = gameInfo.isFourBtn
-	let color = isFourBtn ? 'lightcoral' : 'royalblue'
 	//实例化摇杆 摇杆配置依赖游戏信息
 	let joystick = new Joystick({
 		//容器

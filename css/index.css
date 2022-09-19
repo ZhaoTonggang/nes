@@ -20,7 +20,7 @@ body {
 
 #app {
 	position: absolute;
-	margin: 10px;
+	margin: 10px 0;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
@@ -45,7 +45,7 @@ body {
 }
 
 #app .item {
-	width: 180px;
+	width: 200px;
 	height: auto;
 	display: block;
 	box-shadow: 0 10px 20px -10px #00a0e9;
@@ -69,17 +69,18 @@ body {
 
 #app .item .img_box {
 	display: block;
-	height: 180px;
-	width: 180px;
+	height: 200px;
+	width: 100%;
 	overflow: hidden;
 	position: relative;
 	border-radius: 10px;
 	text-align: center;
+	background: #000000 url(../image/loader.gif) no-repeat center/70%;
 }
 
 #app .item .img_box img {
-	height: 180px;
-	width: 180px;
+	height: 100%;
+	width: 100%;
 }
 
 #app .item .p1 {
@@ -104,34 +105,22 @@ body {
 @media (max-width: 1250px) {
 	#app .item {
 		height: auto;
-		width: 160px;
+		width: 180px;
 	}
 
 	#app .item .img_box {
-		height: 160px;
-		width: 160px;
-	}
-
-	#app .item .img_box img {
-		height: 160px;
-		width: 160px;
+		height: 180px;
 	}
 }
 
 @media (max-width: 1024px) {
 	#app .item {
 		height: auto;
-		width: 140px;
+		width: 170px;
 	}
 
 	#app .item .img_box {
-		height: 140px;
-		width: 140px;
-	}
-
-	#app .item .img_box img {
-		height: 140px;
-		width: 140px;
+		height: 170px;
 	}
 }
 
@@ -143,12 +132,6 @@ body {
 
 	#app .item .img_box {
 		height: 160px;
-		width: 160px;
-	}
-
-	#app .item .img_box img {
-		height: 160px;
-		width: 160px;
 	}
 }
 
@@ -160,12 +143,6 @@ body {
 
 	#app .item .img_box {
 		height: 130px;
-		width: 130px;
-	}
-
-	#app .item .img_box img {
-		height: 130px;
-		width: 130px;
 	}
 }
 

@@ -20,10 +20,28 @@
 
 	<body>
 		<div id="wrap" class="transverse">
-			<div class="title">
-				<a href="./" id="home">返回首页</a>
-				<h1 id="name">热血格斗（中文版）</h1>
-				<span id="chongzhi" onclick="chongzai()">重置游戏</span>
+			<div class="titler">
+				<button class="titbut">
+					<a href="./">
+						<img src="./image/button/home.png" />
+						<p>主页</p>
+					</a>
+				</button>
+				<h1 id="name">加载中...</h1>
+			</div>
+			<div class="titlel">
+				<button class=" titbut" onclick="chongzai()">
+					<img src="./image/button/rec.png" alt="刷新" />
+					<p>刷新</p>
+				</button>
+				<button class="titbut" id="drom">
+					<img src="./image/button/down.png" alt="下载" />
+					<p>下载</p>
+				</button>
+				<button class="titbut" disabled style="cursor: not-allowed;">
+					<img src="./image/button/sh.png" alt="分享" />
+					<p>分享</p>
+				</button>
 			</div>
 			<div id="show_box">
 				<p id="btn_load" onclick="nesl()">点击开始游戏</p>

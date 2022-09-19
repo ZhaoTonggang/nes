@@ -145,7 +145,7 @@ function nes_load_url(canvas_id, path) {
 	let req = new XMLHttpRequest();
 	req.open("GET", path);
 	req.overrideMimeType("text/plain; charset=x-user-defined");
-	req.onerror = () => console.log('这个错误发生在游戏加载环节');
+	req.onerror = () => console.error('这个错误发生在游戏加载环节');
 	req.onload = function() {
 		if (this.status === 200) {
 			//装载游戏数据
