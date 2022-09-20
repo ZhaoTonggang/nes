@@ -1,3 +1,8 @@
+//密钥
+let Session = sessionStorage.getItem("nesHeheda") || 0
+if (Session != 1) {
+	window.location.href = "/"
+}
 //获取设备类型
 let isMobile = /(iPhone|iPod|Android|ios|iOS|iPad|WebOS|Symbian|Windows Phone|Phone)/i.test(navigator.userAgent);
 //设置操作方式
@@ -32,6 +37,8 @@ window.onload = function() {
 			nes_load_url("nes-canvas", "./roms/" + gameInfo.id + ".nes")
 			//隐藏加载按钮
 			this.style.display = 'none'
+			// 隐藏标题
+			document.getElementById('name').style.display = 'none'
 			//浏览器全屏
 			let de = document.querySelector('body') || document.documentElement;
 			if (de.requestFullscreen) {
@@ -114,10 +121,3 @@ function pageInit(gameList) {
 	})
 	joystick.init()
 }
-//密钥
-document.addEventListener("DOMContentLoaded", function(e) {
-	let Session = sessionStorage.getItem("nesHeheda") || 0
-	if (Session != 1) {
-		window.location.href = "/"
-	}
-})
