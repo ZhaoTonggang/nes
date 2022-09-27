@@ -1,20 +1,21 @@
 <!DOCTYPE html>
-<html lang="zh" onselectstart="return false" oncontextmenu=self.event.returnValue=false>
+<html lang="zh-CN" onselectstart="return false" oncontextmenu=self.event.returnValue=false>
 
 	<head>
+		<title>红白机游戏盒 - 在线畅玩小霸王经典游戏</title>
 		<meta charset="UTF-8">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1, maximum-scale=1">
-		<title>红白机游戏盒 - 在线畅玩小霸王经典游戏</title>
+		<meta name="description" content="在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！">
+		<meta name="keywords" content="nes,小霸王,红白机,FC游戏,童年回忆,经典游戏,在线游戏,小游戏">
+		<meta name="author" content="赵彤刚">
 		<!--网站图标配置-->
 		<link rel="apple-touch-icon" sizes="192x192" href="./icons/192x192.png">
 		<link rel="icon" type="image/png" sizes="128x128" href="./icons/128x128.png">
 		<link rel="icon" type="image/png" sizes="144x144" href="./icons/144x144.png">
 		<link rel="icon" type="image/png" sizes="384x384" href="./icons/384x384.png">
 		<link rel="icon" type="image/png" sizes="512x512" href="./icons/512x512.png">
-		<!--PWA配置-->
-		<link rel="manifest" href="./manifest.json">
-		<!-- 该页面样式文件 -->
+		<!-- 页面样式 -->
 		<link rel="stylesheet" href="./css/play.css">
 	</head>
 
@@ -85,12 +86,6 @@
 		<script src="./lib/axios.min.js"></script>
 		<!-- 页面逻辑 -->
 		<script src="./js/play.js"></script>
-		<!--PWA渐进式应用配置-->
-		<script async="async" type="module">
-			import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
-			const el = document.createElement('pwa-update');
-			document.body.appendChild(el);
-		</script>
 	</body>
 
 </html>
