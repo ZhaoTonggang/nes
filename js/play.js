@@ -42,6 +42,67 @@ if (navigator.share) {
 let gameInfo = null
 //获取游戏列表，并init页面
 getGameList(pageInit)
+window.onload = function() {
+	// 弹出通知
+	if ("Notification" in window) {
+		if (window.Notification.permission == "granted") {
+			sendNotification();
+		} else if (window.Notification.permission != "denied") {
+			window.Notification.requestPermission(function(permission) {
+				sendNotification();
+			});
+		}
+	}
+	//禁止双击缩放
+	document.addEventListener('dblclick', function(e) {
+		e.preventDefault()
+	})
+	// 下载rom按钮
+	document.getElementById('drom').onclick = function() {
+		window.open('./roms/' + gameInfo.id + '.nes')
+	}
+	//监听加载按钮
+	document.querySelector('#btn_load').onclick = function() {
+		if (gameInfo) {
+			//加载游戏
+			nes_load_url("nes-canvas", "./roms/" + gameInfo.id + ".nes")
+			//隐藏加载按钮
+			this.style.display = 'none'
+			// 隐藏标题
+			document.getElementById('name').style.display = 'none'
+			//浏览器全屏
+			let de = document.querySelector('body') || document.documentElement;
+			if (de.requestFullscreen) {
+				de.requestFullscreen();
+			} else if (de.mozRequestFullScreen) {
+				de.mozRequestFullScreen();
+			} else if (de.webkitRequestFullScreen) {
+				de.webkitRequestFullScreen();
+			}
+		} else {
+			alert("数据获取失败！")
+			//如果游戏信息为空 则return
+			return
+		}
+	}
+	//实例化NES按钮
+	let nesBtn = new VirtualNesBtn({
+		//容器
+		el: "#user_btn_box",
+		//虚拟按钮按下时的回调 参数evt
+		btn_down_fn: (event) => {
+			keyboard(nes.buttonDown, event)
+		},
+		//虚拟按钮弹起时的回调 参数evt
+		btn_up_fn: (event) => {
+			keyboard(nes.buttonUp, event)
+		},
+		//按顺序分别是 select start b a
+		keyCodes: [32, 13, 86, 66]
+	})
+	//NES按钮实例初始化
+	nesBtn.init()
+}
 //重置游戏配置
 function chongzai() {
 	window.location.reload()
@@ -105,65 +166,4 @@ function pageInit(gameList) {
 		},
 	})
 	joystick.init()
-}
-window.onload = function() {
-	// 弹出通知
-	if ("Notification" in window) {
-		if (window.Notification.permission == "granted") {
-			sendNotification();
-		} else if (window.Notification.permission != "denied") {
-			window.Notification.requestPermission(function(permission) {
-				sendNotification();
-			});
-		}
-	}
-	//禁止双击缩放
-	document.addEventListener('dblclick', function(e) {
-		e.preventDefault()
-	})
-	// 下载rom按钮
-	document.getElementById('drom').onclick = function() {
-		window.open('./roms/' + gameInfo.id + '.nes')
-	}
-	//监听加载按钮
-	document.querySelector('#btn_load').onclick = function() {
-		if (gameInfo) {
-			//加载游戏
-			nes_load_url("nes-canvas", "./roms/" + gameInfo.id + ".nes")
-			//隐藏加载按钮
-			this.style.display = 'none'
-			// 隐藏标题
-			document.getElementById('name').style.display = 'none'
-			//浏览器全屏
-			let de = document.querySelector('body') || document.documentElement;
-			if (de.requestFullscreen) {
-				de.requestFullscreen();
-			} else if (de.mozRequestFullScreen) {
-				de.mozRequestFullScreen();
-			} else if (de.webkitRequestFullScreen) {
-				de.webkitRequestFullScreen();
-			}
-		} else {
-			alert("数据获取失败！")
-			//如果游戏信息为空 则return
-			return
-		}
-	}
-	//实例化NES按钮
-	let nesBtn = new VirtualNesBtn({
-		//容器
-		el: "#user_btn_box",
-		//虚拟按钮按下时的回调 参数evt
-		btn_down_fn: (event) => {
-			keyboard(nes.buttonDown, event)
-		},
-		//虚拟按钮弹起时的回调 参数evt
-		btn_up_fn: (event) => {
-			keyboard(nes.buttonUp, event)
-		},
-		//按顺序分别是 select start b a
-		keyCodes: [32, 13, 86, 66]
-	})
-	//NES按钮实例初始化
-	nesBtn.init()
 }
