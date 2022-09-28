@@ -124,7 +124,6 @@ function nes_init(canvas_id) {
 	let contextClass = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window
 		.oAudioContext || window.msAudioContext);
 	let audio_ctx = new contextClass();
-	// let audio_ctx = new window.AudioContext();
 	let script_processor = audio_ctx.createScriptProcessor(AUDIO_BUFFERING, 0, 2);
 	script_processor.onaudioprocess = audio_callback;
 	script_processor.connect(audio_ctx.destination);

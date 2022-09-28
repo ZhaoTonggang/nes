@@ -68,12 +68,17 @@ body {
 
 .titbut img {
 	height: 30px;
+	width: 30px;
 }
 
 .titbut p {
 	color: #000000;
 	font-size: 14px;
 	font-weight: bold;
+}
+
+#share {
+	display: none;
 }
 
 #name {
