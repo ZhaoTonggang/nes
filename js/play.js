@@ -42,17 +42,64 @@ if (navigator.share) {
 let gameInfo = null
 //获取游戏列表，并init页面
 getGameList(pageInit)
+//重置游戏配置
+function chongzai() {
+	window.location.reload()
+}
+// 分享
+function share() {
+	navigator.share({
+		title: '红白机游戏盒',
+		url: window.location.href,
+		text: '在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
+	});
+}
+//获取游戏信息
+function getGameList(cb) {
+	//异步操作
+	axios.get('./list.json').then(function(res) {
+		cb && cb(res.data)
+	}).catch(function(err) {
+		console.log(err)
+	})
+}
+
+function pageInit(gameList) {
+	//获取id
+	//index就是id-1
+	let id = location.search.substring(2) || 1
+	//数据化获取的1d
+	id = decodeURI(id)
+	//获取游戏信息
+	gameInfo = gameList[id - 1]
+	//展示游戏名称
+	document.querySelector('#name').innerHTML = gameInfo.name + gameInfo.Version
+	// 修改title
+	document.title = gameInfo.name + gameInfo.Version + ' - ' + '红白机游戏盒'
+	//实例化摇杆 摇杆配置依赖游戏信息
+	let joystick = new Joystick({
+		//容器
+		el: "#direction",
+		//摇杆颜色
+		color: 'red',
+		//摇杆大小
+		size: 100,
+		//绑定 上下左右 到 WSAD键
+		keyCodes: [87, 83, 65, 68],
+		//页面强制横屏时使用90
+		rotate: 0,
+		//按下时的回调
+		btn_down_fn: (event) => {
+			keyboard(nes.buttonDown, event)
+		},
+		//释放时的回调
+		btn_up_fn: (event) => {
+			keyboard(nes.buttonUp, event)
+		},
+	})
+	joystick.init()
+}
 window.onload = function() {
-	// 弹出通知
-	if ("Notification" in window) {
-		if (window.Notification.permission == "granted") {
-			sendNotification();
-		} else if (window.Notification.permission != "denied") {
-			window.Notification.requestPermission(function(permission) {
-				sendNotification();
-			});
-		}
-	}
 	//禁止双击缩放
 	document.addEventListener('dblclick', function(e) {
 		e.preventDefault()
@@ -102,68 +149,4 @@ window.onload = function() {
 	})
 	//NES按钮实例初始化
 	nesBtn.init()
-}
-//重置游戏配置
-function chongzai() {
-	window.location.reload()
-}
-// 分享
-function share() {
-	navigator.share({
-		title: '红白机游戏盒',
-		url: window.location.href,
-		text: '在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
-	});
-}
-// 通知
-function sendNotification() {
-	new Notification('正在运行：' + gameInfo.name + gameInfo.Version, {
-		body: '久违了我的朋友，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！',
-		icon: './imgs/' + gameInfo.id + '.png'
-	})
-}
-//获取游戏信息
-function getGameList(cb) {
-	//异步操作
-	axios.get('./list.json').then(function(res) {
-		cb && cb(res.data)
-	}).catch(function(err) {
-		console.log(err)
-	})
-}
-
-function pageInit(gameList) {
-	//获取id
-	//index就是id-1
-	let id = location.search.substring(2) || 1
-	//数据化获取的1d
-	id = decodeURI(id)
-	//获取游戏信息
-	gameInfo = gameList[id - 1]
-	//展示游戏名称
-	document.querySelector('#name').innerHTML = gameInfo.name + gameInfo.Version
-	// 修改title
-	document.title = gameInfo.name + gameInfo.Version + ' - ' + '红白机游戏盒'
-	//实例化摇杆 摇杆配置依赖游戏信息
-	let joystick = new Joystick({
-		//容器
-		el: "#direction",
-		//摇杆颜色
-		color: 'red',
-		//摇杆大小
-		size: 100,
-		//绑定 上下左右 到 WSAD键
-		keyCodes: [87, 83, 65, 68],
-		//页面强制横屏时使用90
-		rotate: 0,
-		//按下时的回调
-		btn_down_fn: (event) => {
-			keyboard(nes.buttonDown, event)
-		},
-		//释放时的回调
-		btn_up_fn: (event) => {
-			keyboard(nes.buttonUp, event)
-		},
-	})
-	joystick.init()
 }
