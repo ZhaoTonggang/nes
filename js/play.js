@@ -16,18 +16,18 @@ function mobile() {
 	if (isMobile) {
 		qhimg.src = "./image/button/key.png";
 		qhp.innerHTML = "键盘";
-		dire.style.display = "block";
-		btne.style.display = "flex";
 		play1.style.display = "none";
 		play2.style.display = "none";
+		dire.style.display = "flex";
+		btne.style.display = "flex";
 		isMobile = false;
 	} else {
 		qhimg.src = "./image/button/gmb.png";
 		qhp.innerHTML = "触屏";
-		play1.style.display = "block";
-		play2.style.display = "block";
 		dire.style.display = "none";
 		btne.style.display = "none";
+		play1.style.display = "block";
+		play2.style.display = "block";
 		isMobile = true;
 	}
 }

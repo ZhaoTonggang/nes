@@ -121,33 +121,33 @@ body {
 	border-radius: 10px;
 }
 
-/* 摇杆容器 */
-#wrap #direction {
+/* 摇杆按钮容器 */
+#direction,
+#user_btn_box {
 	display: none;
 	z-index: 90;
 	position: absolute;
 	bottom: 35px;
+	touch-action: none;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-content: space-around;
+}
+
+/* 摇杆容器 */
+#direction {
 	left: 25px;
 	width: 150px;
 	height: 150px;
 	background: url(../image/yg.png) no-repeat center/cover;
 	cursor: move;
-	touch-action: none;
 }
 
 /* 按钮容器 */
-#wrap #user_btn_box {
-	display: none;
-	z-index: 90;
-	position: absolute;
-	bottom: 35px;
+#user_btn_box {
 	right: 25px;
 	width: 170px;
 	height: 190px;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	align-content: space-around;
-	touch-action: none;
 }
 
 /*按钮样式*/
