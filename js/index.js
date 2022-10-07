@@ -18,13 +18,13 @@ createApp({
 		startGame(id) {
 			window.open('./play.html?=' + id, '_self')
 		},
-		getGameList: async function() {
-			try {
-				let result = await axios.get('./list.json')
-				this.list = result.data
-			} catch (err) {
-				console.log(err)
-			}
+		getGameList: function() {
+			fetch('./list.json')
+				//回调函数
+				.then(response => response.json())
+				//处理服务器数据
+				.then(data => this.list = data)
+				.catch(err => console.log('获取游戏列表失败'))
 		}
 	}
 }).mount('#app')

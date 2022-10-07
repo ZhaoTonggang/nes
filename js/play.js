@@ -56,12 +56,12 @@ function share() {
 }
 //获取游戏信息
 function getGameList(cb) {
-	//异步操作
-	axios.get('./list.json').then(function(res) {
-		cb && cb(res.data)
-	}).catch(function(err) {
-		console.log(err)
-	})
+	fetch('./list.json')
+		//回调函数
+		.then(response => response.json())
+		//处理服务器数据
+		.then(data => cb && cb(data))
+		.catch(err => console.log('获取游戏信息失败'))
 }
 
 function pageInit(gameList) {
@@ -112,11 +112,11 @@ window.onload = function() {
 	document.querySelector('#btn_load').onclick = function() {
 		if (gameInfo) {
 			//加载游戏
-			nes_load_url("nes-canvas", "./roms/" + gameInfo.id + ".nes")
+			nes_load_url("nes-canvas", "./roms/" + gameInfo.id + ".nes");
 			//隐藏加载按钮
-			this.style.display = 'none'
+			this.style.display = 'none';
 			// 隐藏标题
-			document.getElementById('name').style.display = 'none'
+			document.getElementById('name').style.display = 'none';
 			//浏览器全屏
 			let de = document.querySelector('body') || document.documentElement;
 			if (de.requestFullscreen) {
