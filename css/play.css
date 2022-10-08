@@ -107,18 +107,27 @@ body {
 	touch-action: none;
 }
 
-#show_box #btn_load {
+#show_box .load {
 	position: absolute;
-	color: #ff4400;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	cursor: pointer;
 	font-size: 25px;
 	font-weight: bold;
-	background-color: rgba(225, 225, 225, 0.5);
 	padding: 5px;
 	border-radius: 10px;
+}
+
+#btn_load {
+	background-color: rgba(225, 225, 225, 0.5);
+	color: #ff4400;
+	cursor: pointer;
+}
+
+#show_load {
+	background-color: white;
+	color: #000000;
+	display: none;
 }
 
 /* 摇杆按钮容器 */

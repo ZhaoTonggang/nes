@@ -141,19 +141,27 @@ function nes_load_data(canvas_id, rom_data) {
 //入口函数，调用它加载游戏
 function nes_load_url(canvas_id, path) {
 	nes_init(canvas_id);
+	let showload = document.getElementById('show_load');
 	let req = new XMLHttpRequest();
 	req.open("GET", path);
 	req.overrideMimeType("text/plain; charset=x-user-defined");
-	req.onerror = () => console.error('这个错误发生在游戏加载环节');
+	req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
 	req.onload = function() {
 		if (this.status === 200) {
 			//装载游戏数据
 			nes_boot(this.responseText);
+			showload.innerHTML = '加载完成';
+			showload.style.display = 'none';
 		} else if (this.status === 0) {
-			req.onerror();
+			req.onerror(e);
+			showload.innerHTML = '请求数据失败';
 		} else {
-			req.onerror();
+			req.onerror(e);
+			showload.innerHTML = 'ROM加载失败';
 		}
+	};
+	req.onprogress = function(e) {
+		showload.innerHTML = '加载中(' + (e.loaded / e.total * 100).toFixed(0) + '%)';
 	};
 	req.send();
 }
