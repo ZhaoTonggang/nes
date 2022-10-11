@@ -67,15 +67,23 @@ function getGameList(cb) {
 function pageInit(gameList) {
 	//获取id
 	//index就是id-1
-	let id = location.search.substring(2) || 1
+	let id = location.search.substring(2) || 1;
 	//数据化获取的1d
-	id = decodeURI(id)
+	id = decodeURI(id);
 	//获取游戏信息
-	gameInfo = gameList[id - 1]
+	gameInfo = gameList.filter(function(gameobj) {
+		return gameobj.id == id;
+	});
+	// 判断数据是否存在
+	if (gameInfo == "") {
+		alert("403访问被拒绝！");
+		window.location.href = "/";
+		return;
+	}
 	//展示游戏名称
-	document.querySelector('#name').innerHTML = gameInfo.name + gameInfo.Version
+	document.getElementById('name').innerHTML = gameInfo[0].name + gameInfo[0].Version;
 	// 修改title
-	document.title = gameInfo.name + gameInfo.Version + ' - ' + '红白机游戏盒'
+	document.title = gameInfo[0].name + gameInfo[0].Version + ' - ' + '红白机游戏盒';
 	//实例化摇杆 摇杆配置依赖游戏信息
 	let joystick = new Joystick({
 		//容器
@@ -106,13 +114,13 @@ window.onload = function() {
 	})
 	// 下载rom按钮
 	document.getElementById('drom').onclick = function() {
-		window.open('./roms/' + gameInfo.id + '.nes')
+		window.open('./roms/' + gameInfo[0].id + '.nes')
 	}
 	//监听加载按钮
 	document.getElementById('btn_load').onclick = function() {
-		if (gameInfo) {
+		if (gameInfo[0]) {
 			//加载游戏
-			nes_load_url("nes-canvas", "./roms/" + gameInfo.id + ".nes");
+			nes_load_url("nes-canvas", "./roms/" + gameInfo[0].id + ".nes");
 			//隐藏加载按钮
 			this.style.display = 'none';
 			//显示加载进度
