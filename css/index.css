@@ -90,16 +90,27 @@ body {
 	margin: 10px 5px;
 }
 
-#app .item .p2 {
-	color: black;
-	background-color: aqua;
+#app .item .p2,
+#app .item .p3 {
 	font-size: 14px;
 	padding: 5px 15px;
 	font-weight: bold;
 	border-radius: 0 20px;
 	position: absolute;
+}
+
+#app .item .p2 {
 	left: 0;
 	bottom: 0;
+	color: black;
+	background-color: aqua;
+}
+
+#app .item .p3 {
+	right: 0;
+	top: 0;
+	color: white;
+	background-color: blueviolet;
 }
 
 @media (max-width: 1250px) {
