@@ -28,29 +28,32 @@
 						<p>主页</p>
 					</a>
 				</button>
-				<button class=" titbut" onclick="mobile()">
-					<img id="qhimg" src="./image/button/gmb.png" alt="这是切换按钮" />
-					<p id="qhp">切换</p>
+				<button class="titbut" id="share" onclick="share()">
+					<img src="./image/button/sh.png" alt="这是分享按钮" />
+					<p>分享</p>
+				</button>
+				<button class=" titbut" onclick="chongzai()">
+					<img src="./image/button/rec.png" alt="这是刷新按钮" />
+					<p>刷新</p>
 				</button>
 			</div>
 			<h1 id="name">加载中...</h1>
 			<div class="titlel">
-				<button class=" titbut" onclick="chongzai()">
-					<img src="./image/button/rec.png" alt="这是刷新按钮" />
-					<p>刷新</p>
+				<button class=" titbut" onclick="mobile()">
+					<img id="qhimg" src="./image/button/gmb.png" alt="这是切换按钮" />
+					<p id="qhp">切换</p>
+				</button>
+				<button class=" titbut" id="gsave">
+					<img src="./image/button/save.png" alt="这是存档按钮" />
+					<p>存档</p>
 				</button>
 				<button class="titbut" id="drom">
 					<img src="./image/button/down.png" alt="这是下载按钮" />
 					<p>下载</p>
 				</button>
-				<button class="titbut" id="share" onclick="share()">
-					<img src="./image/button/sh.png" alt="这是分享按钮" />
-					<p>分享</p>
-				</button>
 			</div>
 			<div id="show_box">
-				<p id="btn_load" class="load" onclick="nesl()">点击开始游戏</p>
-				<p id="show_load" class="load">正在请求资源</p>
+				<p id="btn_load" class="btnload">点击开始游戏</p>
 				<canvas id="nes-canvas" width="256" height="240"></canvas>
 			</div>
 			<!-- 摇杆容器 -->

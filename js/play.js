@@ -116,15 +116,19 @@ window.onload = function() {
 	document.getElementById('drom').onclick = function() {
 		window.open('./roms/' + gameInfo[0].i + '.nes')
 	}
+	//获取加载按钮
+	let btnload = document.getElementById('btn_load');
+	btnload.style.display = 'inline';
 	//监听加载按钮
-	document.getElementById('btn_load').onclick = function() {
+	btnload.onclick = function() {
 		if (gameInfo[0]) {
 			//加载游戏
 			nes_load_url("nes-canvas", "./roms/" + gameInfo[0].i + ".nes");
-			//隐藏加载按钮
-			this.style.display = 'none';
 			//显示加载进度
-			document.getElementById('show_load').style.display = 'inline';
+			this.onclick = null;
+			this.classList.remove("btnload");
+			this.classList.add("showload");
+			this.innerHTML = "正在请求资源";
 			// 隐藏标题
 			document.getElementById('name').style.display = 'none';
 			//浏览器全屏
@@ -142,6 +146,9 @@ window.onload = function() {
 			//如果游戏信息为空 则return
 			return
 		}
+	}
+	document.getElementById('gsave').onclick = function() {
+		alert("正在开发中，敬请期待！")
 	}
 	//实例化NES按钮
 	let nesBtn = new VirtualNesBtn({

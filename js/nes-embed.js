@@ -141,7 +141,7 @@ function nes_load_data(canvas_id, rom_data) {
 //入口函数，调用它加载游戏
 function nes_load_url(canvas_id, path) {
 	nes_init(canvas_id);
-	let showload = document.getElementById('show_load');
+	let showload = document.getElementById('btn_load');
 	let req = new XMLHttpRequest();
 	req.open("GET", path);
 	req.overrideMimeType("text/plain; charset=x-user-defined");
