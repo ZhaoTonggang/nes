@@ -147,9 +147,6 @@ window.onload = function() {
 			return
 		}
 	}
-	document.getElementById('gsave').onclick = function() {
-		alert("正在开发中，敬请期待！")
-	}
 	//实例化NES按钮
 	let nesBtn = new VirtualNesBtn({
 		//容器

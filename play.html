@@ -17,6 +17,8 @@
 		<link rel="icon" type="image/png" sizes="512x512" href="./icons/512x512.png">
 		<!-- 页面样式 -->
 		<link rel="stylesheet" type="text/css" href="./css/play.css">
+		<!-- 存档 -->
+		<link rel="stylesheet" type="text/css" href="./css/hnesdb.css">
 	</head>
 
 	<body>
@@ -43,7 +45,7 @@
 					<img id="qhimg" src="./image/button/gmb.png" alt="这是切换按钮" />
 					<p id="qhp">切换</p>
 				</button>
-				<button class=" titbut" id="gsave">
+				<button class=" titbut" id="hnbut" onclick="gsave(true)">
 					<img src="./image/button/save.png" alt="这是存档按钮" />
 					<p>存档</p>
 				</button>
@@ -82,6 +84,7 @@
 				<p>START:+</p>
 			</div>
 		</div>
+		<ul id="hnul"></ul>
 		<!-- 模拟器 -->
 		<script type="text/javascript" src="./lib/jsnes.min.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="./js/nes-embed.js" charset="UTF-8"></script>
@@ -90,6 +93,8 @@
 		<!-- 摇杆插件 -->
 		<script type="text/javascript" src="./lib/nipplejs.min.js" charset="UTF-8"></script>
 		<script type="text/javascript" src="./js/joystick.js" charset="UTF-8"></script>
+		<!-- 存档 -->
+		<script type="text/javascript" src="./js/hnesdb.js" charset="UTF-8"></script>
 		<!-- 页面逻辑 -->
 		<script type="text/javascript" src="./js/play.js" charset="UTF-8"></script>
 	</body>
