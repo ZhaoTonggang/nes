@@ -13,7 +13,13 @@ let audio_write_cursor = 0;
 let audio_read_cursor = 0;
 let nes = new jsnes.NES({
 	onFrame: function(framebuffer_24) {
-		for (let i = 0; i < FRAMEBUFFER_SIZE; i++) framebuffer_u32[i] = 0xFF000000 | framebuffer_24[i];
+		let i = 0;
+		for (let y = 0; y < SCREEN_HEIGHT; ++y) {
+			for (let x = 0; x < SCREEN_WIDTH; ++x) {
+				i = y * 256 + x;
+				framebuffer_u32[i] = 0Xff000000 | framebuffer_24[i];
+			}
+		}
 	},
 	onAudioSample: function(l, r) {
 		audio_samples_L[audio_write_cursor] = l;
@@ -120,6 +126,10 @@ function nes_init(canvas_id) {
 	let buffer = new ArrayBuffer(image.data.length);
 	framebuffer_u8 = new Uint8ClampedArray(buffer);
 	framebuffer_u32 = new Uint32Array(buffer);
+	//Set alpha
+	for (let i = 0; i < framebuffer_u32.length; ++i) {
+		framebuffer_u32[i] = 0xff000000;
+	}
 	// Setup audio.
 	let contextClass = (window.AudioContext || window.webkitAudioContext || window.mozAudioContext || window
 		.oAudioContext || window.msAudioContext);

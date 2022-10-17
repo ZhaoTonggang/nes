@@ -141,7 +141,7 @@ window.onload = function() {
 				de.webkitRequestFullScreen();
 			}
 		} else {
-			alert("数据获取失败！");
+			cocoMessage.error("数据获取失败！", 2000);
 			window.location.href = "/";
 			//如果游戏信息为空 则return
 			return

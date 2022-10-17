@@ -40,7 +40,6 @@ class hehedaDB {
 				let db = e.target.result;
 				if (!db.objectStoreNames.contains(that.DBStore)) {
 					try {
-						console.log("进入");
 						let store = db.createObjectStore(that.DBStore, {
 							keyPath: 'id',
 							autoIncrement: true
@@ -120,6 +119,7 @@ class hehedaDB {
 	}
 }
 let HDB = new hehedaDB();
+let sbts = true;
 // 存取操作
 function nessave(type, code, dom, id) {
 	let canvas = document.getElementById("nes-canvas");
@@ -139,64 +139,63 @@ function nessave(type, code, dom, id) {
 		let hnul = document.getElementById("hnul");
 		if (type) {
 			HDB.setData(nesInfo).then(() => {
-				hnbut.onclick = function() {
-					gsave(true);
-				};
+				sbts = true;
 				hnul.style.display = "none";
+				cocoMessage.success("保存成功！", 2000);
 			});
 		} else {
 			HDB.getData(id).then((d) => {
 				nes.fromJSON(d);
-				hnbut.onclick = function() {
-					gsave(true);
-				};
+				sbts = true;
 				hnul.style.display = "none";
+				cocoMessage.success("读取成功！", 2000);
 			});
 		}
 	})
 }
 // 菜单
-function gsave(open) {
-	let hnbut = document.getElementById("hnbut");
-	let hnul = document.getElementById("hnul");
-	if (open) {
-		hnbut.onclick = function() {
-			gsave(false);
-		};
-		let code = gameInfo[0].i.toString();
-		HDB.initDB().then(() => {
-			HDB.getDataListByCode(code).then((data) => {
-				let result = "";
-				for (let j = 0; j < data.length; j++) {
-					result += ` <li class="hnli">
-		            <div class="hnimg"><img src="${data[j].pic}"></div>
-		            <div class="hndiv">
-		            <p>存档【${j+1}】</p>
-					<p>${data[j].time}</p>
-					<button type="button" class="hnsbut" onclick="nessave(true,'${data[j].code}',this,${data[j].id})">保存</button>
-		            <button type="button" class="hnlbut" onclick="nessave(false,'${data[j].code}',this,${data[j].id})" style="display: inline-block;">读取</button>
-		            </div>
-		            </li>`;
-				}
-				for (let j = 0; j < 5 - data.length; j++) {
-					result += ` <li class="hnli">
-					<div class="hnimg"></div>
-		                    <div class="hndiv">
-		                        <p>存档【${data.length+j+1}】</p>
-								<p>无记录</p>
-		                        <button type="button" class="hnsbut" onclick="nessave(true,'${code}',this)">保存</button>
-		                    </div>
-							</li>`;
-				}
-				//获取存档列表
-				hnul.innerHTML = result;
-				hnul.style.display = "inline";
+function gsave() {
+	let savesh = document.getElementById("btn_load").style.display;
+	if (savesh == "none") {
+		let hnbut = document.getElementById("hnbut");
+		let hnul = document.getElementById("hnul");
+		if (sbts) {
+			sbts = false;
+			let code = gameInfo[0].i.toString();
+			HDB.initDB().then(() => {
+				HDB.getDataListByCode(code).then((data) => {
+					let result = "";
+					for (let j = 0; j < data.length; j++) {
+						result += ` <li class="hnli">
+			            <div class="hnimg"><img src="${data[j].pic}"></div>
+			            <div class="hndiv">
+			            <p>存档【${j+1}】</p>
+						<p>${data[j].time}</p>
+						<button type="button" class="hnsbut" onclick="nessave(true,'${data[j].code}',this,${data[j].id})">保存</button>
+			            <button type="button" class="hnlbut" onclick="nessave(false,'${data[j].code}',this,${data[j].id})" style="display: inline-block;">读取</button>
+			            </div>
+			            </li>`;
+					}
+					for (let j = 0; j < 5 - data.length; j++) {
+						result += ` <li class="hnli">
+						<div class="hnimg"></div>
+			                    <div class="hndiv">
+			                        <p>存档【${data.length+j+1}】</p>
+									<p>无记录</p>
+			                        <button type="button" class="hnsbut" onclick="nessave(true,'${code}',this)">保存</button>
+			                    </div>
+								</li>`;
+					}
+					//获取存档列表
+					hnul.innerHTML = result;
+					hnul.style.display = "inline";
+				})
 			})
-		})
+		} else {
+			sbts = true;
+			hnul.style.display = "none";
+		}
 	} else {
-		hnbut.onclick = function() {
-			gsave(true);
-		};
-		hnul.style.display = "none";
+		cocoMessage.warning("请先开始游戏！", 2000);
 	}
 }
