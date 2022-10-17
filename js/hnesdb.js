@@ -117,6 +117,21 @@ class hehedaDB {
 			}
 		});
 	}
+	delData(id) {
+		let that = this;
+		return new Promise(function(resovle, reject) {
+			let request = that.DB
+				.transaction(that.DBStore, "readwrite")
+				.objectStore(that.DBStore)
+				.delete(id);
+			request.onsuccess = function(event) {
+				resovle(event.target.result);
+			};
+			request.onerror = function(event) {
+				console.log("数据删除失败");
+			}
+		});
+	}
 }
 let HDB = new hehedaDB();
 let sbts = true;
@@ -137,19 +152,25 @@ function nessave(type, code, dom, id) {
 	HDB.initDB().then(() => {
 		let hnbut = document.getElementById("hnbut");
 		let hnul = document.getElementById("hnul");
-		if (type) {
+		if (type == "a") {
 			HDB.setData(nesInfo).then(() => {
 				sbts = true;
 				hnul.style.display = "none";
 				cocoMessage.success("保存成功！", 2000);
 			});
-		} else {
+		} else if (type == "b") {
 			HDB.getData(id).then((d) => {
 				nes.fromJSON(d);
 				sbts = true;
 				hnul.style.display = "none";
 				cocoMessage.success("读取成功！", 2000);
 			});
+		} else {
+			HDB.delData(id).then(() => {
+				sbts = true;
+				hnul.style.display = "none";
+				cocoMessage.success("删除成功！", 2000);
+			})
 		}
 	})
 }
@@ -171,8 +192,9 @@ function gsave() {
 			            <div class="hndiv">
 			            <p>存档【${j+1}】</p>
 						<p>${data[j].time}</p>
-						<button type="button" class="hnsbut" onclick="nessave(true,'${data[j].code}',this,${data[j].id})">保存</button>
-			            <button type="button" class="hnlbut" onclick="nessave(false,'${data[j].code}',this,${data[j].id})" style="display: inline-block;">读取</button>
+						<button type="button" class="hnsbut" onclick="nessave('a','${data[j].code}',this,${data[j].id})">保存</button>
+			            <button type="button" class="hndbut" onclick="nessave('c','${data[j].code}',this,${data[j].id})">删除</button>
+						<button type="button" class="hnlbut" onclick="nessave('b','${data[j].code}',this,${data[j].id})">读取</button>
 			            </div>
 			            </li>`;
 					}
@@ -182,7 +204,7 @@ function gsave() {
 			                    <div class="hndiv">
 			                        <p>存档【${data.length+j+1}】</p>
 									<p>无记录</p>
-			                        <button type="button" class="hnsbut" onclick="nessave(true,'${code}',this)">保存</button>
+			                        <button type="button" class="hnsbut" onclick="nessave('a','${code}',this)">保存</button>
 			                    </div>
 								</li>`;
 					}

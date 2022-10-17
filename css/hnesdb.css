@@ -52,6 +52,7 @@
 }
 
 .hnsbut,
+.hndbut,
 .hnlbut {
 	height: 30px;
 	width: 50px;
@@ -66,6 +67,10 @@
 }
 
 .hnsbut {
+	background-color: green;
+}
+
+.hndbut {
 	background-color: red;
 }
 
