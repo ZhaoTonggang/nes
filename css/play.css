@@ -38,12 +38,12 @@ body {
 /* 标题容器 */
 .titler,
 .titlel {
-	position: absolute;
+	position: fixed;
 	top: 20px;
 	background-color: aqua;
 	padding: 0 5px;
 	border-radius: 10px;
-	display: flex;
+	display: block;
 }
 
 .titler {
@@ -55,7 +55,9 @@ body {
 }
 
 .titbut {
-	padding: 5px 10px;
+	padding: 5px;
+	margin: 0;
+	display: inline-block;
 	background-color: aqua;
 	border: none;
 	border-radius: 10px;
@@ -135,12 +137,9 @@ body {
 #user_btn_box {
 	display: none;
 	z-index: 90;
-	position: absolute;
-	bottom: 35px;
+	position: fixed;
+	bottom: 25px;
 	touch-action: none;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	align-content: space-around;
 }
 
 /* 摇杆容器 */
@@ -155,17 +154,15 @@ body {
 /* 按钮容器 */
 #user_btn_box {
 	right: 25px;
-	width: 170px;
-	height: 190px;
+	width: 150px;
+	height: 170px;
 }
 
 /*按钮样式*/
 .nes_btn_box {
-	max-width: 170px;
-	max-height: 200px;
 	margin: 0 auto;
-	width: 100%;
-	height: 100%;
+	width: 150px;
+	height: 170px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -174,13 +171,13 @@ body {
 }
 
 .nes_btn_box .btn {
-	height: 30px;
-	line-height: 30px;
+	height: 20px;
+	line-height: 20px;
 	text-align: center;
-	background-color: lightcoral;
+	background-color: red;
 	color: lightcyan;
 	cursor: pointer;
-	border-radius: 10px;
+	border-radius: 20px;
 	opacity: 0.5;
 }
 
@@ -195,17 +192,20 @@ body {
 	margin-bottom: 20px;
 }
 
+.nes_btn_box .btn-ab,
+.nes_btn_box .btn-a,
+.nes_btn_box .btn-b {
+	height: 50px;
+	line-height: 50px;
+}
+
 .nes_btn_box .btn-ab {
 	width: 80%;
-	height: 60px;
-	line-height: 60px;
 }
 
 .nes_btn_box .btn-a,
 .nes_btn_box .btn-b {
 	width: 46%;
-	height: 60px;
-	line-height: 60px;
 }
 
 /* 按键映射说明 */

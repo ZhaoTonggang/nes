@@ -18,8 +18,8 @@ function mobile() {
 		qhp.innerHTML = "键盘";
 		play1.style.display = "none";
 		play2.style.display = "none";
-		dire.style.display = "flex";
-		btne.style.display = "flex";
+		dire.style.display = "block";
+		btne.style.display = "block";
 		isMobile = false;
 	} else {
 		qhimg.src = "./image/button/gmb.png";

@@ -20,7 +20,7 @@ body {
 
 #app {
 	position: absolute;
-	margin: 10px 0;
+	margin: 15px 0;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
@@ -31,17 +31,66 @@ body {
 	position: fixed;
 	z-index: 99;
 	width: 100%;
-	height: auto;
+	height: 48px;
 	text-align: center;
-	background-color: rgb(22, 160, 134);
-	padding: 10px 0;
+	background-color: aqua;
+	padding: 0;
 }
 
-.div1 a {
+.title {
+	display: inline-block;
 	text-decoration: none;
 	font-weight: bold;
-	color: rgb(255, 255, 255);
-	font-size: 20px;
+	color: black;
+	font-size: 25px;
+	position: absolute;
+	margin: 10px;
+	left: 10px;
+}
+
+.lad,
+#yzxtg {
+	display: none;
+}
+
+.hul {
+	display: inline-block;
+	position: fixed;
+	margin: 5px;
+	padding: 0;
+	overflow: hidden;
+	list-style: none;
+	right: 15px;
+}
+
+.hul li {
+	display: inline-block;
+	margin: 5px;
+}
+
+.hul li a {
+	display: inline-block;
+	color: black;
+	font-size: 16px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	text-decoration: none;
+	position: relative;
+	text-align: center;
+}
+
+.hul li a img {
+	height: 25px;
+	width: 25px;
+	margin: 5px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.hul li a:hover,
+.hul li a.selected {
+	color: #00a0e9;
+	text-align: center;
 }
 
 #app .item {
@@ -132,6 +181,50 @@ body {
 
 	#app .item .img_box {
 		height: 170px;
+	}
+
+	.lad {
+		display: inline-block;
+		position: absolute;
+		right: 10px;
+		margin: 5px;
+	}
+
+	.lad img {
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+	}
+
+	.hul {
+		position: absolute;
+		width: 100%;
+		max-height: 600px;
+		display: block;
+		background-color: aqua;
+		margin: 0;
+		transition: max-height 1s linear;
+		top: 48px;
+		right: 0;
+	}
+
+	.hul li {
+		display: block;
+		border-radius: 20px;
+		background-color: cadetblue;
+	}
+
+	.hul li a {
+		display: block;
+		width: 100%;
+		padding: 5px;
+		color: black;
+		font-size: 18px;
+	}
+
+	:checked~.hul {
+		max-height: 0;
+		transition: max-height 1s linear;
 	}
 }
 
