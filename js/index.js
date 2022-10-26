@@ -1,6 +1,3 @@
-//密钥
-sessionStorage.setItem("nesHeheda", "1")
-// 加载
 const {
 	createApp
 } = Vue

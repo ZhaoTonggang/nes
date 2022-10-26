@@ -1,7 +1,8 @@
-//密钥
-let Session = sessionStorage.getItem("nesHeheda") || 0
-if (Session != 1) {
-	window.location.href = "/"
+// 数据异常处理
+function nodata() {
+	alert("403访问被拒绝！");
+	window.location.href = "/";
+	return;
 }
 //获取设备类型
 let isMobile = /(iPhone|iPod|Android|ios|iOS|iPad|WebOS|Symbian|Windows Phone|Phone)/i.test(navigator.userAgent);
@@ -49,9 +50,9 @@ function chongzai() {
 // 分享
 function share() {
 	navigator.share({
-		title: '红白机游戏盒',
+		title: '在线玩《' + gameInfo[0].n + '》',
 		url: window.location.href,
-		text: '在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
+		text: '推荐使用电脑，运行更加流畅！在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
 	});
 }
 //获取游戏信息
@@ -67,7 +68,7 @@ function getGameList(cb) {
 function pageInit(gameList) {
 	//获取id
 	//index就是id-1
-	let id = location.search.substring(2) || 1;
+	let id = location.search.substring(2);
 	//数据化获取的1d
 	id = decodeURI(id);
 	//获取游戏信息
@@ -75,10 +76,12 @@ function pageInit(gameList) {
 		return gameobj.i == id;
 	});
 	// 判断数据是否存在
-	if (gameInfo == "") {
-		alert("403访问被拒绝！");
-		window.location.href = "/";
-		return;
+	if (id != "") {
+		if (gameInfo == "") {
+			nodata();
+		}
+	} else {
+		nodata();
 	}
 	//展示游戏名称
 	document.getElementById('name').innerHTML = gameInfo[0].n + gameInfo[0].v;
