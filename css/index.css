@@ -49,6 +49,12 @@ body {
 	left: 15px;
 }
 
+.title img {
+	height: 40px;
+	width: 40px;
+	vertical-align: bottom;
+}
+
 .lad,
 #yzxtg {
 	display: none;
