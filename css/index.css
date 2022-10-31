@@ -16,6 +16,12 @@ body {
 	background-size: cover, cover;
 	background-position: center center, center center;
 	background-attachment: fixed, fixed;
+	opacity: 1;
+	transform: rotateY(0deg);
+	-moz-transition: opacity 2s ease-out, transform 2s ease;
+	-webkit-transition: opacity 2s ease-out, transform 2s ease;
+	-ms-transition: opacity 2s ease-out, transform 2s ease;
+	transition: opacity 2s ease-out, transform 2s ease;
 }
 
 #app {
@@ -285,4 +291,20 @@ body {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 	background: #ffee00;
+}
+
+/* 页面加载遮罩 */
+.is-loading {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transform: rotateY(360deg);
+	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
+	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
+	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
+	background: linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
 }

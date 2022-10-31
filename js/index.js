@@ -1,3 +1,10 @@
+// 页面载入设置
+document.onreadystatechange = function() {
+	if (document.readyState === "interactive") {
+		document.body.classList.remove("is-loading");
+	}
+}
+// 数据加载
 const {
 	createApp
 } = Vue
