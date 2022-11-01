@@ -119,11 +119,8 @@ window.onload = function() {
 	document.getElementById('drom').onclick = function() {
 		window.open('./roms/' + gameInfo[0].i + '.nes')
 	}
-	//获取加载按钮
-	let btnload = document.getElementById('btn_load');
-	btnload.style.display = 'inline';
 	//监听加载按钮
-	btnload.onclick = function() {
+	document.getElementById('btn_load').onclick = function() {
 		if (gameInfo[0]) {
 			//加载游戏
 			nes_load_url("nes-canvas", "./roms/" + gameInfo[0].i + ".nes");
@@ -166,5 +163,7 @@ window.onload = function() {
 		keyCodes: [32, 13, 86, 66]
 	})
 	//NES按钮实例初始化
-	nesBtn.init()
+	nesBtn.init();
+	// 移除遮罩
+	document.body.classList.remove('is-loading');
 }

@@ -1,5 +1,4 @@
-*,
-body {
+* {
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -13,18 +12,14 @@ body {
 	font-family: YouYuan;
 }
 
-html,
-body {
+html {
 	width: 100%;
 	height: 100%;
 }
 
-/* 布局容器 */
-#wrap {
+body {
 	width: 100%;
 	height: 100%;
-	text-align: center;
-	overflow: hidden;
 	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
 	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
 	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
@@ -33,6 +28,20 @@ body {
 	background-size: cover, cover;
 	background-position: center center, center center;
 	background-attachment: fixed, fixed;
+	opacity: 1;
+	transform: rotateX(0deg);
+	-moz-transition: opacity 2s ease-out, transform 2s ease;
+	-webkit-transition: opacity 2s ease-out, transform 2s ease;
+	-ms-transition: opacity 2s ease-out, transform 2s ease;
+	transition: opacity 2s ease-out, transform 2s ease;
+}
+
+/* 布局容器 */
+#wrap {
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	overflow: hidden;
 }
 
 /* 标题容器 */
@@ -113,7 +122,6 @@ body {
 	background-color: rgba(225, 225, 225, 0.5);
 	color: #ff4400;
 	cursor: pointer;
-	display: none;
 }
 
 #btn_load {
@@ -125,6 +133,7 @@ body {
 	font-weight: bold;
 	padding: 5px;
 	border-radius: 10px;
+	display: inline;
 }
 
 .showload {
@@ -360,4 +369,20 @@ hr {
 		width: auto;
 		height: 100%;
 	}
+}
+
+/* 页面加载遮罩 */
+.is-loading {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transform: rotateX(360deg);
+	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
+	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
+	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
+	background: linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
 }
