@@ -1,8 +1,19 @@
+* {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	touch-action: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-family: YouYuan, KaiTai;
+}
+
 html,
 body {
-	margin: 0;
-	padding: 0;
-	font-family: YouYuan, KaiTai;
 	width: 100%;
 	height: 100%;
 }
@@ -296,10 +307,6 @@ body {
 .is-loading {
 	display: block;
 	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
 	opacity: 0;
 	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
 	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;

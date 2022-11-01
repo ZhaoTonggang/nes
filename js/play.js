@@ -132,7 +132,7 @@ window.onload = function() {
 			// 隐藏标题
 			document.getElementById('name').style.display = 'none';
 			//浏览器全屏
-			let de = document.querySelector('body') || document.documentElement;
+			let de = document.documentElement;
 			if (de.requestFullscreen) {
 				de.requestFullscreen();
 			} else if (de.mozRequestFullScreen) {
