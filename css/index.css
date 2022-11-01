@@ -17,11 +17,10 @@ body {
 	background-position: center center, center center;
 	background-attachment: fixed, fixed;
 	opacity: 1;
-	transform: rotateY(0deg);
-	-moz-transition: opacity 2s ease-out, transform 2s ease;
-	-webkit-transition: opacity 2s ease-out, transform 2s ease;
-	-ms-transition: opacity 2s ease-out, transform 2s ease;
-	transition: opacity 2s ease-out, transform 2s ease;
+	-moz-transition: opacity 2s ease-out;
+	-webkit-transition: opacity 2s ease-out;
+	-ms-transition: opacity 2s ease-out;
+	transition: opacity 2s ease-out;
 }
 
 #app {
@@ -302,7 +301,6 @@ body {
 	width: 100%;
 	height: 100%;
 	opacity: 0;
-	transform: rotateY(360deg);
 	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
 	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
 	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.gif) no-repeat center/20%;
