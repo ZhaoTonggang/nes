@@ -180,6 +180,24 @@ body {
 	background-color: blueviolet;
 }
 
+#search {
+	width: 100px;
+	height: 15px;
+	line-height: 15px;
+	border-radius: 20px;
+	padding: 5px;
+	text-align: center;
+	color: black;
+	font-weight: bold;
+	border: 2px solid mediumaquamarine;
+	font-size: 14px;
+}
+
+.sapp {
+	width: 100%;
+	top: 50% !important;
+}
+
 @media (max-width: 1250px) {
 	#app .item {
 		height: auto;
@@ -238,6 +256,12 @@ body {
 		padding: 5px;
 		color: black;
 		font-size: 18px;
+	}
+
+	.hul li #search {
+		display: block;
+		padding: 10px;
+		margin: auto;
 	}
 
 	:checked~.hul {

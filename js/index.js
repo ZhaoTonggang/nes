@@ -5,33 +5,49 @@ document.onreadystatechange = function() {
 	}
 }
 // 数据加载
-const {
-	createApp
-} = Vue
-createApp({
-	data() {
-		return {
-			list: []
-		}
-	},
-	created() {
-		//获取游戏列表
-		this.getGameList()
-	},
-	methods: {
-		startGame(id) {
-			window.open('./play.html?=' + id, '_self')
-		},
-		getGameList: function() {
-			fetch('./list.json')
-				//回调函数
-				.then(response => response.json())
-				//处理服务器数据
-				.then(data => this.list = data)
-				.catch(err => console.log('获取游戏列表失败'))
-		}
-	}
-}).mount('#app')
+function intdata() {
+	fetch('./list.json', {
+			methods: 'GET',
+			cache: 'no-cache'
+		})
+		.then(response => {
+			return response.json();
+		})
+		.then(datas => {
+			let item = "";
+			let app = document.getElementById('app');
+			let search = document.getElementById('search').value.replace(/(^\s*)|(\s*$)/g, '');
+			if (search === '') {
+				data = datas;
+			} else {
+				data = datas.filter(array => array.n.match(search) || array.v.match(search) || array.c.match(
+					search));
+				if (data.length === 0) {
+					app.classList.add('sapp');
+					app.innerHTML = '<h1>什么东东都没有丫！换个关键词试试吧！</h1>';
+					return;
+				}
+			}
+			for (let j = 0; j < data.length; j++) {
+				let span1 = data[j].v != '' ? '<span class="p2">' + data[j].v + '</span>' : '';
+				let span2 = data[j].c != '' ? '<span class="p3">' + data[j].c + '</span>' : '';
+				item +=
+					'<div class="item" onclick="opgame(\'' + data[j].i + '\')">' +
+					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" title="' + data[j].n + '" alt="' +
+					data[j].n + '">' + span1 + span2 + '</div><p class="p1">' + data[j].n + '</p></div>';
+			}
+			app.classList.remove('sapp');
+			app.innerHTML = item;
+		})
+		.catch(err => console.log('获取游戏列表失败'))
+}
+intdata();
+document.getElementById('search').onkeyup = () => intdata();
+
+//打开游戏页面
+function opgame(i) {
+	window.open('./play.html?=' + i, '_self');
+}
 //网站标题自动判断
 let title = document.title;
 

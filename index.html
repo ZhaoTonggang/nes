@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN" onselectstart="return false" oncontextmenu=self.event.returnValue=false>
-
 	<head>
 		<title>红白机游戏盒 - 在线畅玩小霸王经典游戏</title>
 		<meta charset="UTF-8">
@@ -30,8 +29,10 @@
 			</label>
 			<ul class="hul">
 				<li>
-					<a title="玩家社区" target="_blank"
-						href="https://pd.qq.com/s/1eis9h2k7"><img
+					<input id="search" type="text" maxlength="10" placeholder="搜索功能测试" />
+				</li>
+				<li>
+					<a title="玩家社区" target="_blank" href="https://pd.qq.com/s/1eis9h2k7"><img
 							src="./image/button/topic.png" alt="玩家社区" />玩家社区</a>
 				</li>
 				<li>
@@ -45,18 +46,7 @@
 				</li>
 			</ul>
 		</div>
-		<div id="app">
-			<div class="item" v-for="(item,index) in list" :key="index" @click="startGame(item.i)">
-				<div class="img_box">
-					<img :src="'./imgs/'+item.i+'.png'" :alt="item.n" :title="item.n" title="加载中..." alt="加载中...">
-					<span class="p2" v-if="item.v != ''">{{item.v}}</span>
-					<span class="p3" v-if="item.c != ''">{{item.c}}</span>
-				</div>
-				<p class="p1">{{item.n}}</p>
-			</div>
-		</div>
-		<!-- Vue -->
-		<script type="text/javascript" src="./lib/vue.global.prod.js" charset="UTF-8"></script>
+		<div id="app"></div>
 		<!-- 页面逻辑 -->
 		<script type="text/javascript" src="./js/index.js" charset="UTF-8"></script>
 		<!--PWA渐进式应用配置-->
@@ -66,5 +56,4 @@
 			document.body.appendChild(el);
 		</script>
 	</body>
-
 </html>
