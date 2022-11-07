@@ -1,3 +1,5 @@
+//全局保存游戏信息
+let gameInfo = null;
 // 数据异常处理
 function nodata() {
 	alert("403访问被拒绝！");
@@ -39,10 +41,6 @@ if (navigator.share) {
 } else {
 	console.log("分享功能禁用")
 }
-//全局保存游戏信息
-let gameInfo = null;
-//获取游戏列表，并init页面
-getGameList(pageInit);
 //重置游戏配置
 function chongzai() {
 	window.location.reload();
@@ -67,7 +65,6 @@ function getGameList(cb) {
 
 function pageInit(gameList) {
 	//获取id
-	//index就是id-1
 	let id = location.search.substring(2);
 	//数据化获取的1d
 	id = decodeURI(id);
@@ -110,6 +107,8 @@ function pageInit(gameList) {
 	})
 	joystick.init()
 }
+//获取游戏列表，并init页面
+getGameList(pageInit);
 window.onload = function() {
 	//禁止双击缩放
 	document.addEventListener('dblclick', function(e) {
