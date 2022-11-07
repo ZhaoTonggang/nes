@@ -24,7 +24,7 @@ function intdata() {
 					search));
 				if (data.length === 0) {
 					app.classList.add('sapp');
-					app.innerHTML = '<h1>什么东东都没有丫！换个关键词试试吧！</h1>';
+					app.innerHTML = '<h1>什么东东都没有，换个词试试丫！</h1>';
 					return;
 				}
 			}
@@ -39,11 +39,12 @@ function intdata() {
 			app.classList.remove('sapp');
 			app.innerHTML = item;
 		})
-		.catch(err => console.log('获取游戏列表失败'))
+		.catch(err => {
+			document.getElementById('apph').innerHTML = '获取列表失败[代码:404]';
+			console.error('[404]错误日志：', err);
+		})
 }
 intdata();
-document.getElementById('search').onkeyup = () => intdata();
-
 //打开游戏页面
 function opgame(i) {
 	window.open('./play.html?=' + i, '_self');
