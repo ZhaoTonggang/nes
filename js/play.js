@@ -40,12 +40,12 @@ if (navigator.share) {
 	console.log("分享功能禁用")
 }
 //全局保存游戏信息
-let gameInfo = null
+let gameInfo = null;
 //获取游戏列表，并init页面
-getGameList(pageInit)
+getGameList(pageInit);
 //重置游戏配置
 function chongzai() {
-	window.location.reload()
+	window.location.reload();
 }
 // 分享
 function share() {
@@ -115,37 +115,60 @@ window.onload = function() {
 	document.addEventListener('dblclick', function(e) {
 		e.preventDefault()
 	})
+	// 载入游戏
+	let nes = null;
+	if (gameInfo[0]) {
+		//加载游戏
+		let showload = document.getElementById('btn_load');
+		let req = new XMLHttpRequest();
+		req.open("GET", "./roms/" + gameInfo[0].i + ".nes");
+		req.overrideMimeType("text/plain; charset=x-user-defined");
+		req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
+		req.onload = function() {
+			if (this.status === 200) {
+				nes = req.responseText;
+				showload.innerHTML = '加载完成';
+				showload.classList.add("btnload");
+				showload.classList.remove("showload");
+				showload.innerHTML = '点击开始游戏';
+				//监听加载按钮
+				document.getElementById('btn_load').onclick = function() {
+					nes_boot(nes);
+					nes_init();
+					//浏览器全屏
+					let de = document.documentElement;
+					if (de.requestFullscreen) {
+						de.requestFullscreen();
+					} else if (de.mozRequestFullScreen) {
+						de.mozRequestFullScreen();
+					} else if (de.webkitRequestFullScreen) {
+						de.webkitRequestFullScreen();
+					}
+					this.style.display = 'none';
+					// 隐藏标题
+					document.getElementById('name').style.display = 'none';
+				}
+			} else if (this.status === 0) {
+				req.onerror(e);
+				showload.innerHTML = '请求数据失败';
+			} else {
+				req.onerror(e);
+				showload.innerHTML = 'ROM加载失败';
+			}
+		};
+		req.onprogress = function(e) {
+			// 显示加载进度
+			showload.innerHTML = '加载中(' + (e.loaded / e.total * 100).toFixed(0) + '%)';
+		};
+		req.send();
+	} else {
+		cocoMessage.error("数据获取失败！", 2000);
+		window.location.href = "/";
+		return
+	}
 	// 下载rom按钮
 	document.getElementById('drom').onclick = function() {
 		window.open('./roms/' + gameInfo[0].i + '.nes')
-	}
-	//监听加载按钮
-	document.getElementById('btn_load').onclick = function() {
-		if (gameInfo[0]) {
-			//加载游戏
-			nes_load_url("nes-canvas", "./roms/" + gameInfo[0].i + ".nes");
-			//显示加载进度
-			this.onclick = null;
-			this.classList.remove("btnload");
-			this.classList.add("showload");
-			this.innerHTML = "正在请求资源";
-			// 隐藏标题
-			document.getElementById('name').style.display = 'none';
-			//浏览器全屏
-			let de = document.documentElement;
-			if (de.requestFullscreen) {
-				de.requestFullscreen();
-			} else if (de.mozRequestFullScreen) {
-				de.mozRequestFullScreen();
-			} else if (de.webkitRequestFullScreen) {
-				de.webkitRequestFullScreen();
-			}
-		} else {
-			cocoMessage.error("数据获取失败！", 2000);
-			window.location.href = "/";
-			//如果游戏信息为空 则return
-			return
-		}
 	}
 	// 初始化存档
 	document.getElementById('hnbut').onclick = function() {

@@ -46,6 +46,7 @@ body {
 	padding: 0 5px;
 	border-radius: 10px;
 	display: block;
+	z-index: 10;
 }
 
 .titler {

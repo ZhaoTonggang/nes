@@ -56,7 +56,7 @@ function audio_callback(event) {
 function keyboard(callback, event) {
 	switch (event.keyCode) {
 		//玩家一
-		case 87: // UP   -  W
+		case 87: // UP   --  W
 			callback(1, jsnes.Controller.BUTTON_UP);
 			break;
 		case 83: // Down  --  S
@@ -109,9 +109,9 @@ function keyboard(callback, event) {
 			break;
 	}
 }
-
-function nes_init(canvas_id) {
-	let canvas = document.getElementById(canvas_id);
+// 配置画布
+function nes_init() {
+	let canvas = document.getElementById('nes-canvas');
 	//禁止双击缩放
 	canvas.addEventListener('dblclick', function(e) {
 		e.preventDefault()
@@ -144,36 +144,9 @@ function nes_boot(rom_data) {
 	window.requestAnimationFrame(onAnimationFrame);
 }
 
-function nes_load_data(canvas_id, rom_data) {
-	nes_init(canvas_id);
+function nes_load_data(rom_data) {
+	nes_init();
 	nes_boot(rom_data);
-}
-//入口函数，调用它加载游戏
-function nes_load_url(canvas_id, path) {
-	nes_init(canvas_id);
-	let showload = document.getElementById('btn_load');
-	let req = new XMLHttpRequest();
-	req.open("GET", path);
-	req.overrideMimeType("text/plain; charset=x-user-defined");
-	req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
-	req.onload = function() {
-		if (this.status === 200) {
-			//装载游戏数据
-			nes_boot(this.responseText);
-			showload.innerHTML = '加载完成';
-			showload.style.display = 'none';
-		} else if (this.status === 0) {
-			req.onerror(e);
-			showload.innerHTML = '请求数据失败';
-		} else {
-			req.onerror(e);
-			showload.innerHTML = 'ROM加载失败';
-		}
-	};
-	req.onprogress = function(e) {
-		showload.innerHTML = '加载中(' + (e.loaded / e.total * 100).toFixed(0) + '%)';
-	};
-	req.send();
 }
 document.addEventListener('keydown', (event) => {
 	keyboard(nes.buttonDown, event)
