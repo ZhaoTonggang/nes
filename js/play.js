@@ -147,6 +147,53 @@ window.onload = function() {
 			return
 		}
 	}
+	// 初始化存档
+	document.getElementById('hnbut').onclick = function() {
+		let savesh = document.getElementById("btn_load").style.display;
+		if (savesh == "none") {
+			let hnbut = document.getElementById("hnbut");
+			let hnul = document.getElementById("hnul");
+			if (sbts) {
+				sbts = false;
+				let code = gameInfo[0].i.toString();
+				HDB.initDB().then(() => {
+					HDB.getDataListByCode(code).then((data) => {
+						let result = "";
+						for (let j = 0; j < data.length; j++) {
+							result += '<li class="hnli"><div class="hnimg"><img src="' + data[j]
+								.pic +
+								'"></div><div class="hndiv"><p>存档【' + Number(j + 1) +
+								'】</p><p>' + data[j]
+								.time +
+								'</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
+								data[
+									j].code + '\', this, \'' + data[j].id +
+								')">覆盖</button><button type="button" class="hndbut" onclick="nessave(\'c\',\'' +
+								data[j].code + '\' ,this,' + data[j].id +
+								')">删除</button><button type="button" class="hnlbut" onclick="nessave(\'b\',\'' +
+								data[j].code + '\',this,' + data[j].id +
+								')">读取</button></div></li>';
+						}
+						for (let j = 0; j < 5 - data.length; j++) {
+							result +=
+								'<li class="hnli"><div class="hnimg"></div><div class="hndiv"><p>存档【' +
+								Number(data.length + j + 1) +
+								'】</p><p>无记录</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
+								code + '\',this)">保存</button></div></li>';
+						}
+						//获取存档列表
+						hnul.innerHTML = result;
+						hnul.style.display = "inline";
+					})
+				})
+			} else {
+				sbts = true;
+				hnul.style.display = "none";
+			}
+		} else {
+			cocoMessage.warning("请先开始游戏！", 2000);
+		}
+	}
 	//实例化NES按钮
 	let nesBtn = new VirtualNesBtn({
 		//容器
