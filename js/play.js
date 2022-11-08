@@ -200,8 +200,7 @@ window.onload = function() {
 								'】</p><p>' + data[j]
 								.time +
 								'</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
-								data[
-									j].code + '\', this, \'' + data[j].id +
+								data[j].code + '\', this, ' + data[j].id +
 								')">覆盖</button><button type="button" class="hndbut" onclick="nessave(\'c\',\'' +
 								data[j].code + '\' ,this,' + data[j].id +
 								')">删除</button><button type="button" class="hnlbut" onclick="nessave(\'b\',\'' +
