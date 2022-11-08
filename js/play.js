@@ -1,5 +1,43 @@
-//全局保存游戏信息
+//获取游戏信息
 let gameInfo = null;
+fetch('./list.json', {
+		methods: 'GET',
+		cache: 'no-cache'
+	})
+	//回调函数
+	.then(response => {
+		return response.json();
+	})
+	//处理服务器数据
+	.then(data => {
+		//获取id
+		let id = location.search.substring(2);
+		//数据化获取的1d
+		id = decodeURI(id);
+		//获取游戏信息
+		gameInfo = data.filter(function(gameobj) {
+			return gameobj.i == id;
+		});
+		// 判断数据是否存在
+		if (id != "") {
+			if (gameInfo == "") {
+				nodata();
+			}
+		} else {
+			nodata();
+		}
+		//展示游戏名称
+		document.getElementById('name').innerHTML = gameInfo[0].n + gameInfo[0].v;
+		// 修改title
+		document.title = gameInfo[0].n + gameInfo[0].v + ' - ' + '红白机游戏盒';
+	})
+	.catch(err => console.error('获取游戏信息失败'))
+// 设置按钮状态
+if (navigator.share) {
+	document.getElementById("share").style.display = "inline";
+} else {
+	console.log("分享功能禁用")
+}
 // 数据异常处理
 function nodata() {
 	alert("403访问被拒绝！");
@@ -35,12 +73,6 @@ function mobile() {
 	}
 }
 mobile();
-// 设置按钮状态
-if (navigator.share) {
-	document.getElementById("share").style.display = "inline";
-} else {
-	console.log("分享功能禁用")
-}
 //重置游戏配置
 function chongzai() {
 	window.location.reload();
@@ -53,66 +85,12 @@ function share() {
 		text: '推荐使用电脑，运行更加流畅！在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
 	});
 }
-//获取游戏信息
-function getGameList(cb) {
-	fetch('./list.json')
-		//回调函数
-		.then(response => response.json())
-		//处理服务器数据
-		.then(data => cb && cb(data))
-		.catch(err => console.log('获取游戏信息失败'))
-}
-
-function pageInit(gameList) {
-	//获取id
-	let id = location.search.substring(2);
-	//数据化获取的1d
-	id = decodeURI(id);
-	//获取游戏信息
-	gameInfo = gameList.filter(function(gameobj) {
-		return gameobj.i == id;
-	});
-	// 判断数据是否存在
-	if (id != "") {
-		if (gameInfo == "") {
-			nodata();
-		}
-	} else {
-		nodata();
-	}
-	//展示游戏名称
-	document.getElementById('name').innerHTML = gameInfo[0].n + gameInfo[0].v;
-	// 修改title
-	document.title = gameInfo[0].n + gameInfo[0].v + ' - ' + '红白机游戏盒';
-	//实例化摇杆 摇杆配置依赖游戏信息
-	let joystick = new Joystick({
-		//容器
-		el: "#direction",
-		//摇杆颜色
-		color: 'red',
-		//摇杆大小
-		size: 100,
-		//绑定 上下左右 到 WSAD键
-		keyCodes: [87, 83, 65, 68],
-		//页面强制横屏时使用90
-		rotate: 0,
-		//按下时的回调
-		btn_down_fn: (event) => {
-			keyboard(nes.buttonDown, event)
-		},
-		//释放时的回调
-		btn_up_fn: (event) => {
-			keyboard(nes.buttonUp, event)
-		},
-	})
-	joystick.init()
-}
-//获取游戏列表，并init页面
-getGameList(pageInit);
 window.onload = function() {
 	//禁止双击缩放
 	document.addEventListener('dblclick', function(e) {
 		e.preventDefault()
+	}, {
+		passive: false
 	})
 	// 载入游戏
 	let nes = null;
@@ -233,6 +211,29 @@ window.onload = function() {
 	})
 	//NES按钮实例初始化
 	nesBtn.init();
+	//实例化摇杆信息
+	let joystick = new Joystick({
+		//容器
+		el: "#direction",
+		//摇杆颜色
+		color: 'red',
+		//摇杆大小
+		size: 100,
+		//绑定 上下左右 到 WSAD键
+		keyCodes: [87, 83, 65, 68],
+		//页面强制横屏时使用90
+		rotate: 0,
+		//按下时的回调
+		btn_down_fn: (event) => {
+			keyboard(nes.buttonDown, event)
+		},
+		//释放时的回调
+		btn_up_fn: (event) => {
+			keyboard(nes.buttonUp, event)
+		},
+	})
+	// 初始化遥感信息
+	joystick.init();
 	// 移除遮罩
 	document.body.classList.remove('is-loading');
 }
