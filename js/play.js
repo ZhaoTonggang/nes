@@ -26,12 +26,97 @@ fetch('./list.json', {
 		} else {
 			nodata();
 		}
+		// 载入游戏
+		let nes = null;
+		if (gameInfo[0]) {
+			//加载游戏
+			let showload = document.getElementById('btn_load');
+			let req = new XMLHttpRequest();
+			req.open("GET", "./roms/" + gameInfo[0].i + ".nes");
+			req.overrideMimeType("text/plain; charset=x-user-defined");
+			req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
+			req.onload = function() {
+				if (this.status === 200) {
+					nes = req.responseText;
+					showload.innerHTML = '加载完成';
+					showload.classList.add("btnload");
+					showload.classList.remove("showload");
+					showload.innerHTML = '点击开始游戏';
+					//监听加载按钮
+					document.getElementById('btn_load').onclick = function() {
+						nes_boot(nes);
+						nes_init();
+						//浏览器全屏
+						let de = document.documentElement;
+						if (de.requestFullscreen) {
+							de.requestFullscreen();
+						} else if (de.mozRequestFullScreen) {
+							de.mozRequestFullScreen();
+						} else if (de.webkitRequestFullScreen) {
+							de.webkitRequestFullScreen();
+						}
+						this.style.display = 'none';
+						// 隐藏标题
+						document.getElementById('name').style.display = 'none';
+					}
+				} else if (this.status === 0) {
+					req.onerror(e);
+					showload.innerHTML = '请求数据失败';
+				} else {
+					req.onerror(e);
+					showload.innerHTML = 'ROM加载失败';
+				}
+			};
+			req.onprogress = function(e) {
+				// 显示加载进度
+				showload.innerHTML = '加载中(' + (e.loaded / e.total * 100).toFixed(0) + '%)';
+			};
+			req.send();
+		} else {
+			nodata();
+		}
 		//展示游戏名称
 		document.getElementById('name').innerHTML = gameInfo[0].n + gameInfo[0].v;
 		// 修改title
 		document.title = gameInfo[0].n + gameInfo[0].v + ' - ' + '红白机游戏盒';
 	})
 	.catch(err => console.error('获取游戏信息失败'))
+//实例化摇杆信息
+let joystick = new Joystick({
+	//容器
+	el: "#direction",
+	//摇杆颜色
+	color: 'red',
+	//摇杆大小
+	size: 100,
+	//绑定 上下左右 到 WSAD键
+	keyCodes: [87, 83, 65, 68],
+	//页面强制横屏时使用90
+	rotate: 0,
+	//按下时的回调
+	btn_down_fn: (event) => {
+		keyboard(nes.buttonDown, event)
+	},
+	//释放时的回调
+	btn_up_fn: (event) => {
+		keyboard(nes.buttonUp, event)
+	},
+})
+//实例化NES按钮
+let nesBtn = new VirtualNesBtn({
+	//容器
+	el: "#user_btn_box",
+	//虚拟按钮按下时的回调 参数evt
+	btn_down_fn: (event) => {
+		keyboard(nes.buttonDown, event)
+	},
+	//虚拟按钮弹起时的回调 参数evt
+	btn_up_fn: (event) => {
+		keyboard(nes.buttonUp, event)
+	},
+	//按顺序分别是 select start b a
+	keyCodes: [32, 13, 86, 66]
+})
 // 设置按钮状态
 if (navigator.share) {
 	document.getElementById("share").style.display = "inline";
@@ -92,57 +177,6 @@ window.onload = function() {
 	}, {
 		passive: false
 	})
-	// 载入游戏
-	let nes = null;
-	if (gameInfo[0]) {
-		//加载游戏
-		let showload = document.getElementById('btn_load');
-		let req = new XMLHttpRequest();
-		req.open("GET", "./roms/" + gameInfo[0].i + ".nes");
-		req.overrideMimeType("text/plain; charset=x-user-defined");
-		req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
-		req.onload = function() {
-			if (this.status === 200) {
-				nes = req.responseText;
-				showload.innerHTML = '加载完成';
-				showload.classList.add("btnload");
-				showload.classList.remove("showload");
-				showload.innerHTML = '点击开始游戏';
-				//监听加载按钮
-				document.getElementById('btn_load').onclick = function() {
-					nes_boot(nes);
-					nes_init();
-					//浏览器全屏
-					let de = document.documentElement;
-					if (de.requestFullscreen) {
-						de.requestFullscreen();
-					} else if (de.mozRequestFullScreen) {
-						de.mozRequestFullScreen();
-					} else if (de.webkitRequestFullScreen) {
-						de.webkitRequestFullScreen();
-					}
-					this.style.display = 'none';
-					// 隐藏标题
-					document.getElementById('name').style.display = 'none';
-				}
-			} else if (this.status === 0) {
-				req.onerror(e);
-				showload.innerHTML = '请求数据失败';
-			} else {
-				req.onerror(e);
-				showload.innerHTML = 'ROM加载失败';
-			}
-		};
-		req.onprogress = function(e) {
-			// 显示加载进度
-			showload.innerHTML = '加载中(' + (e.loaded / e.total * 100).toFixed(0) + '%)';
-		};
-		req.send();
-	} else {
-		cocoMessage.error("数据获取失败！", 2000);
-		window.location.href = "/";
-		return
-	}
 	// 下载rom按钮
 	document.getElementById('drom').onclick = function() {
 		window.open('./roms/' + gameInfo[0].i + '.nes')
@@ -194,46 +228,10 @@ window.onload = function() {
 			cocoMessage.warning("请先开始游戏！", 2000);
 		}
 	}
-	//实例化NES按钮
-	let nesBtn = new VirtualNesBtn({
-		//容器
-		el: "#user_btn_box",
-		//虚拟按钮按下时的回调 参数evt
-		btn_down_fn: (event) => {
-			keyboard(nes.buttonDown, event)
-		},
-		//虚拟按钮弹起时的回调 参数evt
-		btn_up_fn: (event) => {
-			keyboard(nes.buttonUp, event)
-		},
-		//按顺序分别是 select start b a
-		keyCodes: [32, 13, 86, 66]
-	})
-	//NES按钮实例初始化
-	nesBtn.init();
-	//实例化摇杆信息
-	let joystick = new Joystick({
-		//容器
-		el: "#direction",
-		//摇杆颜色
-		color: 'red',
-		//摇杆大小
-		size: 100,
-		//绑定 上下左右 到 WSAD键
-		keyCodes: [87, 83, 65, 68],
-		//页面强制横屏时使用90
-		rotate: 0,
-		//按下时的回调
-		btn_down_fn: (event) => {
-			keyboard(nes.buttonDown, event)
-		},
-		//释放时的回调
-		btn_up_fn: (event) => {
-			keyboard(nes.buttonUp, event)
-		},
-	})
 	// 初始化遥感信息
 	joystick.init();
+	//NES按钮实例初始化
+	nesBtn.init();
 	// 移除遮罩
 	document.body.classList.remove('is-loading');
 }
