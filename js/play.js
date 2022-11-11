@@ -27,54 +27,73 @@ fetch('./list.json', {
 			nodata();
 		}
 		// 载入游戏
-		let nes = null;
-		if (gameInfo[0]) {
-			//加载游戏
-			let showload = document.getElementById('btn_load');
-			let req = new XMLHttpRequest();
-			req.open("GET", "./roms/" + gameInfo[0].i + ".nes");
-			req.overrideMimeType("text/plain; charset=x-user-defined");
-			req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
-			req.onload = function() {
-				if (this.status === 200) {
-					nes = req.responseText;
-					showload.innerHTML = '加载完成';
-					showload.classList.add("btnload");
-					showload.classList.remove("showload");
-					showload.innerHTML = '点击开始游戏';
-					//监听加载按钮
-					document.getElementById('btn_load').onclick = function() {
-						nes_boot(nes);
-						nes_init();
-						//浏览器全屏
-						let de = document.documentElement;
-						if (de.requestFullscreen) {
-							de.requestFullscreen();
-						} else if (de.mozRequestFullScreen) {
-							de.mozRequestFullScreen();
-						} else if (de.webkitRequestFullScreen) {
-							de.webkitRequestFullScreen();
+		let showload = document.getElementById('btn_load');
+		let req = new XMLHttpRequest();
+		req.open("GET", "./roms/" + gameInfo[0].i + ".zip");
+		req.overrideMimeType("text/plain; charset=x-user-defined");
+		req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
+		req.onprogress = (e) => {
+			// 显示加载进度
+			showload.innerHTML = '加载中(' + (e.loaded / e.total * 100).toFixed(0) + '%)';
+		};
+		req.onloadstart = function() {
+			cocoMessage.warning("ROM载入中！", 2000);
+		};
+		req.onload = function() {
+			if (this.status === 200) {
+				let nes = null;
+				let nzip = new JSZip();
+				cocoMessage.success("ROM载入成功！", 2000);
+				nzip.loadAsync(this.responseText)
+					.then(zip => {
+						cocoMessage.warning("释放资源中！", 2000);
+						let zdata = zip.file(gameInfo[0].i + ".nes");
+						if (!zdata) {
+							showload.onclick = null;
+							cocoMessage.error("资源释放失败！", 2000);
+							showload.classList.remove("btnload");
+							showload.classList.add("showload");
+							showload.innerHTML = '初始化失败';
+						} else {
+							zdata.async("binarystring")
+								.then(res => {
+									nes = res;
+									cocoMessage.success("资源配置完成！", 2000);
+									showload.classList.add("btnload");
+									showload.classList.remove("showload");
+									showload.innerHTML = '点击开始游戏';
+								})
 						}
-						this.style.display = 'none';
-						// 隐藏标题
-						document.getElementById('name').style.display = 'none';
+					})
+				//监听加载按钮
+				document.getElementById('btn_load').onclick = function() {
+					nes_boot(nes);
+					nes_init();
+					cocoMessage.success("启动游戏引擎！", 2000);
+					//浏览器全屏
+					let de = document.documentElement;
+					if (de.requestFullscreen) {
+						de.requestFullscreen();
+					} else if (de.mozRequestFullScreen) {
+						de.mozRequestFullScreen();
+					} else if (de.webkitRequestFullScreen) {
+						de.webkitRequestFullScreen();
 					}
-				} else if (this.status === 0) {
-					req.onerror(e);
-					showload.innerHTML = '请求数据失败';
-				} else {
-					req.onerror(e);
-					showload.innerHTML = 'ROM加载失败';
+					this.style.display = 'none';
+					// 隐藏标题
+					document.getElementById('name').style.display = 'none';
 				}
-			};
-			req.onprogress = function(e) {
-				// 显示加载进度
-				showload.innerHTML = '加载中(' + (e.loaded / e.total * 100).toFixed(0) + '%)';
-			};
-			req.send();
-		} else {
-			nodata();
-		}
+			} else if (this.status === 0) {
+				req.onerror();
+				showload.innerHTML = '请求数据失败';
+				cocoMessage.error("请求数据失败！", 2000);
+			} else {
+				req.onerror();
+				showload.innerHTML = 'ROM加载失败';
+				cocoMessage.error("ROM加载失败！", 2000);
+			}
+		};
+		req.send();
 		//展示游戏名称
 		document.getElementById('name').innerHTML = gameInfo[0].n + gameInfo[0].v;
 		// 修改title
@@ -179,7 +198,7 @@ window.onload = function() {
 	})
 	// 下载rom按钮
 	document.getElementById('drom').onclick = function() {
-		window.open('./roms/' + gameInfo[0].i + '.nes')
+		window.open('./roms/' + gameInfo[0].i + '.zip')
 	}
 	// 初始化存档
 	document.getElementById('hnbut').onclick = function() {
@@ -200,9 +219,9 @@ window.onload = function() {
 								'】</p><p>' + data[j]
 								.time +
 								'</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
-								data[j].code + '\', this, ' + data[j].id +
+								data[j].code + '\',this,' + data[j].id +
 								')">覆盖</button><button type="button" class="hndbut" onclick="nessave(\'c\',\'' +
-								data[j].code + '\' ,this,' + data[j].id +
+								data[j].code + '\',this,' + data[j].id +
 								')">删除</button><button type="button" class="hnlbut" onclick="nessave(\'b\',\'' +
 								data[j].code + '\',this,' + data[j].id +
 								')">读取</button></div></li>';
