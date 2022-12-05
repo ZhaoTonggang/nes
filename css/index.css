@@ -4,13 +4,13 @@
 	margin: 0;
 	user-select: none;
 	font-family: YouYuan, KaiTai;
+	filter: grayscale(100%);
 }
 
 html,
 body {
 	width: 100%;
 	height: 100%;
-	filter: grayscale(100%);
 }
 
 body {
