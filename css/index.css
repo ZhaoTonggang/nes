@@ -121,6 +121,7 @@ body {
 	background-color: #000000;
 	margin: 10px 5px;
 	border-radius: 10px;
+	transition: 0.5s linear;
 }
 
 #app .item:hover {
@@ -130,7 +131,7 @@ body {
 	transform-style: preserve-3d;
 	-webkit-transform-style: inherit;
 	-webkit-transition: 0.3s linear;
-	transition: 0.3s linear;
+	transition: 0.5s linear;
 	cursor: pointer
 }
 
