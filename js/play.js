@@ -80,8 +80,37 @@ fetch('./list.json', {
 						de.webkitRequestFullScreen();
 					}
 					this.style.display = 'none';
-					// 隐藏标题
-					document.getElementById('name').style.display = 'none';
+					//隐藏鼠标和工具栏
+					let hhtml = document.getElementsByTagName("html")[0];
+					let pl1 = document.getElementById("player1");
+					let pl2 = document.getElementById("player2");
+					let gname = document.getElementById("name");
+					let titler = document.getElementsByClassName("titler")[0];
+					let titlel = document.getElementsByClassName("titlel")[0];
+					let timer = 0;
+					let isshow = false;
+					document.onmousemove = function() {
+						if (isshow) {
+							isshow = false;
+							hhtml.style.cursor = "default";
+							pl2.style.right = "20px";
+							pl1.style.left = "20px";
+							gname.style.top = "20px";
+							titler.style.left = "20px";
+							titlel.style.right = "20px";
+						} else {
+							clearTimeout(timer);
+							timer = setTimeout(function() {
+								isshow = true;
+								hhtml.style.cursor = "none";
+								pl2.style.right = "-180px";
+								pl1.style.left = "-180px";
+								gname.style.top = "-120px";
+								titler.style.left = "-150px";
+								titlel.style.right = "-150px";
+							}, 3000)
+						}
+					}
 				}
 			} else if (this.status === 0) {
 				req.onerror();
@@ -95,7 +124,7 @@ fetch('./list.json', {
 		};
 		req.send();
 		//展示游戏名称
-		document.getElementById('name').innerHTML = gameInfo[0].n + gameInfo[0].v;
+		document.getElementById('name').innerHTML = gameInfo[0].n + '(' + gameInfo[0].v + ')';
 		// 修改title
 		document.title = gameInfo[0].n + gameInfo[0].v + ' - ' + '红白机游戏盒';
 	})
@@ -239,8 +268,15 @@ window.onload = function() {
 					})
 				})
 			} else {
-				sbts = true;
-				hnul.style.display = "none";
+				document.onclick = function() {
+					let cobj = event.srcElement;
+					if (cobj.id === "hnul") {
+						return;
+					} else {
+						hnul.style.display = "none";
+						sbts = true;
+					}
+				}
 			}
 		} else {
 			cocoMessage.warning("请先开始游戏！", 2000);

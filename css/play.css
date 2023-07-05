@@ -47,6 +47,7 @@ body {
 	border-radius: 10px;
 	display: block;
 	z-index: 10;
+	transition: 0.5s linear;
 }
 
 .titler {
@@ -96,6 +97,7 @@ body {
 	background-color: aqua;
 	border-radius: 10px;
 	z-index: 999;
+	transition: 0.5s linear;
 }
 
 /* 通用 */
@@ -226,6 +228,7 @@ body {
 	font-size: 20px;
 	background-color: aqua;
 	border-radius: 20px;
+	transition: 0.5s linear;
 }
 
 #player1 {
