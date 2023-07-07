@@ -124,9 +124,15 @@ fetch('./list.json', {
 		};
 		req.send();
 		//展示游戏名称
-		document.getElementById('name').innerHTML = gameInfo[0].n + '(' + gameInfo[0].v + ')';
+		let gnm = gameInfo[0].v;
+		if (gnm != '') {
+			gnm = '(' + gnm + ')';
+		} else {
+			gnm = '';
+		}
+		document.getElementById('name').innerHTML = gameInfo[0].n + gnm;
 		// 修改title
-		document.title = gameInfo[0].n + gameInfo[0].v + ' - ' + '红白机游戏盒';
+		document.title = gameInfo[0].n + gnm + ' - ' + '红白机游戏盒';
 	})
 	.catch(err => console.error('获取游戏信息失败'))
 //实例化摇杆信息
@@ -271,7 +277,7 @@ window.onload = function() {
 				document.onclick = function() {
 					let cobj = event.srcElement;
 					if (cobj.id === "hnul") {
-						return;
+						sbts = false;
 					} else {
 						hnul.style.display = "none";
 						sbts = true;
