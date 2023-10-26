@@ -31,11 +31,20 @@
 			</label>
 			<ul class="hul">
 				<li>
-					<input id="search" type="text" maxlength="10" oninput="intdata()" placeholder="请输入关键字" />
+					<input id="search" type="search" maxlength="10" placeholder="请输入关键字" />
+					<input id="searchBt" type="submit" value="搜索" onclick="intdata()" />
 				</li>
 				<li>
 					<a title="玩家社区" target="_blank" href="https://pd.qq.com/s/1eis9h2k7"><img
 							src="./image/button/topic.png" alt="玩家社区" />玩家社区</a>
+				</li>
+				<li>
+					<a title="ROM提交" target="_blank" href="https://wj.qq.com/s2/13382279/cbcf/"><img
+							src="./image/button/submit.png" alt="ROM提交" />ROM提交</a>
+				</li>
+				<li>
+					<a title="开发平台" target="_blank" href="https://8bitide.heheda.top"><img
+							src="./image/button/develop.png" alt="开发平台" />开发平台</a>
 				</li>
 				<li>
 					<a title="留言反馈" target="_blank"
@@ -51,6 +60,7 @@
 		<div id="app" class="sapp">
 			<h1 id="apph">资源正在加载中...</h1>
 		</div>
+		<div id="cd-top" class="cdtopHid" onclick="cdTop()" title="返回顶部">回到顶部</div>
 		<!-- 页面逻辑 -->
 		<script type="text/javascript" src="./js/index.js" charset="UTF-8"></script>
 		<!--PWA渐进式应用配置-->

@@ -4,6 +4,11 @@
 	margin: 0;
 	user-select: none;
 	font-family: YouYuan, KaiTai;
+	scroll-behavior: smooth;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+	letter-spacing: 1px;
 }
 
 html,
@@ -34,7 +39,8 @@ body {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
-	top: 40px;
+	align-items: flex-start;
+	top: 45px;
 }
 
 .div1 {
@@ -44,25 +50,31 @@ body {
 	height: 50px;
 	text-align: center;
 	background-color: aqua;
-	padding: 0;
 }
 
 .title {
-	display: inline-block;
-	text-decoration: none;
-	font-weight: bold;
 	color: black;
 	font-size: 25px;
 	position: absolute;
 	line-height: 40px;
 	margin: 5px;
 	left: 15px;
+	transition: all 1s;
+}
+
+.title:hover {
+	color: #008cff;
+
+	& img {
+		transform: rotate(-30deg);
+	}
 }
 
 .title img {
 	height: 40px;
 	width: 40px;
 	vertical-align: bottom;
+	transition: all 1s;
 }
 
 .lad,
@@ -76,7 +88,6 @@ body {
 	margin: auto;
 	padding: 0;
 	overflow: hidden;
-	list-style: none;
 	right: 15px;
 }
 
@@ -86,42 +97,41 @@ body {
 }
 
 .hul li a {
-	display: inline-block;
 	color: black;
 	font-size: 16px;
-	font-weight: bold;
 	line-height: 40px;
-	letter-spacing: 1px;
-	text-decoration: none;
-	position: relative;
-	text-align: center;
+	transition: all 1s;
 }
 
 .hul li a img {
 	height: 25px;
 	width: 25px;
-	margin: 5px;
+	margin-right: 5px;
 	vertical-align: middle;
-	text-align: center;
+	transition: all 1s;
 }
 
 .hul li a:hover,
 .hul li a.selected {
-	color: #00a0e9;
-	text-align: center;
+	color: #008cff;
+
+	& img {
+		transform: rotateY(360deg);
+	}
 }
 
 #app .item {
 	width: 200px;
 	height: auto;
-	display: block;
-	box-shadow: 0 10px 20px -10px #00a0e9;
-	border: 2px solid #00a0e9;
+	box-shadow: 0 10px 20px -10px aqua;
+	border: 2px solid aqua;
 	text-align: center;
 	background-color: #000000;
 	margin: 10px 5px;
 	border-radius: 10px;
-	transition: 0.5s linear;
+	transition: all 0.5s linear;
+	-webkit-transition: all 0.5s linear;
+	cursor: pointer
 }
 
 #app .item:hover {
@@ -130,9 +140,6 @@ body {
 	transform: translate3d(0px, -10px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
 	transform-style: preserve-3d;
 	-webkit-transform-style: inherit;
-	-webkit-transition: 0.3s linear;
-	transition: 0.5s linear;
-	cursor: pointer
 }
 
 #app .item .img_box {
@@ -154,7 +161,6 @@ body {
 #app .item .p1 {
 	font-size: 15px;
 	color: white;
-	font-weight: bold;
 	margin: 10px 5px;
 }
 
@@ -162,7 +168,6 @@ body {
 #app .item .p3 {
 	font-size: 14px;
 	padding: 5px 15px;
-	font-weight: bold;
 	border-radius: 0 20px;
 	position: absolute;
 }
@@ -181,22 +186,63 @@ body {
 	background-color: blueviolet;
 }
 
-#search {
-	width: 100px;
-	height: 15px;
-	line-height: 15px;
-	border-radius: 20px;
-	padding: 5px;
-	text-align: center;
-	color: black;
-	font-weight: bold;
-	border: 2px solid mediumaquamarine;
+#search,
+#searchBt {
 	font-size: 14px;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 5px 1px;
+	line-height: 15px;
+}
+
+#search {
+	width: 130px;
+	color: black;
+	float: left;
+}
+
+#searchBt {
+	background-color: #008cff;
+	color: #ffffff;
+	cursor: pointer;
 }
 
 .sapp {
 	width: 100%;
 	top: 50% !important;
+}
+
+/*返回顶部按钮*/
+#cd-top {
+	z-index: 99999;
+	display: block;
+	border-radius: 50px;
+	height: 50px;
+	width: 50px;
+	position: fixed;
+	right: 10px;
+	cursor: pointer;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	overflow: hidden;
+	text-indent: 100%;
+	white-space: nowrap;
+	transition: all 1s;
+}
+
+#cd-top:hover {
+	background: #008cff url(../image/button/cd-top.png) no-repeat center/70%;
+	transform: rotateZ(360deg);
+}
+
+.cdtopHid {
+	background: #008cff url(../image/button/cd-top.png) no-repeat center/70%;
+	transform: rotateY(360deg);
+	top: -50px;
+}
+
+.cdtopVis {
+	background: aqua url(../image/button/cdtop.png) no-repeat center/60%;
+	top: 90%;
 }
 
 @media (max-width: 1250px) {
@@ -260,9 +306,7 @@ body {
 	}
 
 	.hul li #search {
-		display: block;
-		padding: 10px;
-		margin: auto;
+		float: none;
 	}
 
 	:checked~.hul {
@@ -312,7 +356,7 @@ body {
 ::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-	background-color: #00a0e9;
+	background-color: #008cff;
 }
 
 /*滑块效果*/
