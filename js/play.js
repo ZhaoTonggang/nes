@@ -1,3 +1,5 @@
+// 严格模式
+"use strict";
 //获取游戏信息
 let gameInfo = null;
 fetch('./list.json', {
@@ -5,30 +7,24 @@ fetch('./list.json', {
 		cache: 'no-cache'
 	})
 	//回调函数
-	.then(response => {
-		return response.json();
-	})
+	.then(response => response.json())
 	//处理服务器数据
 	.then(data => {
-		//获取id
-		let id = location.search.substring(2);
 		//数据化获取的1d
-		id = decodeURI(id);
+		const id = decodeURI(location.search.substring(2));
 		//获取游戏信息
-		gameInfo = data.filter(function(gameobj) {
-			return gameobj.i == id;
-		});
+		gameInfo = data.filter(gameobj => gameobj.i == id);
 		// 判断数据是否存在
 		if (id != "") {
 			if (gameInfo == "") {
 				nodata();
-			}
+			};
 		} else {
 			nodata();
-		}
+		};
 		// 载入游戏
-		let showload = document.getElementById('btn_load');
-		let req = new XMLHttpRequest();
+		const showload = document.getElementById('btn_load');
+		const req = new XMLHttpRequest();
 		req.open("GET", "./roms/" + gameInfo[0].i + ".zip");
 		req.overrideMimeType("text/plain; charset=x-user-defined");
 		req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
@@ -36,18 +32,18 @@ fetch('./list.json', {
 			// 显示加载进度
 			showload.innerHTML = '加载中(' + (e.loaded / e.total * 100).toFixed(0) + '%)';
 		};
-		req.onloadstart = function() {
+		req.onloadstart = () => {
 			cocoMessage.warning("ROM载入中！", 2000);
 		};
-		req.onload = function() {
-			if (this.status === 200) {
+		req.onload = () => {
+			if (req.status === 200) {
 				let nes = null;
-				let nzip = new JSZip();
+				const nzip = new JSZip();
 				cocoMessage.success("ROM载入成功！", 2000);
-				nzip.loadAsync(this.responseText)
+				nzip.loadAsync(req.responseText)
 					.then(zip => {
 						cocoMessage.warning("释放资源中！", 2000);
-						let zdata = zip.file(gameInfo[0].i + ".nes");
+						const zdata = zip.file(gameInfo[0].i + ".nes");
 						if (!zdata) {
 							showload.onclick = null;
 							cocoMessage.error("资源释放失败！", 2000);
@@ -66,30 +62,31 @@ fetch('./list.json', {
 						}
 					})
 				//监听加载按钮
-				document.getElementById('btn_load').onclick = function() {
+				const btnload = document.getElementById('btn_load');
+				btnload.onclick = () => {
 					nes_boot(nes);
 					nes_init();
 					cocoMessage.success("启动游戏引擎！", 2000);
 					//浏览器全屏
-					let de = document.documentElement;
+					const de = document.documentElement;
 					if (de.requestFullscreen) {
 						de.requestFullscreen();
 					} else if (de.mozRequestFullScreen) {
 						de.mozRequestFullScreen();
 					} else if (de.webkitRequestFullScreen) {
 						de.webkitRequestFullScreen();
-					}
-					this.style.display = 'none';
+					};
+					btnload.style.display = 'none';
 					//隐藏鼠标和工具栏
-					let hhtml = document.getElementsByTagName("html")[0];
-					let pl1 = document.getElementById("player1");
-					let pl2 = document.getElementById("player2");
-					let gname = document.getElementById("name");
-					let titler = document.getElementsByClassName("titler")[0];
-					let titlel = document.getElementsByClassName("titlel")[0];
-					let timer = 0;
+					const hhtml = document.getElementsByTagName("html")[0];
+					const pl1 = document.getElementById("player1");
+					const pl2 = document.getElementById("player2");
+					const gname = document.getElementById("name");
+					const titler = document.getElementsByClassName("titler")[0];
+					const titlel = document.getElementsByClassName("titlel")[0];
+					let timer = null;
 					let isshow = false;
-					document.onmousemove = function() {
+					document.onmousemove = () => {
 						if (isshow) {
 							isshow = false;
 							hhtml.style.cursor = "default";
@@ -99,8 +96,10 @@ fetch('./list.json', {
 							titler.style.left = "20px";
 							titlel.style.right = "20px";
 						} else {
-							clearTimeout(timer);
-							timer = setTimeout(function() {
+							if (timer) {
+								clearTimeout(timer);
+							};
+							timer = setTimeout(() => {
 								isshow = true;
 								hhtml.style.cursor = "none";
 								pl2.style.right = "-180px";
@@ -109,10 +108,10 @@ fetch('./list.json', {
 								titler.style.left = "-150px";
 								titlel.style.right = "-150px";
 							}, 3000)
-						}
-					}
-				}
-			} else if (this.status === 0) {
+						};
+					};
+				};
+			} else if (req.status === 0) {
 				req.onerror();
 				showload.innerHTML = '请求数据失败';
 				cocoMessage.error("请求数据失败！", 2000);
@@ -120,7 +119,7 @@ fetch('./list.json', {
 				req.onerror();
 				showload.innerHTML = 'ROM加载失败';
 				cocoMessage.error("ROM加载失败！", 2000);
-			}
+			};
 		};
 		req.send();
 		//展示游戏名称
@@ -175,10 +174,10 @@ let nesBtn = new VirtualNesBtn({
 if (navigator.share) {
 	document.getElementById("share").style.display = "inline";
 } else {
-	console.log("分享功能禁用")
-}
+	console.log("分享功能禁用");
+};
 // 数据异常处理
-function nodata() {
+const nodata = () => {
 	alert("403访问被拒绝！");
 	window.location.href = "/";
 	return;
@@ -186,13 +185,13 @@ function nodata() {
 //获取设备类型
 let isMobile = /(iPhone|iPod|Android|ios|iOS|iPad|WebOS|Symbian|Windows Phone|Phone)/i.test(navigator.userAgent);
 //设置操作方式
-function mobile() {
-	let dire = document.getElementById("direction");
-	let btne = document.getElementById("user_btn_box");
-	let play1 = document.getElementById("player1");
-	let play2 = document.getElementById("player2");
-	let qhimg = document.getElementById("qhimg");
-	let qhp = document.getElementById("qhp");
+const mobile = () => {
+	const dire = document.getElementById("direction");
+	const btne = document.getElementById("user_btn_box");
+	const play1 = document.getElementById("player1");
+	const play2 = document.getElementById("player2");
+	const qhimg = document.getElementById("qhimg");
+	const qhp = document.getElementById("qhp");
 	if (isMobile) {
 		qhimg.src = "./image/button/key.png";
 		qhp.innerHTML = "键盘";
@@ -213,34 +212,34 @@ function mobile() {
 }
 mobile();
 //重置游戏配置
-function chongzai() {
+const chongzai = () => {
 	window.location.reload();
 }
 // 分享
-function share() {
+const share = () => {
 	navigator.share({
 		title: '在线玩《' + gameInfo[0].n + '》',
 		url: window.location.href,
 		text: '推荐使用电脑，运行更加流畅！在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
 	});
 }
-window.onload = function() {
+window.onload = () => {
 	//禁止双击缩放
-	document.addEventListener('dblclick', function(e) {
+	document.addEventListener('dblclick', (e) => {
 		e.preventDefault()
 	}, {
 		passive: false
-	})
+	});
 	// 下载rom按钮
-	document.getElementById('drom').onclick = function() {
+	document.getElementById('drom').onclick = () => {
 		window.open('./roms/' + gameInfo[0].i + '.zip')
-	}
+	};
 	// 初始化存档
-	document.getElementById('hnbut').onclick = function() {
-		let savesh = document.getElementById("btn_load").style.display;
+	document.getElementById('hnbut').onclick = () => {
+		const savesh = document.getElementById("btn_load").style.display;
 		if (savesh == "none") {
-			let hnbut = document.getElementById("hnbut");
-			let hnul = document.getElementById("hnul");
+			const hnbut = document.getElementById("hnbut");
+			const hnul = document.getElementById("hnul");
 			if (sbts) {
 				sbts = false;
 				let code = gameInfo[0].i.toString();
@@ -274,7 +273,7 @@ window.onload = function() {
 					})
 				})
 			} else {
-				document.onclick = function() {
+				document.onclick = () => {
 					let cobj = event.srcElement;
 					if (cobj.id === "hnul") {
 						sbts = false;

@@ -1,11 +1,11 @@
 // 严格模式
-"use strict"
+"use strict";
 // 页面载入
 document.onreadystatechange = () => {
 	if (document.readyState === "interactive") {
 		document.body.classList.remove("is-loading");
-	}
-}
+	};
+};
 // 数据容器
 let data;
 let timeout = null;
@@ -37,7 +37,7 @@ const intdata = () => {
 					app.classList.add('sapp');
 					app.innerHTML = '<h1>什么东东都没有，换个词试试丫！</h1>';
 					return;
-				}
+				};
 			};
 			for (let j = 0; j < data.length; j++) {
 				let span1 = data[j].v != '' ? '<span class="p2">' + data[j].v + '</span>' : '';
@@ -47,7 +47,7 @@ const intdata = () => {
 					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" title="' + data[j].n +
 					'" alt="' +
 					data[j].n + '">' + span1 + span2 + '</div><p class="p1">' + data[j].n + '</p></div>';
-			}
+			};
 			app.classList.remove('sapp');
 			app.innerHTML = item;
 		})
@@ -55,12 +55,12 @@ const intdata = () => {
 			document.getElementById('apph').innerHTML = '获取列表失败[代码:404]';
 			console.error('[404]错误日志：', err);
 		})
-}
+};
 intdata();
 //打开游戏
 const opgame = (i) => {
 	window.open('./play.html?=' + i, '_self');
-}
+};
 //标题判断
 window.addEventListener('visibilitychange', () => {
 	if (document.hidden) {
@@ -72,14 +72,14 @@ window.addEventListener('visibilitychange', () => {
 		setTimeout(() => {
 			document.title = title;
 		}, 3000);
-	}
-})
+	};
+});
 //返回顶部
 const cdTop = () => {
 	window.scrollY = 0;
 	window.pageYOffset = 0;
 	document.documentElement.scrollTop = 0;
-}
+};
 // 监听屏幕滚动
 window.addEventListener('scroll', () => {
 	if (timeout !== null) {
@@ -92,12 +92,12 @@ window.addEventListener('scroll', () => {
 			cdtopbt.className = "cdtopVis";
 		} else {
 			cdtopbt.className = "cdtopHid";
-		}
+		};
 	}, 500);
 });
 // 回车搜索
 window.onkeydown = () => {
 	if (window.event && window.event.keyCode == 13 && search == document.activeElement) {
 		intdata();
-	}
-}
+	};
+};
