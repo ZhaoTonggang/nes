@@ -1,19 +1,20 @@
 // 严格模式
 "use strict"
 // 页面载入
-document.onreadystatechange = function() {
+document.onreadystatechange = () => {
 	if (document.readyState === "interactive") {
 		document.body.classList.remove("is-loading");
 	}
 }
 // 数据容器
 let data;
+let timeout = null;
 // 取得资源
 const search = document.getElementById('search');
 const cdtopbt = document.getElementById("cd-top");
 const title = document.title;
 // 数据加载
-function intdata() {
+const intdata = () => {
 	fetch('./list.json', {
 			methods: 'GET',
 			cache: 'force-cache',
@@ -43,7 +44,8 @@ function intdata() {
 				let span2 = data[j].c != '' ? '<span class="p3">' + data[j].c + '</span>' : '';
 				item +=
 					'<div class="item" onclick="opgame(\'' + data[j].i + '\')">' +
-					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" title="' + data[j].n + '" alt="' +
+					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" title="' + data[j].n +
+					'" alt="' +
 					data[j].n + '">' + span1 + span2 + '</div><p class="p1">' + data[j].n + '</p></div>';
 			}
 			app.classList.remove('sapp');
@@ -56,11 +58,11 @@ function intdata() {
 }
 intdata();
 //打开游戏
-function opgame(i) {
+const opgame = (i) => {
 	window.open('./play.html?=' + i, '_self');
 }
 //标题判断
-document.addEventListener('visibilitychange', function() {
+window.addEventListener('visibilitychange', () => {
 	if (document.hidden) {
 		//窗口不可见
 		document.title = '(つ ェ ⊂)我藏好了哦~';
@@ -73,21 +75,28 @@ document.addEventListener('visibilitychange', function() {
 	}
 })
 //返回顶部
-window.onscroll = function() {
-	if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-		cdtopbt.className = "cdtopVis";
-	} else {
-		cdtopbt.className = "cdtopHid";
-	}
-}
-
-function cdTop() {
-	document.body.scrollTop = 0;
+const cdTop = () => {
+	window.scrollY = 0;
+	window.pageYOffset = 0;
 	document.documentElement.scrollTop = 0;
 }
-
+// 监听屏幕滚动
+window.addEventListener('scroll', () => {
+	if (timeout !== null) {
+		clearTimeout(timeout);
+	}
+	timeout = setTimeout(() => {
+		let scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+		// 返回顶部
+		if (scrollTop > 100) {
+			cdtopbt.className = "cdtopVis";
+		} else {
+			cdtopbt.className = "cdtopHid";
+		}
+	}, 500);
+});
 // 回车搜索
-window.onkeydown = function() {
+window.onkeydown = () => {
 	if (window.event && window.event.keyCode == 13 && search == document.activeElement) {
 		intdata();
 	}
