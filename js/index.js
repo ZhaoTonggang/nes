@@ -1,6 +1,10 @@
 // 严格模式
 "use strict";
 // 页面载入
+if (window.location.hostname.indexOf('nes.heheda.') < 0) {
+	alert('当您看到这条提示意味着：您所访问的网站正在恶意调用本站资源，本站对偷盗资源的行为0容忍，点击确认跳转正版体验。');
+	window.open('https://nes.heheda.top', '_self');
+};
 document.onreadystatechange = () => {
 	if (document.readyState === "interactive") {
 		document.body.classList.remove("is-loading");
@@ -42,8 +46,10 @@ const intdata = () => {
 			for (let j = 0; j < data.length; j++) {
 				let span1 = data[j].v != '' ? '<span class="p2">' + data[j].v + '</span>' : '';
 				let span2 = data[j].c != '' ? '<span class="p3">' + data[j].c + '</span>' : '';
+				let opgamev = data[j].v != '' ? "'" + data[j].v + "'" : false;
 				item +=
-					'<div class="item" onclick="opgame(\'' + data[j].i + '\')">' +
+					'<div class="item" onclick="opgame(' + opgamev + ',\'' + data[j].n + '\',\'' + data[j].i +
+					'\')">' +
 					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" title="' + data[j].n +
 					'" alt="' +
 					data[j].n + '">' + span1 + span2 + '</div><p class="p1">' + data[j].n + '</p></div>';
@@ -58,8 +64,8 @@ const intdata = () => {
 };
 intdata();
 //打开游戏
-const opgame = (i) => {
-	window.open('./play.html?=' + i, '_self');
+const opgame = (v, n, i) => {
+	window.open(encodeURI('./play.html?v=' + v + '&n=' + n + '&i=' + i), '_self');
 };
 //标题判断
 window.addEventListener('visibilitychange', () => {
