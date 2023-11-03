@@ -11,7 +11,7 @@ const urltext = () => {
 	return;
 };
 // 判断数据合法性
-if (url.indexOf('nes.heheda.') < 0) {
+if (window.top != window) {
 	alert('当您看到这条提示意味着：您所访问的网站正在恶意调用本站资源，本站对偷盗资源的行为0容忍，点击确认跳转正版体验。');
 	window.open('https://nes.heheda.top', '_self');
 } else if (urldata.indexOf('?') > -1 && urldata.indexOf('&') > -1 && urldata.indexOf('=') > -1) {
