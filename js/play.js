@@ -5,7 +5,7 @@ let gameInfo = {};
 const url = window.location.href;
 const urldata = decodeURI(url);
 // 参数合法性
-const urltext = () => {
+const urlerr = () => {
 	alert('参数传入不合法');
 	window.location.href = "/";
 	return;
@@ -15,16 +15,21 @@ if (window.top != window) {
 	alert('当您看到这条提示意味着：您所访问的网站正在恶意调用本站资源，本站对偷盗资源的行为0容忍，点击确认跳转正版体验。');
 	window.open('https://nes.heheda.top', '_self');
 } else if (urldata.indexOf('?') > -1 && urldata.indexOf('&') > -1 && urldata.indexOf('=') > -1) {
-	const urlarrs = urldata.split('?')[1].split('&');
-	for (let i = 0; i < urlarrs.length; i++) {
-		let data = urlarrs[i].split('=');
-		if (data == "") {
-			urltext();
-		}
-		gameInfo[data[0]] = data[1];
-	};
+	const urlarr = urldata.split('?')[1];
+	if (urldata.indexOf('index') > -1) {
+		window.open('./?' + urlarr, '_self');
+	} else {
+		const urlarrs = urlarr.split('&');
+		for (let i = 0; i < urlarrs.length; i++) {
+			let data = urlarrs[i].split('=');
+			if (data == "") {
+				urlerr();
+			}
+			gameInfo[data[0]] = data[1];
+		};
+	}
 } else {
-	urltext();
+	urlerr();
 };
 // 加载提示
 const showload = document.getElementById('btn_load');
@@ -37,7 +42,7 @@ const showtext = () => {
 };
 // 载入游戏
 const req = new XMLHttpRequest();
-req.open("GET", "./roms/" + gameInfo.i + ".zip");
+req.open("GET", "../roms/" + gameInfo.i + ".zip");
 req.overrideMimeType("text/plain; charset=x-user-defined");
 req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
 req.onprogress = (e) => {
@@ -187,29 +192,22 @@ if (navigator.share) {
 };
 //获取设备类型
 let isMobile = /(iPhone|iPod|Android|ios|iOS|iPad|WebOS|Symbian|Windows Phone|Phone)/i.test(navigator.userAgent);
+// 封装操作模式
+const mwork = (qhimg, qhp, play1, play2) => {
+	document.getElementById("qhimg").src = "../image/button/" + qhimg;
+	document.getElementById("qhp").innerHTML = qhp;
+	document.getElementById("player1").style.display = play1;
+	document.getElementById("player2").style.display = play1;
+	document.getElementById("direction").style.display = play2;
+	document.getElementById("user_btn_box").style.display = play2;
+}
 //设置操作方式
 const mobile = () => {
-	const dire = document.getElementById("direction");
-	const btne = document.getElementById("user_btn_box");
-	const play1 = document.getElementById("player1");
-	const play2 = document.getElementById("player2");
-	const qhimg = document.getElementById("qhimg");
-	const qhp = document.getElementById("qhp");
 	if (isMobile) {
-		qhimg.src = "./image/button/key.png";
-		qhp.innerHTML = "键盘";
-		play1.style.display = "none";
-		play2.style.display = "none";
-		dire.style.display = "block";
-		btne.style.display = "block";
+		mwork("key.png", "键盘", "none", "block");
 		isMobile = false;
 	} else {
-		qhimg.src = "./image/button/gmb.png";
-		qhp.innerHTML = "触屏";
-		dire.style.display = "none";
-		btne.style.display = "none";
-		play1.style.display = "block";
-		play2.style.display = "block";
+		mwork("gmb.png", "触屏", "block", "none");
 		isMobile = true;
 	}
 }
@@ -235,7 +233,7 @@ window.onload = () => {
 	});
 	// 下载rom按钮
 	document.getElementById('drom').onclick = () => {
-		window.open('./roms/' + gameInfo.i + '.zip')
+		window.open('../roms/' + gameInfo.i + '.zip')
 	};
 	// 初始化存档
 	document.getElementById('hnbut').onclick = () => {
