@@ -3,7 +3,7 @@
 	padding: 0;
 	margin: 0;
 	user-select: none;
-	font-family: YouYuan, KaiTai;
+	font-family: PingFang SC, SimSun, KaiTi, YouYuan;
 	scroll-behavior: smooth;
 	text-align: center;
 	font-weight: bold;
@@ -33,23 +33,47 @@ body {
 	transition: opacity 2s ease-out;
 }
 
-#app {
-	position: absolute;
-	margin: 15px 0;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	align-items: flex-start;
-	top: 45px;
-}
-
-.div1 {
+.div1,
+.div2 {
 	position: fixed;
 	z-index: 99;
 	width: 100%;
-	height: 50px;
-	text-align: center;
 	background-color: aqua;
+}
+
+.div1 {
+	height: 50px;
+}
+
+.div2 {
+	height: 25px;
+	bottom: 0;
+}
+
+.div2 p {
+	font-size: 15px;
+	padding: 5px;
+	display: inline-block;
+	position: inherit;
+	line-height: 15px;
+}
+
+.div2 a {
+	color: #000000;
+}
+
+.div2 a:hover {
+	color: #008cff;
+}
+
+.div2p {
+	color: red;
+	left: 5px;
+}
+
+.div2p2 {
+	color: black;
+	right: 5px;
 }
 
 .title {
@@ -93,7 +117,7 @@ body {
 
 .hul li {
 	display: inline-block;
-	margin: 5px;
+	padding: 5px;
 }
 
 .hul li a {
@@ -120,8 +144,18 @@ body {
 	}
 }
 
+#app {
+	position: absolute;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	top: 60px;
+	padding-bottom: 30px;
+}
+
 #app .item {
-	width: 200px;
+	width: 170px;
 	height: auto;
 	box-shadow: 0 10px 20px -10px aqua;
 	border: 2px solid aqua;
@@ -144,7 +178,7 @@ body {
 
 #app .item .img_box {
 	display: block;
-	height: 200px;
+	height: 170px;
 	width: 100%;
 	overflow: hidden;
 	position: relative;
@@ -242,28 +276,50 @@ body {
 
 .cdtopVis {
 	background: aqua url(../image/button/cdtop.png) no-repeat center/60%;
-	top: 90%;
+	top: 85%;
 }
 
 @media (max-width: 1250px) {
 	#app .item {
 		height: auto;
-		width: 180px;
+		width: 160px;
 	}
 
 	#app .item .img_box {
-		height: 180px;
+		height: 160px;
 	}
 }
 
 @media (max-width: 1024px) {
+	.div2 {
+		height: 45px;
+	}
+
+	.div2 p {
+		display: block;
+		position: relative;
+	}
+
+	.div2p {
+		left: 0;
+	}
+
+	.div2p2 {
+		right: 0;
+		padding-top: 0 !important;
+	}
+
+	#app {
+		padding-bottom: 50px;
+	}
+
 	#app .item {
 		height: auto;
-		width: 170px;
+		width: 150px;
 	}
 
 	#app .item .img_box {
-		height: 170px;
+		height: 150px;
 	}
 
 	.lad {
@@ -316,13 +372,21 @@ body {
 }
 
 @media (max-width: 600px) {
+	.div2 {
+		display: none;
+	}
+
+	#app {
+		padding-bottom: 10px;
+	}
+
 	#app .item {
 		height: auto;
-		width: 160px;
+		width: 120px;
 	}
 
 	#app .item .img_box {
-		height: 160px;
+		height: 120px;
 	}
 }
 

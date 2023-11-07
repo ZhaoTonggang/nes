@@ -84,9 +84,8 @@ window.addEventListener('visibilitychange', () => {
 });
 //返回顶部
 const cdTop = () => {
-	window.scrollY = 0;
-	window.pageYOffset = 0;
 	document.documentElement.scrollTop = 0;
+	document.body.scrollTop = 0;
 };
 // 监听屏幕滚动
 window.addEventListener('scroll', () => {
@@ -94,7 +93,7 @@ window.addEventListener('scroll', () => {
 		clearTimeout(timeout);
 	}
 	timeout = setTimeout(() => {
-		let scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+		let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 		// 返回顶部
 		if (scrollTop > 100) {
 			cdtopbt.className = "cdtopVis";
