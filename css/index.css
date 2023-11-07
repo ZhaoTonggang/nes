@@ -54,7 +54,7 @@ body {
 	font-size: 15px;
 	padding: 5px;
 	display: inline-block;
-	position: inherit;
+	position: absolute;
 	line-height: 15px;
 }
 
