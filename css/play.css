@@ -232,7 +232,7 @@ body {
 	z-index: 90;
 	font-size: 20px;
 	background-color: aqua;
-	border-radius: 20px;
+	border-radius: 10px;
 	transition: 0.5s linear;
 }
 

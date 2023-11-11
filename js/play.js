@@ -233,7 +233,13 @@ window.onload = () => {
 	});
 	// 下载rom按钮
 	document.getElementById('drom').onclick = () => {
-		window.open('../roms/' + gameInfo.i + '.zip')
+		const dorom = confirm('您要下载此游戏的ROM文件吗？');
+		if (dorom == true) {
+			cocoMessage.warning("即将开始下载！", 2000);
+			window.open('../roms/' + gameInfo.i + '.zip');
+		} else {
+			cocoMessage.warning("您取消了下载！", 2000);
+		}
 	};
 	// 初始化存档
 	document.getElementById('hnbut').onclick = () => {

@@ -25,7 +25,7 @@ const intdata = () => {
 			methods: 'GET',
 			cache: 'force-cache',
 			mode: 'same-origin',
-			integrity: 'sha256-61KQ7jxXtD+GotQw8ZcJDG4UP67whfRq8ThEsowFu18='
+			integrity: 'sha256-MaKebJrEJL2a4SBEcnU2hCd0Blf8+Pu7CGbv+9eQXaQ='
 		})
 		.then(response => {
 			return response.json();
