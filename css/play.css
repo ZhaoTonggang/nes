@@ -68,6 +68,7 @@ body {
 	border: none;
 	border-radius: 10px;
 	cursor: pointer;
+	transition: all 1s;
 }
 
 .titbut:hover {
@@ -199,7 +200,7 @@ body {
 
 .nes_btn_box .btn-select,
 .nes_btn_box .btn-start {
-	width: 40%;
+	width: 45%;
 	margin-bottom: 20px;
 }
 
@@ -216,18 +217,15 @@ body {
 
 .nes_btn_box .btn-a,
 .nes_btn_box .btn-b {
-	width: 46%;
+	width: 45%;
 }
 
 /* 按键映射说明 */
 #player1,
 #player2 {
 	display: none;
-	height: auto;
-	width: 140px;
 	bottom: 20px;
 	padding: 10px;
-	line-height: 30px;
 	position: absolute;
 	z-index: 90;
 	font-size: 20px;

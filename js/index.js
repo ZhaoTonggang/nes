@@ -60,7 +60,7 @@ const intdata = () => {
 			app.innerHTML = item;
 		})
 		.catch(err => {
-			document.getElementById('apph').innerHTML = '获取列表失败[代码:404]';
+			document.getElementById('apph').innerHTML = '获取数据失败<br />请尝试“异常修复”<br />[错误代码:404]';
 			console.error('[404]错误日志：', err);
 		})
 };
@@ -108,3 +108,10 @@ window.onkeydown = () => {
 		intdata();
 	};
 };
+// 程序修复
+const fixsys = () => {
+	const yesfix = confirm('确认运行修复程序吗？系统将向云端请求最新的数据包，这将有效应对绝大多数异常情况。');
+	if (yesfix == true) {
+		window.location.replace(window.location.href);
+	}
+}

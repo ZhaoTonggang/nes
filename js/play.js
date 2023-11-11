@@ -224,80 +224,78 @@ const share = () => {
 		text: '推荐使用电脑，运行更加流畅！在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
 	});
 }
-window.onload = () => {
-	//禁止双击缩放
-	document.addEventListener('dblclick', (e) => {
-		e.preventDefault()
-	}, {
-		passive: false
-	});
-	// 下载rom按钮
-	document.getElementById('drom').onclick = () => {
-		const dorom = confirm('您要下载此游戏的ROM文件吗？');
-		if (dorom == true) {
-			cocoMessage.warning("即将开始下载！", 2000);
-			window.open('../roms/' + gameInfo.i + '.zip');
-		} else {
-			cocoMessage.warning("您取消了下载！", 2000);
-		}
-	};
-	// 初始化存档
-	document.getElementById('hnbut').onclick = () => {
-		const savesh = document.getElementById("btn_load").style.display;
-		if (savesh == "none") {
-			const hnbut = document.getElementById("hnbut");
-			const hnul = document.getElementById("hnul");
-			if (sbts) {
-				sbts = false;
-				let code = gameInfo.i.toString();
-				HDB.initDB().then(() => {
-					HDB.getDataListByCode(code).then((data) => {
-						let result = "";
-						for (let j = 0; j < data.length; j++) {
-							result += '<li class="hnli"><div class="hnimg"><img src="' + data[j]
-								.pic +
-								'"></div><div class="hndiv"><p>存档【' + Number(j + 1) +
-								'】</p><p>' + data[j]
-								.time +
-								'</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
-								data[j].code + '\',this,' + data[j].id +
-								')">覆盖</button><button type="button" class="hndbut" onclick="nessave(\'c\',\'' +
-								data[j].code + '\',this,' + data[j].id +
-								')">删除</button><button type="button" class="hnlbut" onclick="nessave(\'b\',\'' +
-								data[j].code + '\',this,' + data[j].id +
-								')">读取</button></div></li>';
-						}
-						for (let k = 0; k < 5 - data.length; k++) {
-							result +=
-								'<li class="hnli"><div class="hnimg"></div><div class="hndiv"><p>存档【' +
-								Number(data.length + k + 1) +
-								'】</p><p>无记录</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
-								code + '\',this)">保存</button></div></li>';
-						}
-						//获取存档列表
-						hnul.innerHTML = result;
-						hnul.style.display = "inline";
-					})
-				})
-			} else {
-				document.onclick = () => {
-					let cobj = event.srcElement;
-					if (cobj.id === "hnul") {
-						sbts = false;
-					} else {
-						hnul.style.display = "none";
-						sbts = true;
+// 下载rom按钮
+const dowrom = () => {
+	const dorom = confirm('您要下载此游戏的ROM文件吗？');
+	if (dorom == true) {
+		cocoMessage.warning("即将开始下载！", 2000);
+		window.open('../roms/' + gameInfo.i + '.zip');
+	} else {
+		cocoMessage.warning("您取消了下载！", 2000);
+	}
+};
+// 初始化存档
+const savedata = () => {
+	const savesh = document.getElementById("btn_load").style.display;
+	if (savesh == "none") {
+		const hnbut = document.getElementById("hnbut");
+		const hnul = document.getElementById("hnul");
+		if (sbts) {
+			sbts = false;
+			let code = gameInfo.i.toString();
+			HDB.initDB().then(() => {
+				HDB.getDataListByCode(code).then((data) => {
+					let result = "";
+					for (let j = 0; j < data.length; j++) {
+						result += '<li class="hnli"><div class="hnimg"><img src="' + data[j]
+							.pic +
+							'"></div><div class="hndiv"><p>存档【' + Number(j + 1) +
+							'】</p><p>' + data[j]
+							.time +
+							'</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
+							data[j].code + '\',this,' + data[j].id +
+							')">覆盖</button><button type="button" class="hndbut" onclick="nessave(\'c\',\'' +
+							data[j].code + '\',this,' + data[j].id +
+							')">删除</button><button type="button" class="hnlbut" onclick="nessave(\'b\',\'' +
+							data[j].code + '\',this,' + data[j].id +
+							')">读取</button></div></li>';
 					}
+					for (let k = 0; k < 5 - data.length; k++) {
+						result +=
+							'<li class="hnli"><div class="hnimg"></div><div class="hndiv"><p>存档【' +
+							Number(data.length + k + 1) +
+							'】</p><p>无记录</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
+							code + '\',this)">保存</button></div></li>';
+					}
+					//获取存档列表
+					hnul.innerHTML = result;
+					hnul.style.display = "inline";
+				})
+			})
+		} else {
+			document.onclick = () => {
+				let cobj = event.srcElement;
+				if (cobj.id === "hnul") {
+					sbts = false;
+				} else {
+					hnul.style.display = "none";
+					sbts = true;
 				}
 			}
-		} else {
-			cocoMessage.warning("请先开始游戏！", 2000);
 		}
+	} else {
+		cocoMessage.warning("请先开始游戏！", 2000);
 	}
-	// 初始化遥感信息
-	joystick.init();
-	//NES按钮实例初始化
-	nesBtn.init();
-	// 移除遮罩
-	document.body.classList.remove('is-loading');
 }
+// 初始化遥感信息
+joystick.init();
+//NES按钮实例初始化
+nesBtn.init();
+//禁止双击缩放
+document.addEventListener('dblclick', (e) => {
+	e.preventDefault()
+}, {
+	passive: false
+});
+// 移除遮罩
+document.body.classList.remove('is-loading');

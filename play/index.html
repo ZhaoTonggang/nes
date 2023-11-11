@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-CN" onselectstart="return false" oncontextmenu=self.event.returnValue=false>
-
 	<head>
 		<title>红白机游戏盒 - 在线畅玩小霸王经典游戏</title>
 		<meta charset="UTF-8">
@@ -19,12 +18,11 @@
 		<!-- 页面样式 -->
 		<link rel="stylesheet" type="text/css" href="../css/play.css">
 	</head>
-
 	<body class="is-loading">
 		<div class="titler">
 			<button class="titbut">
 				<a href="../">
-					<img src="../image/button/home.png" />
+					<img src="../image/button/home.png" alt="这是主页按钮" />
 					<p>主页</p>
 				</a>
 			</button>
@@ -43,11 +41,11 @@
 				<img id="qhimg" src="../image/button/gmb.png" alt="这是切换按钮" />
 				<p id="qhp">切换</p>
 			</button>
-			<button class=" titbut" id="hnbut">
+			<button class=" titbut" id="hnbut" onclick="savedata()">
 				<img src="../image/button/save.png" alt="这是存档按钮" />
 				<p>存档</p>
 			</button>
-			<button class="titbut" id="drom">
+			<button class="titbut" onclick="dowrom()">
 				<img src="../image/button/down.png" alt="这是下载按钮" />
 				<p>下载</p>
 			</button>
@@ -64,22 +62,12 @@
 		<div id="player1">
 			<p class="plp">玩家一</p>
 			<hr />
-			<p>上:W | 下:S</p>
-			<p>左:A | 右:D</p>
-			<p>A:V | B:B</p>
-			<p>C:V+B</p>
-			<p>SELECT:空格</p>
-			<p>START:回车</p>
+			<p>上:W | 下:S<br />左:A | 右:D<br />A:V | B:B<br />C:V+B<br />SELECT:空格<br />START:回车</p>
 		</div>
 		<div id="player2">
 			<p class="plp">玩家二</p>
 			<hr />
-			<p>上:↑ | 下:↓</p>
-			<p>左:← | 右:→</p>
-			<p>A:O | B:P</p>
-			<p>C:O+P</p>
-			<p>SELECT:-</p>
-			<p>START:+</p>
+			<p>上:↑ | 下:↓<br />左:← | 右:→<br />A:O | B:P<br />C:O+P<br />SELECT:-<br />START:+</p>
 		</div>
 		<!-- 存档菜单 -->
 		<ul id="hnul"></ul>
@@ -102,5 +90,4 @@
 		<!-- 页面逻辑 -->
 		<script type="text/javascript" src="../js/play.js" charset="UTF-8"></script>
 	</body>
-
 </html>
