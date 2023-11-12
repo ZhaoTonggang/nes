@@ -24,8 +24,7 @@ const intdata = () => {
 	fetch('./list.json', {
 			methods: 'GET',
 			cache: 'force-cache',
-			mode: 'same-origin',
-			integrity: 'sha256-MaKebJrEJL2a4SBEcnU2hCd0Blf8+Pu7CGbv+9eQXaQ='
+			mode: 'same-origin'
 		})
 		.then(response => {
 			return response.json();
