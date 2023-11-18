@@ -42,7 +42,9 @@ function audio_callback(event) {
 	let dst = event.outputBuffer;
 	let len = dst.length;
 	// Attempt to avoid buffer underruns.
-	if (audio_remain() < AUDIO_BUFFERING) nes.frame();
+	if (audio_remain() < AUDIO_BUFFERING) {
+		nes.frame();
+	}
 	let dst_l = dst.getChannelData(0);
 	let dst_r = dst.getChannelData(1);
 	for (let j = 0; j < len; j++) {
@@ -118,9 +120,15 @@ function nes_init() {
 	}, {
 		passive: false
 	})
-	canvas_ctx = canvas.getContext("2d");
+	canvas_ctx = canvas.getContext("2d", {
+		alpha: false,
+		colorSpace: "display-p3",
+		desynchronized: true,
+		wwillRedFrequently: true,
+	});
 	image = canvas_ctx.getImageData(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	canvas_ctx.fillStyle = "black";
+	canvas_ctx.imageSmoothingEnabled = false;
 	canvas_ctx.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	// Allocate framebuffer array.
 	let buffer = new ArrayBuffer(image.data.length);
@@ -148,10 +156,10 @@ function nes_load_data(rom_data) {
 	nes_init();
 	nes_boot(rom_data);
 }
-document.addEventListener('keydown', (event) => {
+window.addEventListener('keydown', (event) => {
 	keyboard(nes.buttonDown, event)
 });
 //'keyup'用来取消动作  对于AB键，没有他则无法进行下一轮操作  对于方向键，没有他则游戏角色会一直朝一个方向走下去
-document.addEventListener('keyup', (event) => {
+window.addEventListener('keyup', (event) => {
 	keyboard(nes.buttonUp, event)
 });
