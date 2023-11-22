@@ -11,8 +11,8 @@ let audio_samples_L = new Float32Array(SAMPLE_COUNT);
 let audio_samples_R = new Float32Array(SAMPLE_COUNT);
 let audio_write_cursor = 0;
 let audio_read_cursor = 0;
-let nes = new jsnes.NES({
-	onFrame: function(framebuffer_24) {
+let nes = new nesjs.NES({
+	onFrame: (framebuffer_24) => {
 		let i = 0;
 		for (let y = 0; y < SCREEN_HEIGHT; ++y) {
 			for (let x = 0; x < SCREEN_WIDTH; ++x) {
@@ -21,24 +21,24 @@ let nes = new jsnes.NES({
 			}
 		}
 	},
-	onAudioSample: function(l, r) {
+	onAudioSample: (l, r) => {
 		audio_samples_L[audio_write_cursor] = l;
 		audio_samples_R[audio_write_cursor] = r;
 		audio_write_cursor = (audio_write_cursor + 1) & SAMPLE_MASK;
 	},
 });
 
-function onAnimationFrame() {
+const onAnimationFrame = () => {
 	window.requestAnimationFrame(onAnimationFrame);
 	image.data.set(framebuffer_u8);
 	canvas_ctx.putImageData(image, 0, 0);
 }
 
-function audio_remain() {
+const audio_remain = () => {
 	return (audio_write_cursor - audio_read_cursor) & SAMPLE_MASK;
 }
 
-function audio_callback(event) {
+const audio_callback = (event) => {
 	let dst = event.outputBuffer;
 	let len = dst.length;
 	// Attempt to avoid buffer underruns.
@@ -55,67 +55,100 @@ function audio_callback(event) {
 	audio_read_cursor = (audio_read_cursor + len) & SAMPLE_MASK;
 }
 //在此配置按键
-function keyboard(callback, event) {
+const keyboard = (callback, event) => {
 	switch (event.keyCode) {
 		//玩家一
-		case 87: // UP   --  W
-			callback(1, jsnes.Controller.BUTTON_UP);
+		case 87: {
+			// UP   --  W
+			callback(1, nesjs.Controller.BUTTON_UP);
 			break;
-		case 83: // Down  --  S
-			callback(1, jsnes.Controller.BUTTON_DOWN);
+		}
+		case 83: {
+			// Down  --  S
+			callback(1, nesjs.Controller.BUTTON_DOWN);
 			break;
-		case 65: // Left  -- A
-			callback(1, jsnes.Controller.BUTTON_LEFT);
+		}
+		case 65: {
+			// Left  -- A
+			callback(1, nesjs.Controller.BUTTON_LEFT);
 			break;
-		case 68: // Right   -- D
-			callback(1, jsnes.Controller.BUTTON_RIGHT);
+		}
+		case 68: {
+			// Right   -- D
+			callback(1, nesjs.Controller.BUTTON_RIGHT);
 			break;
-		case 66: // B
-			callback(1, jsnes.Controller.BUTTON_A);
+		}
+		case 66: {
+			// B
+			callback(1, nesjs.Controller.BUTTON_A);
 			break;
-		case 86: // V
-			callback(1, jsnes.Controller.BUTTON_B);
+		}
+		case 86: {
+			// V
+			callback(1, nesjs.Controller.BUTTON_B);
 			break;
-		case 32: // 空格
-			callback(1, jsnes.Controller.BUTTON_SELECT);
+		}
+		case 32: {
+			// 空格
+			callback(1, nesjs.Controller.BUTTON_SELECT);
 			break;
-		case 13: // 回车
-			callback(1, jsnes.Controller.BUTTON_START);
+		}
+		case 13: {
+			// 回车
+			callback(1, nesjs.Controller.BUTTON_START);
 			break;
-			//玩家二
-		case 38: // UP   -  上
-			callback(2, jsnes.Controller.BUTTON_UP);
+		}
+		//玩家二
+		case 38: {
+			// UP   -  上
+			callback(2, nesjs.Controller.BUTTON_UP);
 			break;
-		case 40: // Down  --  下
-			callback(2, jsnes.Controller.BUTTON_DOWN);
+		}
+		case 40: {
+			// Down  --  下
+			callback(2, nesjs.Controller.BUTTON_DOWN);
 			break;
-		case 37: // Left  -- 左
-			callback(2, jsnes.Controller.BUTTON_LEFT);
+		}
+		case 37: {
+			// Left  -- 左
+			callback(2, nesjs.Controller.BUTTON_LEFT);
 			break;
-		case 39: // Right   -- 右
-			callback(2, jsnes.Controller.BUTTON_RIGHT);
+		}
+		case 39: {
+			// Right   -- 右
+			callback(2, nesjs.Controller.BUTTON_RIGHT);
 			break;
-		case 80: // P
-			callback(2, jsnes.Controller.BUTTON_A);
+		}
+		case 80: {
+			// P
+			callback(2, nesjs.Controller.BUTTON_A);
 			break;
-		case 79: // O
-			callback(2, jsnes.Controller.BUTTON_B);
+		}
+		case 79: {
+			// O
+			callback(2, nesjs.Controller.BUTTON_B);
 			break;
-		case 189: // -
-			callback(2, jsnes.Controller.BUTTON_SELECT);
+		}
+		case 189: {
+			// -
+			callback(2, nesjs.Controller.BUTTON_SELECT);
 			break;
-		case 187: // =
-			callback(2, jsnes.Controller.BUTTON_START);
+		}
+		case 187: {
+			// =
+			callback(2, nesjs.Controller.BUTTON_START);
 			break;
-		default:
+		}
+		default: {
 			break;
+		}
 	}
 }
 // 配置画布
-function nes_init() {
-	let canvas = document.getElementById('nes-canvas');
+const nes_init = () => {
+	const canvas = document.getElementById('nes-canvas');
 	//禁止双击缩放
-	canvas.addEventListener('dblclick', function(e) {
+	canvas.addEventListener('dblclick', (e) => {
 		e.preventDefault()
 	}, {
 		passive: false
@@ -147,12 +180,12 @@ function nes_init() {
 	script_processor.connect(audio_ctx.destination);
 }
 
-function nes_boot(rom_data) {
+const nes_boot = (rom_data) => {
 	nes.loadROM(rom_data);
 	window.requestAnimationFrame(onAnimationFrame);
 }
 
-function nes_load_data(rom_data) {
+const nes_load_data = (rom_data) => {
 	nes_init();
 	nes_boot(rom_data);
 }
