@@ -119,11 +119,11 @@ req.onload = () => {
 					timer = setTimeout(() => {
 						isshow = true;
 						hhtml.style.cursor = "none";
-						pl2.style.right = "-180px";
-						pl1.style.left = "-180px";
+						pl2.style.right = "-200px";
+						pl1.style.left = "-200px";
 						gname.style.top = "-120px";
-						titler.style.left = "-150px";
-						titlel.style.right = "-150px";
+						titler.style.left = "-220px";
+						titlel.style.right = "-220px";
 					}, 3000)
 				};
 			};
