@@ -4,6 +4,7 @@
 let gameInfo = {};
 const url = window.location.href;
 const urldata = decodeURI(url);
+let setgame = false;
 // 参数合法性
 const urlerr = () => {
 	alert('参数传入不合法');
@@ -126,6 +127,7 @@ req.onload = () => {
 					}, 3000)
 				};
 			};
+			setgame = true;
 		};
 	} else if (req.status === 0) {
 		req.onerror();
@@ -234,6 +236,20 @@ const dowrom = () => {
 		cocoMessage.warning("您取消了下载！", 2000);
 	}
 };
+// 截屏
+const screenshot = () => {
+	if (setgame) {
+		let canvas = document.getElementById("nes-canvas");
+		let data = canvas.toDataURL('image/png');
+		let image = new Image();
+		image.src = data;
+		let w = window.open("", "_blank");
+		w.document.write(image.outerHTML);
+	} else {
+		cocoMessage.warning("请先开始游戏！", 2000);
+	}
+
+}
 // 初始化存档
 const savedata = () => {
 	const savesh = document.getElementById("btn_load").style.display;
