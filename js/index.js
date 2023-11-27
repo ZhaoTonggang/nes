@@ -7,11 +7,6 @@ if (window.top != window) {
 } else if (window.location.href.indexOf('index') > -1) {
 	window.open('./', '_self');
 };
-document.onreadystatechange = () => {
-	if (document.readyState === "interactive") {
-		document.body.classList.remove("is-loading");
-	};
-};
 // 数据容器
 let data;
 let timeout = null;
@@ -114,3 +109,5 @@ const fixsys = () => {
 		window.location.replace(window.location.href);
 	}
 }
+// 移除遮罩
+window.onload = () => document.body.classList.remove("is-loading");
