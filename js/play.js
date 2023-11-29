@@ -5,6 +5,7 @@ let gameInfo = {};
 const url = window.location.href;
 const urldata = decodeURI(url);
 let setgame = false;
+window.EJS_pathtodata = "https://other.heheda.top/gamelib/";
 // 参数合法性
 const urlerr = () => {
 	alert('参数传入不合法');
@@ -27,11 +28,68 @@ if (window.top != window) {
 				urlerr();
 			}
 			gameInfo[data[0]] = data[1];
+			// 初始化
+			window.EJS_language = "zh-CN";
+			window.EJS_player = "#nesgame";
+			window.EJS_biosUrl = "";
+			window.EJS_core = "nes";
+			// 音量
+			window.EJS_volume = 1;
+			// 是否启用线程
+			window.EJS_thread = true;
+			// 开始按钮位置
+			window.EJS_alignStartButton = "center";
+			// 背景颜色
+			window.EJS_backgroundColor = "#ffffff00";
+			// 背景模糊
+			window.EJS_backgroundBlur = true;
+			window.EJS_onGameStart = () => {
+				cocoMessage.success("启动游戏引擎！", 2000);
+				showload.style.display = 'none';
+				//隐藏鼠标和工具栏
+				const hhtml = document.getElementsByTagName("html")[0];
+				const pl1 = document.getElementById("player1");
+				const pl2 = document.getElementById("player2");
+				const gname = document.getElementById("name");
+				const titler = document.getElementsByClassName("titler")[0];
+				const titlel = document.getElementsByClassName("titlel")[0];
+				let timer = null;
+				let isshow = false;
+				document.onmousemove = () => {
+					if (isshow) {
+						isshow = false;
+						hhtml.style.cursor = "default";
+						pl2.style.right = "20px";
+						pl1.style.left = "20px";
+						gname.style.top = "20px";
+						titler.style.left = "20px";
+						titlel.style.right = "20px";
+					} else {
+						if (timer) {
+							clearTimeout(timer);
+						};
+						timer = setTimeout(() => {
+							isshow = true;
+							hhtml.style.cursor = "none";
+							pl2.style.right = "-200px";
+							pl1.style.left = "-200px";
+							gname.style.top = "-120px";
+							titler.style.left = "-220px";
+							titlel.style.right = "-220px";
+						}, 3000)
+					};
+				};
+				setgame = true;
+			};
+			// 移除遮罩
+			document.body.classList.remove('is-loading');
 		};
 	}
 } else {
 	urlerr();
 };
+// 获取封面
+window.EJS_backgroundImage = '../imgs/' + gameInfo.i + '.png';
 // 加载提示
 const showload = document.getElementById('btn_load');
 const showtext = () => {
@@ -44,7 +102,7 @@ const showtext = () => {
 // 载入游戏
 const req = new XMLHttpRequest();
 req.open("GET", "../roms/" + gameInfo.i + ".zip");
-req.overrideMimeType("text/plain; charset=x-user-defined");
+req.overrideMimeType("application/zip;charset=x-user-defined");
 req.onerror = (e) => console.error('这个错误发生在游戏加载环节', e);
 req.onprogress = (e) => {
 	// 显示加载进度
@@ -55,7 +113,6 @@ req.onloadstart = () => {
 };
 req.onload = () => {
 	if (req.status === 200) {
-		let nes = null;
 		const nzip = new JSZip();
 		cocoMessage.success("ROM载入成功！", 2000);
 		nzip.loadAsync(req.responseText)
@@ -64,71 +121,17 @@ req.onload = () => {
 					showtext();
 				} else {
 					cocoMessage.warning("释放资源中！", 2000);
-					const zdata = zip.file(gameInfo.i + ".nes");
-					if (!zdata) {
-						showtext();
-					} else {
-						zdata.async("binarystring")
-							.then(res => {
-								nes = res;
-								cocoMessage.success("资源配置完成！", 2000);
-								showload.classList.add("btnload");
-								showload.classList.remove("showload");
-								showload.innerHTML = '点击开始游戏';
-							})
-					}
+					zip.file(gameInfo.i + ".nes").async("blob")
+						.then(res => {
+							window.EJS_gameUrl = res;
+							cocoMessage.success("资源配置完成！", 2000);
+							showload.innerHTML = '加载完成';
+							showload.style.display = 'none';
+						});
 				}
 			})
 		//监听加载按钮
-		showload.onclick = () => {
-			nes_boot(nes);
-			nes_init();
-			cocoMessage.success("启动游戏引擎！", 2000);
-			//浏览器全屏
-			const de = document.documentElement;
-			if (de.requestFullscreen) {
-				de.requestFullscreen();
-			} else if (de.mozRequestFullScreen) {
-				de.mozRequestFullScreen();
-			} else if (de.webkitRequestFullScreen) {
-				de.webkitRequestFullScreen();
-			};
-			showload.style.display = 'none';
-			//隐藏鼠标和工具栏
-			const hhtml = document.getElementsByTagName("html")[0];
-			const pl1 = document.getElementById("player1");
-			const pl2 = document.getElementById("player2");
-			const gname = document.getElementById("name");
-			const titler = document.getElementsByClassName("titler")[0];
-			const titlel = document.getElementsByClassName("titlel")[0];
-			let timer = null;
-			let isshow = false;
-			document.onmousemove = () => {
-				if (isshow) {
-					isshow = false;
-					hhtml.style.cursor = "default";
-					pl2.style.right = "20px";
-					pl1.style.left = "20px";
-					gname.style.top = "20px";
-					titler.style.left = "20px";
-					titlel.style.right = "20px";
-				} else {
-					if (timer) {
-						clearTimeout(timer);
-					};
-					timer = setTimeout(() => {
-						isshow = true;
-						hhtml.style.cursor = "none";
-						pl2.style.right = "-200px";
-						pl1.style.left = "-200px";
-						gname.style.top = "-120px";
-						titler.style.left = "-220px";
-						titlel.style.right = "-220px";
-					}, 3000)
-				};
-			};
-			setgame = true;
-		};
+		showload.onclick = () => {};
 	} else if (req.status === 0) {
 		req.onerror();
 		showload.innerHTML = '请求数据失败';
@@ -147,45 +150,10 @@ if (gnm != 'false') {
 } else {
 	gnm = '';
 }
+window.EJS_gameName = gameInfo.n + gnm;
 document.getElementById('name').innerHTML = gameInfo.n + gnm;
 // 修改title
 document.title = gameInfo.n + gnm + ' - ' + '红白机游戏盒';
-//实例化摇杆信息
-let joystick = new Joystick({
-	//容器
-	el: "#direction",
-	//摇杆颜色
-	color: 'red',
-	//摇杆大小
-	size: 100,
-	//绑定 上下左右 到 WSAD键
-	keyCodes: [87, 83, 65, 68],
-	//页面强制横屏时使用90
-	rotate: 0,
-	//按下时的回调
-	btn_down_fn: (event) => {
-		keyboard(nes.buttonDown, event)
-	},
-	//释放时的回调
-	btn_up_fn: (event) => {
-		keyboard(nes.buttonUp, event)
-	},
-})
-//实例化NES按钮
-let nesBtn = new VirtualNesBtn({
-	//容器
-	el: "#user_btn_box",
-	//虚拟按钮按下时的回调 参数evt
-	btn_down_fn: (event) => {
-		keyboard(nes.buttonDown, event)
-	},
-	//虚拟按钮弹起时的回调 参数evt
-	btn_up_fn: (event) => {
-		keyboard(nes.buttonUp, event)
-	},
-	//按顺序分别是 select start b a
-	keyCodes: [32, 13, 86, 66]
-})
 // 设置按钮状态
 if (navigator.share) {
 	document.getElementById("share").style.display = "inline";
@@ -194,24 +162,20 @@ if (navigator.share) {
 };
 //获取设备类型
 let isMobile = /(iPhone|iPod|Android|ios|iOS|iPad|WebOS|Symbian|Windows Phone|Phone)/i.test(navigator.userAgent);
-// 封装操作模式
-const mwork = (qhimg, qhp, play1, play2) => {
-	document.getElementById("qhimg").src = "../image/button/" + qhimg;
-	document.getElementById("qhp").innerHTML = qhp;
-	document.getElementById("player1").style.display = play1;
-	document.getElementById("player2").style.display = play1;
-	document.getElementById("direction").style.display = play2;
-	document.getElementById("user_btn_box").style.display = play2;
-}
 //设置操作方式
 const mobile = () => {
+	const player1 = document.getElementById("player1");
+	const player2 = document.getElementById("player2");
 	if (isMobile) {
-		mwork("key.png", "键盘", "none", "block");
+		player1.style.display = "none";
+		player2.style.display = "none";
 		isMobile = false;
 	} else {
-		mwork("gmb.png", "触屏", "block", "none");
+		player1.style.display = "block";
+		player2.style.display = "block";
 		isMobile = true;
 	}
+
 }
 mobile();
 //重置游戏配置
@@ -239,7 +203,7 @@ const dowrom = () => {
 // 截屏
 const screenshot = () => {
 	if (setgame) {
-		let canvas = document.getElementById("nes-canvas");
+		const canvas = document.getElementsByClassName("ejs_canvas")[0];
 		let data = canvas.toDataURL('image/png');
 		let image = new Image();
 		image.src = data;
@@ -248,70 +212,63 @@ const screenshot = () => {
 	} else {
 		cocoMessage.warning("请先开始游戏！", 2000);
 	}
-
 }
 // 初始化存档
-const savedata = () => {
-	const savesh = document.getElementById("btn_load").style.display;
-	if (savesh == "none") {
-		const hnbut = document.getElementById("hnbut");
-		const hnul = document.getElementById("hnul");
-		if (sbts) {
-			sbts = false;
-			let code = gameInfo.i.toString();
-			HDB.initDB().then(() => {
-				HDB.getDataListByCode(code).then((data) => {
-					let result = "";
-					for (let j = 0; j < data.length; j++) {
-						result += '<li class="hnli"><div class="hnimg"><img src="' + data[j]
-							.pic +
-							'"></div><div class="hndiv"><p>存档【' + Number(j + 1) +
-							'】</p><p>' + data[j]
-							.time +
-							'</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
-							data[j].code + '\',this,' + data[j].id +
-							')">覆盖</button><button type="button" class="hndbut" onclick="nessave(\'c\',\'' +
-							data[j].code + '\',this,' + data[j].id +
-							')">删除</button><button type="button" class="hnlbut" onclick="nessave(\'b\',\'' +
-							data[j].code + '\',this,' + data[j].id +
-							')">读取</button></div></li>';
-					}
-					for (let k = 0; k < 5 - data.length; k++) {
-						result +=
-							'<li class="hnli"><div class="hnimg"></div><div class="hndiv"><p>存档【' +
-							Number(data.length + k + 1) +
-							'】</p><p>无记录</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
-							code + '\',this)">保存</button></div></li>';
-					}
-					//获取存档列表
-					hnul.innerHTML = result;
-					hnul.style.display = "inline";
-				})
-			})
-		} else {
-			document.onclick = () => {
-				let cobj = event.srcElement;
-				if (cobj.id === "hnul") {
-					sbts = false;
-				} else {
-					hnul.style.display = "none";
-					sbts = true;
-				}
-			}
-		}
-	} else {
-		cocoMessage.warning("请先开始游戏！", 2000);
-	}
-}
-// 初始化遥感信息
-joystick.init();
-//NES按钮实例初始化
-nesBtn.init();
+// const savedata = () => {
+// 	const savesh = document.getElementById("btn_load").style.display;
+// 	if (savesh == "none") {
+// 		const hnbut = document.getElementById("hnbut");
+// 		const hnul = document.getElementById("hnul");
+// 		if (sbts) {
+// 			sbts = false;
+// 			let code = gameInfo.i.toString();
+// 			HDB.initDB().then(() => {
+// 				HDB.getDataListByCode(code).then((data) => {
+// 					let result = "";
+// 					for (let j = 0; j < data.length; j++) {
+// 						result += '<li class="hnli"><div class="hnimg"><img src="' + data[j]
+// 							.pic +
+// 							'"></div><div class="hndiv"><p>存档【' + Number(j + 1) +
+// 							'】</p><p>' + data[j]
+// 							.time +
+// 							'</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
+// 							data[j].code + '\',this,' + data[j].id +
+// 							')">覆盖</button><button type="button" class="hndbut" onclick="nessave(\'c\',\'' +
+// 							data[j].code + '\',this,' + data[j].id +
+// 							')">删除</button><button type="button" class="hnlbut" onclick="nessave(\'b\',\'' +
+// 							data[j].code + '\',this,' + data[j].id +
+// 							')">读取</button></div></li>';
+// 					}
+// 					for (let k = 0; k < 5 - data.length; k++) {
+// 						result +=
+// 							'<li class="hnli"><div class="hnimg"></div><div class="hndiv"><p>存档【' +
+// 							Number(data.length + k + 1) +
+// 							'】</p><p>无记录</p><button type="button" class="hnsbut" onclick="nessave(\'a\',\'' +
+// 							code + '\',this)">保存</button></div></li>';
+// 					}
+// 					//获取存档列表
+// 					hnul.innerHTML = result;
+// 					hnul.style.display = "inline";
+// 				})
+// 			})
+// 		} else {
+// 			document.onclick = () => {
+// 				let cobj = event.srcElement;
+// 				if (cobj.id === "hnul") {
+// 					sbts = false;
+// 				} else {
+// 					hnul.style.display = "none";
+// 					sbts = true;
+// 				}
+// 			}
+// 		}
+// 	} else {
+// 		cocoMessage.warning("请先开始游戏！", 2000);
+// 	}
+// }
 //禁止双击缩放
 document.addEventListener('dblclick', (e) => {
 	e.preventDefault()
 }, {
 	passive: false
 });
-// 移除遮罩
-document.body.classList.remove('is-loading');

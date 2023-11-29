@@ -30,10 +30,6 @@
 				<img src="../image/button/sh.png" alt="这是分享按钮" />
 				<p>分享</p>
 			</button>
-			<button class="titbut" onclick="dowrom()">
-				<img src="../image/button/down.png" alt="这是下载按钮" />
-				<p>下载</p>
-			</button>
 			<button class=" titbut" onclick="chongzai()">
 				<img src="../image/button/rec.png" alt="这是刷新按钮" />
 				<p>刷新</p>
@@ -42,12 +38,16 @@
 		<h1 id="name">加载中...</h1>
 		<div class="titlel">
 			<button class=" titbut" onclick="mobile()">
-				<img id="qhimg" src="../image/button/gmb.png" alt="这是切换按钮" />
-				<p id="qhp">切换</p>
+				<img id="qhimg" src="../image/button/steer.svg" alt="这是说明按钮" />
+				<p id="qhp">引导</p>
 			</button>
-			<button class=" titbut" id="hnbut" onclick="savedata()">
+			<!-- <button class=" titbut" id="hnbut" onclick="savedata()">
 				<img src="../image/button/save.png" alt="这是存档按钮" />
 				<p>存档</p>
+			</button> -->
+			<button class="titbut" onclick="dowrom()">
+				<img src="../image/button/down.png" alt="这是下载按钮" />
+				<p>下载</p>
 			</button>
 			<button class="titbut" onclick="screenshot()">
 				<img src="../image/button/scrshot.svg" alt="这是截屏按钮" />
@@ -56,43 +56,31 @@
 		</div>
 		<div id="show_box">
 			<p id="btn_load" class="showload">正在请求资源</p>
-			<canvas id="nes-canvas" width="256" height="240"></canvas>
+			<div id="nesgame"></div>
 		</div>
-		<!-- 摇杆容器 -->
-		<div id="direction"></div>
-		<!-- 按键容器 -->
-		<div id="user_btn_box"></div>
 		<!--按键映射说明-->
 		<div id="player1">
-			<p class="plp">玩家一</p>
+			<p class="plp">说明</p>
 			<hr />
-			<p>上:W | 下:S<br />左:A | 右:D<br />A:V | B:B<br />C:V+B<br />SELECT:空格<br />START:回车</p>
+			<p>请开始游戏后<br />在底部菜单栏<br />进行相关设置</p>
 		</div>
 		<div id="player2">
-			<p class="plp">玩家二</p>
+			<p class="plp">功能</p>
 			<hr />
-			<p>上:↑ | 下:↓<br />左:← | 右:→<br />A:O | B:P<br />C:O+P<br />SELECT:-<br />START:+</p>
+			<p>支持手柄，存<br />档按键自定义<br />作弊等功能<br />支持4名玩家同<br />时进行游戏<br />支持移动端</p>
 		</div>
 		<!-- 存档菜单 -->
 		<ul id="hnul"></ul>
-		<!-- 模拟器 -->
-		<script defer type="text/javascript" src="../lib/nesjs.min.js" charset="UTF-8"></script>
-		<script defer type="text/javascript" src="../js/nes-embed.js" charset="UTF-8"></script>
-		<!-- nes_btn插件 -->
-		<script defer type="text/javascript" src="../js/nes_btn.js" charset="UTF-8"></script>
-		<!-- 摇杆插件 -->
-		<script defer type="text/javascript" src="../lib/nipplejs.min.js" charset="UTF-8"></script>
-		<script defer type="text/javascript" src="../js/joystick.js" charset="UTF-8"></script>
 		<!-- 提示框 -->
-		<script defer type="text/javascript" src="../lib/coco-message.min.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="../lib/coco-message.min.js" charset="UTF-8"></script>
 		<!-- jszip -->
-		<script defer type="text/javascript" src="../lib/jszip.min.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="../lib/jszip.min.js" charset="UTF-8"></script>
 		<!-- 存档 -->
-		<script defer type="text/javascript" src="../js/hnesdb.js" charset="UTF-8"></script>
-		<!-- 手柄 -->
-		<script defer type="text/javascript" src="../js/gamepad.js" charset="UTF-8"></script>
+		<!-- <script defer type="text/javascript" src="../js/hnesdb.js" charset="UTF-8"></script> -->
 		<!-- 页面逻辑 -->
-		<script defer type="text/javascript" src="../js/play.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="../js/play.js" charset="UTF-8"></script>
+		<!-- 模拟器 -->
+		<script type="text/javascript" src="https://other.heheda.top/gamelib/loader.js" charset="UTF-8"></script>
 		<!-- 谷歌广告 -->
 		<script async
 			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3670070169085381"
