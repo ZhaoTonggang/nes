@@ -32,7 +32,6 @@ if (window.top != window) {
 			window.EJS_player = "#nesgame";
 			window.EJS_biosUrl = "";
 			window.EJS_core = "nes";
-			window.EJS_DEBUG_XX = true;
 			// 音量
 			window.EJS_volume = 1;
 			// 是否启用线程
