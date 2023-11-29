@@ -5,7 +5,18 @@ let gameInfo = {};
 const url = window.location.href;
 const urldata = decodeURI(url);
 let setgame = false;
-window.EJS_pathtodata = "https://other.heheda.top/gamelib/";
+window.EJS_paths = {
+	"GameManager.js": "https://other.heheda.top/gamelib/GameManager.js",
+	"emulator.min.css": "https://other.heheda.top/gamelib/emulator.min.css",
+	"emulator.min.js": "https://other.heheda.top/gamelib/emulator.min.js",
+	"gamepad.js": "https://other.heheda.top/gamelib/gamepad.js",
+	"loader.js": "https://other.heheda.top/gamelib/loader.js",
+	"nipplejs.js": "https://other.heheda.top/gamelib/nipplejs.js",
+	"shaders.js": "https://other.heheda.top/gamelib/shaders.js",
+	"socket.io.min.js": "https://other.heheda.top/gamelib/socket.io.min.js",
+	"storage.js": "https://other.heheda.top/gamelib/storage.js",
+	"version.json": "https://other.heheda.top/gamelib/version.json"
+};
 // 参数合法性
 const urlerr = () => {
 	alert('参数传入不合法');
