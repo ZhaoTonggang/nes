@@ -5,18 +5,6 @@ let gameInfo = {};
 const url = window.location.href;
 const urldata = decodeURI(url);
 let setgame = false;
-window.EJS_paths = {
-	"GameManager.js": "https://other.heheda.top/gamelib/GameManager.js",
-	"emulator.min.css": "https://other.heheda.top/gamelib/emulator.min.css",
-	"emulator.min.js": "https://other.heheda.top/gamelib/emulator.min.js",
-	"gamepad.js": "https://other.heheda.top/gamelib/gamepad.js",
-	"loader.js": "https://other.heheda.top/gamelib/loader.js",
-	"nipplejs.js": "https://other.heheda.top/gamelib/nipplejs.js",
-	"shaders.js": "https://other.heheda.top/gamelib/shaders.js",
-	"socket.io.min.js": "https://other.heheda.top/gamelib/socket.io.min.js",
-	"storage.js": "https://other.heheda.top/gamelib/storage.js",
-	"version.json": "https://other.heheda.top/gamelib/version.json"
-};
 // 参数合法性
 const urlerr = () => {
 	alert('参数传入不合法');
@@ -44,6 +32,7 @@ if (window.top != window) {
 			window.EJS_player = "#nesgame";
 			window.EJS_biosUrl = "";
 			window.EJS_core = "nes";
+			window.EJS_DEBUG_XX = true;
 			// 音量
 			window.EJS_volume = 1;
 			// 是否启用线程
@@ -54,6 +43,13 @@ if (window.top != window) {
 			window.EJS_backgroundColor = "#ffffff00";
 			// 背景模糊
 			window.EJS_backgroundBlur = true;
+			window.EJS_defaultOptions = {
+				'shader': 'crt-easymode.glslp',
+				'fastForward': 'disabled',
+				'save-state-location': 'browser',
+				'fceumm_sndquality': 'Very High',
+				'fceumm_turbo_enable': 'Both'
+			};
 			window.EJS_onGameStart = () => {
 				cocoMessage.success("启动游戏引擎！", 2000);
 				showload.style.display = 'none';
@@ -100,7 +96,7 @@ if (window.top != window) {
 	urlerr();
 };
 // 获取封面
-window.EJS_backgroundImage = '../imgs/' + gameInfo.i + '.png';
+window.EJS_backgroundImage = '../../imgs/' + gameInfo.i + '.png';
 // 加载提示
 const showload = document.getElementById('btn_load');
 const showtext = () => {
