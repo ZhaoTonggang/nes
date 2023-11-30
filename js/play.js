@@ -128,7 +128,7 @@ req.onload = () => {
 					showtext();
 				} else {
 					cocoMessage.warning("释放资源中！", 2000);
-					zip.file(gameInfo.i + ".nes").async("arraybuffer")
+					zip.file(gameInfo.i + ".nes").async("blob")
 						.then(res => {
 							window.EJS_gameUrl = res;
 							// 初始化模拟器
