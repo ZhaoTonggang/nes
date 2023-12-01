@@ -22,6 +22,7 @@ body {
 }
 
 body {
+	display: inline;
 	overflow: hidden;
 	opacity: 1;
 	transform: rotateX(0deg);
