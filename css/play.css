@@ -17,13 +17,17 @@
 
 html,
 body {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
 }
 
 body {
-	display: inline;
-	overflow: hidden;
 	opacity: 1;
 	transform: rotateX(0deg);
 	-moz-transition: opacity 2s ease-out, transform 2s ease;
@@ -117,8 +121,7 @@ body,
 
 /* 通用 */
 #show_box {
-	display: inline-block;
-	position: relative;
+	display: inline;
 }
 
 #nesgame {
@@ -290,8 +293,6 @@ hr {
 
 /* 页面加载遮罩 */
 .is-loading {
-	display: block;
-	position: fixed;
 	opacity: 0;
 	transform: rotateX(360deg);
 	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.svg) no-repeat center/20%;
