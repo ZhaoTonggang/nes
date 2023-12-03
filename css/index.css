@@ -154,6 +154,11 @@ body {
 	padding-bottom: 30px;
 }
 
+#app h1 {
+	position: fixed;
+	top: 50%;
+}
+
 #app .item {
 	width: 170px;
 	height: auto;
