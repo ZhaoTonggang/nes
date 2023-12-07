@@ -4,6 +4,7 @@
 let gameInfo = {};
 const url = window.location.href;
 const urldata = decodeURI(url);
+const showload = document.getElementById('btn_load');
 // 参数合法性
 const urlerr = () => {
 	alert('参数传入不合法');
@@ -24,11 +25,14 @@ if (window.top != window) {
 			let data = urlarrs[i].split('=');
 			if (data == "") {
 				urlerr();
+			} else {
+				gameInfo[data[0]] = data[1];
 			}
-			gameInfo[data[0]] = data[1];
-			// 移除遮罩
-			document.body.classList.remove('is-loading');
 		};
+		// 游戏ID
+		window.gameId = gameInfo.i;
+		// 移除遮罩
+		document.body.classList.remove('is-loading');
 	}
 } else {
 	urlerr();
@@ -36,67 +40,43 @@ if (window.top != window) {
 //游戏状态
 let setgame = false;
 // 初始化
-// window.EJS_language = "zh-CN";
 window.EJS_player = "#show_box";
-window.EJS_pathtodata = "../lib/data/";
-const folderPath = (path) => path.substring(0, path.length - path.split('/')
-	.pop().length);
-let scriptPath = (typeof window.EJS_pathtodata === "string") ? window
-	.EJS_pathtodata : folderPath((new URL(
-		document.currentScript.src)).pathname);
-if (!scriptPath.endsWith('/')) scriptPath += '/';
-const config = {};
-config.dataPath = scriptPath;
+// window.EJS_pathtodata = "../lib/data/";
+// const folderPath = (path) => path.substring(0, path.length - path.split('/')
+// 	.pop().length);
+// let scriptPath = (typeof window.EJS_pathtodata === "string") ? window
+// 	.EJS_pathtodata : folderPath((new URL(
+// 		document.currentScript.src)).pathname);
+// if (!scriptPath.endsWith('/')) scriptPath += '/';
+window.dataPath = "https://other.heheda.top/gamelib/";
+// window.dataPath = "../lib/data/";
 // 核心
-config.system = "nes";
-// BISO URL
-config.biosUrl = "";
-config.color = window.EJS_color;
-config.adUrl = "../image/ad.png";
-config.threads = true;
+window.system = "nes";
+// 广告
+window.adUrl = "../image/ad.png";
 // 广告方式
-config.adMode = 1;
+window.adMode = 1;
 // 广告时间
-config.adTimer = 5000;
-config.adSize = window.EJS_AdSize;
-// 开始按钮位置
-config.alignStartButton = "center";
-config.VirtualGamepadSettings = window.EJS_VirtualGamepadSettings;
-config.buttonOpts = window.EJS_Buttons;
+window.adTimer = 5000;
 // 音量
-config.volume = 1;
-config.defaultControllers = window.EJS_defaultControls;
-config.startOnLoad = window.EJS_startOnLoaded;
-config.fullscreenOnLoad = window.EJS_fullscreenOnLoaded;
-config.filePaths = window.EJS_paths;
-config.loadState = window.EJS_loadStateURL;
-config.cacheLimit = window.EJS_CacheLimit;
-config.cheats = window.EJS_cheats;
+window.volume = 1;
+// 自动开始
+window.startOnLoad = true;
 // 菜单配置
-config.defaultOptions = {
+window.defaultOptions = {
 	'shader': 'crt-easymode.glslp',
 	'fastForward': 'disabled',
 	'save-state-location': 'browser',
 	'fceumm_sndquality': 'Very High',
 	'fceumm_turbo_enable': 'Both'
 };
-config.gamePatchUrl = window.EJS_gamePatchUrl;
-config.gameParentUrl = window.EJS_gameParentUrl;
-config.netplayUrl = window.EJS_netplayServer;
-config.gameId = window.EJS_gameID;
 // 封面
-config.backgroundImg = '../../imgs/' + gameInfo.i + '.png';
+window.backgroundImg = '../../imgs/' + gameInfo.i + '.png';
 // 背景模糊
-config.backgroundBlur = true;
+window.backgroundBlur = true;
 // 背景颜色
-config.backgroundColor = "#ffffff00";
-config.controlScheme = window.EJS_controlScheme;
-// 是否启用线程
-config.threads = window.EJS_threads;
-config.disableCue = window.EJS_disableCue;
-config.startBtnName = window.EJS_startButtonName;
-config.softLoad = window.EJS_softLoad;
-config.langJson = {
+window.backgroundColor = "#ffffff00";
+window.langJson = {
 	"0": "0",
 	"1": "1",
 	"2": "2",
@@ -443,7 +423,6 @@ window.EJS_onGameStart = () => {
 	setgame = true;
 };
 // 加载提示
-const showload = document.getElementById('btn_load');
 const showtext = () => {
 	showload.onclick = null;
 	cocoMessage.error("初始化失败！", 2000);
@@ -451,6 +430,25 @@ const showtext = () => {
 	showload.classList.add("showload");
 	showload.innerHTML = '初始化失败';
 };
+// 开始游戏
+const StartGame = () => {
+	// 初始化模拟器
+	window.EJS_emulator = new EmulatorJS(EJS_player, window);
+	if (typeof window.EJS_ready === "function") {
+		window.EJS_emulator.on("ready", window.EJS_ready);
+	}
+	if (typeof window.EJS_onGameStart === "function") {
+		window.EJS_emulator.on("start", window.EJS_onGameStart);
+	}
+	if (typeof window.EJS_onLoadState === "function") {
+		window.EJS_emulator.on("load", window.EJS_onLoadState);
+	}
+	if (typeof window.EJS_onSaveState === "function") {
+		window.EJS_emulator.on("save", window.EJS_onSaveState);
+	}
+	cocoMessage.warning("正在载入游戏！", 2000);
+	showload.style.display = 'none';
+}
 // 载入游戏
 const req = new XMLHttpRequest();
 req.open("GET", "../roms/" + gameInfo.i + ".zip");
@@ -475,24 +473,12 @@ req.onload = () => {
 					cocoMessage.warning("释放资源中！", 2000);
 					zip.file(gameInfo.i + ".nes").async("blob")
 						.then(res => {
-							config.gameUrl = res;
-							// 初始化模拟器
-							config.emulator = new EmulatorJS(EJS_player, config);
-							if (typeof window.EJS_ready === "function") {
-								config.emulator.on("ready", window.EJS_ready);
-							}
-							if (typeof window.EJS_onGameStart === "function") {
-								config.emulator.on("start", window.EJS_onGameStart);
-							}
-							if (typeof window.EJS_onLoadState === "function") {
-								config.emulator.on("load", window.EJS_onLoadState);
-							}
-							if (typeof window.EJS_onSaveState === "function") {
-								config.emulator.on("save", window.EJS_onSaveState);
-							}
+							window.gameUrl = res;
 							cocoMessage.success("资源配置完成！", 2000);
-							showload.innerHTML = '加载完成';
-							showload.style.display = 'none';
+							showload.classList.add("btnload");
+							showload.classList.remove("showload");
+							showload.innerHTML = '点击开始游戏';
+							showload.onclick = () => StartGame();
 						});
 				}
 			})
@@ -516,7 +502,7 @@ if (gnm != 'false') {
 } else {
 	gnm = '';
 }
-config.gameName = gameInfo.n + gnm;
+window.gameName = gameInfo.n + gnm;
 document.getElementById('name').innerHTML = gameInfo.n + gnm;
 // 修改title
 document.title = gameInfo.n + gnm + ' - ' + '红白机游戏盒';

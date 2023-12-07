@@ -115,7 +115,21 @@ body,
 
 /* 通用 */
 #show_box {
-	background-color: #ffffff00;
+	height: 100%;
+	width: 100%;
+	background: url(../image/nesico.svg) no-repeat center/50%;
+}
+
+.btnload {
+	background-color: rgba(225, 225, 225, 0.5);
+	color: #ff4400;
+	cursor: pointer;
+	transition: all 1s;
+}
+
+.btnload:hover {
+	color: black;
+	background-color: aqua;
 }
 
 #btn_load {
