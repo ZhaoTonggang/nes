@@ -115,3 +115,9 @@ document.onreadystatechange = () => {
 		document.body.classList.remove("is-loading");
 	};
 };
+// 通知
+let olddate = new Date().getDate();
+const newdate = 21 - olddate;
+alert(
+	"至亲爱的玩家：\n\n各位玩家你们好，红白机游戏盒新版已推出，经过多轮测试，其稳定性已达到相关要求，为了减少服务器资源占用，我们将于【" + newdate +
+	"】日后移除旧版入口并删除相应数据。\n届时旧版存档等相关数据将无法使用，在旧版中有存档数据的玩家，请尽快完成游戏！\n\n红白机游戏盒，特此通知！")

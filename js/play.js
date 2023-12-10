@@ -41,13 +41,6 @@ if (window.top != window) {
 let setgame = false;
 // 初始化
 window.EJS_player = "#show_box";
-// window.EJS_pathtodata = "../lib/data/";
-// const folderPath = (path) => path.substring(0, path.length - path.split('/')
-// 	.pop().length);
-// let scriptPath = (typeof window.EJS_pathtodata === "string") ? window
-// 	.EJS_pathtodata : folderPath((new URL(
-// 		document.currentScript.src)).pathname);
-// if (!scriptPath.endsWith('/')) scriptPath += '/';
 window.dataPath = "https://other.heheda.top/gamelib/";
 // window.dataPath = "../lib/data/";
 // 核心
@@ -482,8 +475,6 @@ req.onload = () => {
 						});
 				}
 			})
-		//监听加载按钮
-		showload.onclick = () => {};
 	} else if (req.status === 0) {
 		req.onerror();
 		showload.innerHTML = '请求数据失败';
@@ -502,10 +493,10 @@ if (gnm != 'false') {
 } else {
 	gnm = '';
 }
-window.gameName = gameInfo.n + gnm;
 document.getElementById('name').innerHTML = gameInfo.n + gnm;
 // 修改title
 document.title = gameInfo.n + gnm + ' - ' + '红白机游戏盒';
+window.gameName = gameInfo.n + gnm;
 // 设置按钮状态
 if (navigator.share) {
 	document.getElementById("share").style.display = "inline";
