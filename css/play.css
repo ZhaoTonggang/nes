@@ -120,18 +120,6 @@ body,
 	background: url(../image/nesico.svg) no-repeat center/50%;
 }
 
-.btnload {
-	background-color: rgba(225, 225, 225, 0.5);
-	color: #ff4400;
-	cursor: pointer;
-	transition: all 1s;
-}
-
-.btnload:hover {
-	color: black;
-	background-color: aqua;
-}
-
 #btn_load {
 	z-index: 999;
 	position: fixed;
@@ -141,9 +129,6 @@ body,
 	font-size: 25px;
 	padding: 5px;
 	border-radius: 10px;
-}
-
-.showload {
 	background-color: white;
 	color: #000000;
 }
