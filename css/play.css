@@ -29,6 +29,7 @@ body {
 	-webkit-transition: opacity 2s ease-out, transform 2s ease;
 	-ms-transition: opacity 2s ease-out, transform 2s ease;
 	transition: opacity 2s ease-out, transform 2s ease;
+	box-sizing: border-box;
 }
 
 body,
@@ -118,6 +119,7 @@ body,
 	height: 100%;
 	width: 100%;
 	background: url(../image/nesico.svg) no-repeat center/50%;
+	position: absolute;
 }
 
 #btn_load {
@@ -250,9 +252,7 @@ hr {
 	}
 
 	#show_box {
-		height: 85%;
-		position: relative;
-		display: block;
+		height: 93%;
 	}
 
 	.titbut {
