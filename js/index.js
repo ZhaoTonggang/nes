@@ -40,14 +40,13 @@ const intdata = () => {
 				};
 			};
 			for (let j = 0; j < data.length; j++) {
-				let span1 = data[j].v != '' ? '<span class="p2">' + data[j].v + '</span>' : '';
-				let span2 = data[j].c != '' ? '<span class="p3">' + data[j].c + '</span>' : '';
+				let span1 = data[j].v != '' ? '<span class="item_p2">' + data[j].v + '</span>' : '';
+				let span2 = data[j].c != '' ? '<span class="item_p3">' + data[j].c + '</span>' : '';
 				let opgamev = data[j].v != '' ? data[j].v : false;
 				let purl = encodeURI('./play/?v=' + opgamev + '&n=' + data[j].n + '&i=' + data[j].i);
-				item += '<div class="item" onclick="location.href=\'' + purl + '\'">' +
-					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" title="' + data[j].n +
-					'" alt="' + data[j].n + '">' + span1 + span2 + '</div><p class="p1">' + data[j].n +
-					'</p></div>';
+				item += '<a href="' + purl + '" title="' + data[j].n + '" target="_self"><div class="item">' +
+					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" alt="' + data[j].n + '">' +
+					span1 + span2 + '</div><p class="item_p1">' + data[j].n + '</p></div></a>';
 			};
 			app.classList.remove('sapp');
 			app.innerHTML = item;
@@ -112,7 +111,10 @@ document.onreadystatechange = () => {
 };
 // 通知
 let olddate = new Date().getDate();
-const newdate = 21 - olddate;
+let newdate = 21 - olddate;
+if (newdate < 0) {
+	newdate = 0;
+}
 alert(
 	"至亲爱的玩家：\n\n各位玩家你们好，红白机游戏盒新版已推出，经过多轮测试，其稳定性已达到相关要求，为了减少服务器资源占用，我们将于【" + newdate +
-	"】日后移除旧版入口并删除相应数据。\n届时旧版存档等相关数据将无法使用，在旧版中有存档数据的玩家，请尽快完成游戏！\n\n红白机游戏盒，特此通知！")
+	"】天后移除旧版入口并删除相应数据。\n届时旧版存档等相关数据将无法使用，在旧版中有存档数据的玩家，请尽快完成游戏！\n\n红白机游戏盒，特此通知！")

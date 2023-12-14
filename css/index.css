@@ -124,7 +124,7 @@ body {
 	top: 50%;
 }
 
-#app .item {
+.item {
 	width: 170px;
 	height: auto;
 	box-shadow: 0 10px 20px -10px aqua;
@@ -135,10 +135,9 @@ body {
 	border-radius: 10px;
 	transition: all 0.5s linear;
 	-webkit-transition: all 0.5s linear;
-	cursor: pointer
 }
 
-#app .item:hover {
+.item:hover {
 	box-shadow: 0 10px 40px -10px #ffee00;
 	border: 2px solid #ffee00;
 	transform: translate3d(0px, -10px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg);
@@ -146,7 +145,7 @@ body {
 	-webkit-transform-style: inherit;
 }
 
-#app .item .img_box {
+.img_box {
 	display: block;
 	height: 170px;
 	width: 100%;
@@ -157,33 +156,33 @@ body {
 	background: #000000 url(../image/loader.svg) no-repeat center/70%;
 }
 
-#app .item .img_box img {
+.img_box img {
 	height: 100%;
 	width: 100%;
 }
 
-#app .item .p1 {
+.item_p1 {
 	font-size: 15px;
 	color: white;
 	margin: 10px 5px;
 }
 
-#app .item .p2,
-#app .item .p3 {
+.item_p2,
+.item_p3 {
 	font-size: 14px;
 	padding: 5px 15px;
 	border-radius: 0 20px;
 	position: absolute;
 }
 
-#app .item .p2 {
+.item_p2 {
 	left: 0;
 	bottom: 0;
 	color: black;
 	background-color: aqua;
 }
 
-#app .item .p3 {
+.item_p3 {
 	right: 0;
 	top: 0;
 	color: white;
@@ -250,11 +249,11 @@ body {
 }
 
 @media (max-width: 1250px) {
-	#app .item {
+	.item {
 		width: 160px;
 	}
 
-	#app .item .img_box {
+	.item .img_box {
 		height: 160px;
 	}
 }
@@ -264,11 +263,11 @@ body {
 		padding-bottom: 50px;
 	}
 
-	#app .item {
+	.item {
 		width: 150px;
 	}
 
-	#app .item .img_box {
+	.item .img_box {
 		height: 150px;
 	}
 
@@ -326,11 +325,11 @@ body {
 }
 
 @media (max-width:370px) {
-	#app .item {
+	.item {
 		width: 130px;
 	}
 
-	#app .item .img_box {
+	.img_box {
 		height: 130px;
 	}
 }
