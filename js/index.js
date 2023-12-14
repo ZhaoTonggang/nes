@@ -42,13 +42,12 @@ const intdata = () => {
 			for (let j = 0; j < data.length; j++) {
 				let span1 = data[j].v != '' ? '<span class="p2">' + data[j].v + '</span>' : '';
 				let span2 = data[j].c != '' ? '<span class="p3">' + data[j].c + '</span>' : '';
-				let opgamev = data[j].v != '' ? "'" + data[j].v + "'" : false;
-				item +=
-					'<div class="item" onclick="opgame(' + opgamev + ',\'' + data[j].n + '\',\'' + data[j].i +
-					'\')">' +
+				let opgamev = data[j].v != '' ? data[j].v : false;
+				let purl = encodeURI('./play/?v=' + opgamev + '&n=' + data[j].n + '&i=' + data[j].i);
+				item += '<div class="item" onclick="location.href=\'' + purl + '\'">' +
 					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" title="' + data[j].n +
-					'" alt="' +
-					data[j].n + '">' + span1 + span2 + '</div><p class="p1">' + data[j].n + '</p></div>';
+					'" alt="' + data[j].n + '">' + span1 + span2 + '</div><p class="p1">' + data[j].n +
+					'</p></div>';
 			};
 			app.classList.remove('sapp');
 			app.innerHTML = item;
@@ -59,10 +58,6 @@ const intdata = () => {
 		})
 };
 intdata();
-//打开游戏
-const opgame = (v, n, i) => {
-	window.open(encodeURI('./play/?v=' + v + '&n=' + n + '&i=' + i), '_self');
-};
 //标题判断
 window.addEventListener('visibilitychange', () => {
 	if (document.hidden) {
