@@ -57,15 +57,11 @@ if (window.top != window) {
 		// 广告
 		window.adUrl = "https://other.heheda.top/ad/";
 		// 广告方式
-		window.adMode = 1;
+		window.adMode = 2;
 		// 广告时间
 		window.adTimer = 5000;
 		// 音量
 		window.volume = 1;
-		// 按钮
-		window.alignStartButton = "center";
-		// 自动开始
-		// window.startOnLoad = true;
 		// 菜单配置
 		window.defaultOptions = {
 			'shader': 'crt-easymode.glslp',
