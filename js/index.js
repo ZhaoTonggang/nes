@@ -7,10 +7,8 @@ if (window.top != window) {
 } else if (window.location.href.indexOf('index') > -1) {
 	window.open('./', '_self');
 };
-// 数据容器
-let data;
-let timeout = null;
 // 取得资源
+let timeout = null;
 const search = document.getElementById('search');
 const cdtopbt = document.getElementById("cd-top");
 const title = document.title;
@@ -25,25 +23,25 @@ const intdata = () => {
 			return response.json();
 		})
 		.then(datas => {
+			// 数据容器
+			let data;
 			let item = "";
 			const app = document.getElementById('app');
 			const searchV = search.value.replace(/(^\s*)|(\s*$)/g, '');
 			if (searchV === '') {
 				data = datas;
 			} else {
-				data = datas.filter(array => array.n.match(searchV) || array.v.match(searchV) || array.c.match(
-					searchV));
+				data = datas.filter(array => array.n.match(searchV));
 				if (data.length === 0) {
-					app.classList.add('sapp');
-					app.innerHTML = '<h1>什么东东都没有，换个词试试丫！</h1>';
+					app.innerHTML = '<h1 id="apph">什么东东都没有，换个词试试丫！</h1>';
 					return;
 				};
 			};
 			for (let j = 0; j < data.length; j++) {
-				let span1 = data[j].v != '' ? '<span class="item_p2">' + data[j].v + '</span>' : '';
-				let span2 = data[j].c != '' ? '<span class="item_p3">' + data[j].c + '</span>' : '';
-				let opgamev = data[j].v != '' ? data[j].v : false;
-				let purl = encodeURI('./play/?v=' + opgamev + '&n=' + data[j].n + '&i=' + data[j].i);
+				let span1 = data[j].v ? '<span class="item_p2">' + data[j].v + '</span>' : '';
+				let span2 = data[j].c ? '<span class="item_p3">' + data[j].c + '</span>' : '';
+				let opgamev = data[j].v ? '&v=' + data[j].v : '';
+				let purl = encodeURI('./play/?n=' + data[j].n + opgamev + '&i=' + data[j].i);
 				item += '<a href="' + purl + '" title="' + data[j].n + '" target="_self"><div class="item">' +
 					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" alt="' + data[j].n + '">' +
 					span1 + span2 + '</div><p class="item_p1">' + data[j].n + '</p></div></a>';
@@ -109,12 +107,3 @@ document.onreadystatechange = () => {
 		document.body.classList.remove("is-loading");
 	};
 };
-// 通知
-let olddate = new Date().getDate();
-let newdate = 21 - olddate;
-if (newdate < 0) {
-	newdate = 0;
-}
-alert(
-	"至亲爱的玩家：\n\n各位玩家你们好，红白机游戏盒新版已推出，经过多轮测试，其稳定性已达到相关要求，为了减少服务器资源占用，我们将于【" + newdate +
-	"】天后移除旧版入口并删除相应数据。\n届时旧版存档等相关数据将无法使用，在旧版中有存档数据的玩家，请尽快完成游戏！\n\n红白机游戏盒，特此通知！")

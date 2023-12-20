@@ -33,12 +33,7 @@ if (window.top != window) {
 		cocoMessage.warning("正在配置资源！", 2000);
 		const showload = document.getElementById('btn_load');
 		//展示游戏名称
-		let gnm = gameInfo.v;
-		if (gnm != 'false') {
-			gnm = '(' + gnm + ')';
-		} else {
-			gnm = '';
-		}
+		const gnm = gameInfo.v ? '(' + gameInfo.v + ')' : '';
 		document.getElementById('name').innerHTML = gameInfo.n + gnm;
 		// 修改title
 		document.title = gameInfo.n + gnm + ' - ' + '红白机游戏盒';

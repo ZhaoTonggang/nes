@@ -210,11 +210,6 @@ body {
 	cursor: pointer;
 }
 
-.sapp {
-	width: 100%;
-	top: 50% !important;
-}
-
 /*返回顶部按钮*/
 #cd-top {
 	z-index: 99999;
