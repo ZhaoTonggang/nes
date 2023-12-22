@@ -11,7 +11,7 @@ const urlerr = () => {
 	alert('参数传入不合法');
 	window.location.href = "/";
 	return;
-};
+}
 // 判断数据合法性
 if (window.top != window) {
 	alert('当您看到这条提示意味着：您所访问的网站正在恶意调用本站资源，本站对偷盗资源的行为0容忍，点击确认跳转正版体验。');
@@ -29,7 +29,7 @@ if (window.top != window) {
 			} else {
 				gameInfo[data[0]] = data[1];
 			}
-		};
+		}
 		cocoMessage.warning("正在配置资源！", 2000);
 		const showload = document.getElementById('btn_load');
 		//展示游戏名称
@@ -40,6 +40,8 @@ if (window.top != window) {
 		window.gameName = gameInfo.n + gnm;
 		// 游戏ID
 		window.gameId = gameInfo.i;
+		// 联机服务
+		// window.netplayUrl = "https://other.heheda.top/gamelib/";
 		// 封面
 		window.backgroundImg = '../../imgs/' + gameInfo.i + '.png';
 		// ROM
@@ -48,7 +50,7 @@ if (window.top != window) {
 		window.EJS_player = "#show_box";
 		window.dataPath = "https://other.heheda.top/gamelib/";
 		// 核心
-		window.system = "nes";
+		window.system = gameInfo.s ? gameInfo.s : "nes";
 		// 广告
 		window.adUrl = "https://other.heheda.top/ad/";
 		// 广告方式
@@ -60,11 +62,14 @@ if (window.top != window) {
 		// 菜单配置
 		window.defaultOptions = {
 			'shader': 'crt-easymode.glslp',
-			'fastForward': 'disabled',
+			'fceumm_overscan_v_top': '0',
+			'fceumm_overscan_v_bottom': '0',
 			'save-state-location': 'browser',
 			'fceumm_sndquality': 'Very High',
-			'fceumm_turbo_enable': 'Both'
-		};
+			'fceumm_turbo_enable': 'Both',
+			'nestopia_overscan_v_top': '0',
+			'nestopia_overscan_v_bottom': '0'
+		}
 		// 背景模糊
 		window.backgroundBlur = true;
 		// 背景颜色
@@ -83,8 +88,8 @@ if (window.top != window) {
 			"Restart": "重新开始",
 			"Pause": "暂停",
 			"Play": "开始",
-			"Save State": "保存状态",
-			"Load State": "加载状态",
+			"Save State": "存档",
+			"Load State": "读档",
 			"Control Settings": "控制设置",
 			"Cheats": "作弊",
 			"Cache Manager": "缓存管理器",
@@ -99,8 +104,8 @@ if (window.top != window) {
 			"Reset": "重置",
 			"Clear": "清除",
 			"Close": "关闭",
-			"QUICK SAVE STATE": "快速保存状态",
-			"QUICK LOAD STATE": "快速加载状态",
+			"QUICK SAVE STATE": "快速存档",
+			"QUICK LOAD STATE": "快速读档",
 			"CHANGE STATE SLOT": "改变状态槽",
 			"FAST FORWARD": "快进",
 			"Player": "玩家",
@@ -129,25 +134,35 @@ if (window.top != window) {
 			"show": "展示",
 			"hide": "隐藏",
 			"Fast Forward Ratio": "快进速率",
+			"unlimited": "无限",
 			"Fast Forward": "快进",
 			"Enabled": "启用",
 			"Save State Slot": "保存状态槽",
 			"Save State Location": "保存状态位置",
 			"Download": "下载",
 			"Keep in Browser": "保留在浏览器中",
+			"fceumm region": "区域",
 			"Auto": "自动",
 			"NTSC": "NTSC",
 			"PAL": "PAL",
 			"Dendy": "Dendy",
+			"fceumm aspect": "首选纵横比",
 			"8:7 PAR": "8:7 PAR",
 			"4:3": "4:3",
+			"fceumm overscan h left": "左裁剪过扫描",
+			"fceumm overscan h right": "右裁剪过扫描",
+			"fceumm overscan v top": "上裁剪过扫描",
+			"fceumm overscan v bottom": "下裁剪过扫描",
+			"fceumm sndquality": "音质",
 			"Low": "低",
 			"High": "高",
 			"Very High": "极高",
+			"fceumm turbo enable": "Turbo启用",
 			"None": "无",
 			"Player 1": "玩家1",
 			"Player 2": "玩家2",
 			"Both": "两者",
+			"fceumm turbo delay": "Turbo延迟",
 			"SAVED STATE TO SLOT": "已将状态保存到插槽",
 			"LOADED STATE FROM SLOT": "已从插槽加载状态",
 			"SET SAVE STATE SLOT TO": "将保存状态槽设置为",
@@ -187,6 +202,8 @@ if (window.top != window) {
 			"EmulatorJS": "EmulatorJS",
 			"Clear All": "全部清除",
 			"Take Screenshot": "截图",
+			"Start screen recording": "开始录屏",
+			"Stop screen recording": "停止录屏",
 			"Quick Save": "快速保存",
 			"Quick Load": "快速加载",
 			"REWIND": "快退",
@@ -206,52 +223,12 @@ if (window.top != window) {
 			"DOWN": "向下",
 			"LEFT": "向左",
 			"RIGHT": "向右",
-			"X": "X",
-			"Y": "Y",
-			"L": "L",
-			"R": "R",
-			"Z": "Z",
-			"STICK UP": "摇杆向上",
-			"STICK DOWN": "摇杆向下",
-			"STICK LEFT": "摇杆向左",
-			"STICK RIGHT": "摇杆向右",
-			"C-PAD UP": "C-PAD 向上",
-			"C-PAD DOWN": "C-PAD 向下",
-			"C-PAD LEFT": "C-PAD 向左",
-			"C-PAD RIGHT": "C-PAD 向右",
-			"MICROPHONE": "麦克风",
-			"BUTTON 1 / START": "按钮 1 / 开始",
-			"BUTTON 2": "按钮2",
-			"BUTTON": "按钮",
 			"BUTTON_1": "BUTTON_1",
 			"BUTTON_2": "BUTTON_2",
 			"up arrow": "up arrow",
 			"down arrow": "down arrow",
 			"left arrow": "left arrow",
 			"right arrow": "right arrow",
-			"Rewind": "Rewind",
-			"LEFT D-PAD UP": "左方向键向上",
-			"LEFT D-PAD DOWN": "左方向键向下",
-			"LEFT D-PAD LEFT": "左方向键向左",
-			"LEFT D-PAD RIGHT": "左方向键向右",
-			"RIGHT D-PAD UP": "右方向键向上",
-			"RIGHT D-PAD DOWN": "右方向键向下",
-			"RIGHT D-PAD LEFT": "右方向键向左",
-			"RIGHT D-PAD RIGHT": "右方向键向右",
-			"C": "C",
-			"MODE": "模式",
-			"FIRE": "开火",
-			"RESET": "重置",
-			"LEFT DIFFICULTY A": "左难易度A",
-			"LEFT DIFFICULTY B": "左难易度B",
-			"RIGHT DIFFICULTY A": "右难易度A",
-			"RIGHT DIFFICULTY B": "右难易度B",
-			"COLOR": "彩色",
-			"B/W": "黑白",
-			"PAUSE": "暂停",
-			"OPTION": "选项",
-			"OPTION 1": "选项1",
-			"OPTION 2": "选项2",
 			"L2": "L2",
 			"R2": "R2",
 			"L3": "L3",
@@ -326,6 +303,8 @@ if (window.top != window) {
 			"end": "End",
 			"pageup": "向上翻页",
 			"pagedown": "向下翻页",
+			"dash": "-",
+			"equal sign": "+",
 			"!": "！",
 			"@": "@",
 			"#": "#",
@@ -376,9 +355,197 @@ if (window.top != window) {
 			"DPAD_DOWN": "十字键向下",
 			"DPAD_LEFT": "十字键向左",
 			"DPAD_RIGHT": "十字键向右"
-		};
-		// 初始化模拟器
+		}
+		// 按键映射
+		window.defaultControllers = {
+			0: {
+				0: {
+					'value': 'b',
+					'value2': 'BUTTON_2'
+				},
+				1: {
+					'value': 'h',
+					'value2': 'BUTTON_4'
+				},
+				2: {
+					'value': 'space',
+					'value2': 'SELECT'
+				},
+				3: {
+					'value': 'enter',
+					'value2': 'START'
+				},
+				4: {
+					'value': 'w',
+					'value2': 'DPAD_UP'
+				},
+				5: {
+					'value': 's',
+					'value2': 'DPAD_DOWN'
+				},
+				6: {
+					'value': 'a',
+					'value2': 'DPAD_LEFT'
+				},
+				7: {
+					'value': 'd',
+					'value2': 'DPAD_RIGHT'
+				},
+				8: {
+					'value': 'v',
+					'value2': 'BUTTON_1'
+				},
+				9: {
+					'value': 'g',
+					'value2': 'BUTTON_3'
+				},
+				21: {
+					'value2': 'RIGHT_STICK_X:-1'
+				},
+				22: {
+					'value2': 'RIGHT_STICK_Y:+1'
+				},
+				23: {
+					'value2': 'RIGHT_STICK_Y:-1'
+				},
+				24: {
+					'value': '1'
+				},
+				25: {
+					'value': '2'
+				},
+				26: {
+					'value': '3'
+				},
+			},
+			1: {
+				0: {
+					'value': 'l',
+					'value2': 'BUTTON_2'
+				},
+				1: {
+					'value': 'p',
+					'value2': 'BUTTON_4'
+				},
+				2: {
+					'value': 'dash',
+					'value2': 'SELECT'
+				},
+				3: {
+					'value': 'equal sign',
+					'value2': 'START'
+				},
+				4: {
+					'value': 'up arrow',
+					'value2': 'DPAD_UP'
+				},
+				5: {
+					'value': 'down arrow',
+					'value2': 'DPAD_DOWN'
+				},
+				6: {
+					'value': 'left arrow',
+					'value2': 'DPAD_LEFT'
+				},
+				7: {
+					'value': 'right arrow',
+					'value2': 'DPAD_RIGHT'
+				},
+				8: {
+					'value': 'k',
+					'value2': 'BUTTON_1'
+				},
+				9: {
+					'value': 'o',
+					'value2': 'BUTTON_3'
+				},
+				21: {
+					'value2': 'RIGHT_STICK_X:-1'
+				},
+				22: {
+					'value2': 'RIGHT_STICK_Y:+1'
+				},
+				23: {
+					'value2': 'RIGHT_STICK_Y:-1'
+				},
+				24: {
+					'value': '4'
+				},
+				25: {
+					'value': '5'
+				},
+				26: {
+					'value': '6'
+				},
+			},
+			2: {
+				0: {
+					'value2': 'BUTTON_2'
+				},
+				1: {
+					'value2': 'BUTTON_4'
+				},
+				2: {
+					'value2': 'SELECT'
+				},
+				3: {
+					'value2': 'START'
+				},
+				4: {
+					'value2': 'DPAD_UP'
+				},
+				5: {
+					'value2': 'DPAD_DOWN'
+				},
+				6: {
+					'value2': 'DPAD_LEFT'
+				},
+				7: {
+					'value2': 'DPAD_RIGHT'
+				},
+				8: {
+					'value2': 'BUTTON_1'
+				},
+				9: {
+					'value2': 'BUTTON_3'
+				},
+			},
+			3: {
+				0: {
+					'value2': 'BUTTON_2'
+				},
+				1: {
+					'value2': 'BUTTON_4'
+				},
+				2: {
+					'value2': 'SELECT'
+				},
+				3: {
+					'value2': 'START'
+				},
+				4: {
+					'value2': 'DPAD_UP'
+				},
+				5: {
+					'value2': 'DPAD_DOWN'
+				},
+				6: {
+					'value2': 'DPAD_LEFT'
+				},
+				7: {
+					'value2': 'DPAD_RIGHT'
+				},
+				8: {
+					'value2': 'BUTTON_1'
+				},
+				9: {
+					'value2': 'BUTTON_3'
+				},
+			}
+		}
+		// 初始化模拟器		
 		window.EJS_emulator = new EmulatorJS(EJS_player, window);
+		// 监听游戏状态
 		window.EJS_emulator.on("start", () => {
 			cocoMessage.success("启动游戏引擎！", 2000);
 			//隐藏鼠标和工具栏
@@ -402,7 +569,7 @@ if (window.top != window) {
 				} else {
 					if (timer) {
 						clearTimeout(timer);
-					};
+					}
 					timer = setTimeout(() => {
 						isshow = true;
 						hhtml.style.cursor = "none";
@@ -412,10 +579,14 @@ if (window.top != window) {
 						titler.style.left = "-220px";
 						titlel.style.right = "-220px";
 					}, 3000)
-				};
-			};
+				}
+			}
 			setgame = true;
-		});
+		})
+		// 监听存档
+		// window.EJS_emulator.on("save", (e) => console.log(e));
+		// 监听读档
+		// window.EJS_emulator.on("load", (e) => console.log(e));
 		cocoMessage.success("资源配置完成！", 2000);
 		showload.style.display = 'none';
 		// 移除遮罩
@@ -423,13 +594,13 @@ if (window.top != window) {
 	}
 } else {
 	urlerr();
-};
+}
 // 设置按钮状态
 if (navigator.share) {
 	document.getElementById("share").style.display = "inline";
 } else {
 	console.log("分享功能禁用");
-};
+}
 //获取设备类型
 let isMobile = /(iPhone|iPod|Android|ios|iOS|iPad|WebOS|Symbian|Windows Phone|Phone)/i.test(navigator.userAgent);
 //设置操作方式
@@ -458,7 +629,7 @@ const share = () => {
 		title: '在线玩《' + gameInfo.n + '》',
 		url: url,
 		text: '推荐使用电脑，运行更加流畅！在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
-	});
+	})
 }
 // 下载rom按钮
 const dowrom = () => {
@@ -469,7 +640,7 @@ const dowrom = () => {
 	} else {
 		cocoMessage.warning("您取消了下载！", 2000);
 	}
-};
+}
 // 截屏
 const screenshot = () => {
 	if (setgame) {
@@ -541,4 +712,4 @@ document.addEventListener('dblclick', (e) => {
 	e.preventDefault()
 }, {
 	passive: false
-});
+})
