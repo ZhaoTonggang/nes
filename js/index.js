@@ -41,8 +41,7 @@ const intdata = () => {
 				let span1 = data[j].v ? '<span class="item_p2">' + data[j].v + '</span>' : '';
 				let span2 = data[j].c ? '<span class="item_p3">' + data[j].c + '</span>' : '';
 				let opgamev = data[j].v ? '&v=' + data[j].v : '';
-				let gcore = data[j].s ? '&s=' + data[j].s : '';
-				let purl = encodeURI('./play/?n=' + data[j].n + opgamev + gcore + '&i=' + data[j].i);
+				let purl = encodeURI('./play/?n=' + data[j].n + opgamev + '&i=' + data[j].i);
 				item += '<a href="' + purl + '" title="' + data[j].n + '" target="_self"><div class="item">' +
 					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" alt="' + data[j].n + '">' +
 					span1 + span2 + '</div><p class="item_p1">' + data[j].n + '</p></div></a>';

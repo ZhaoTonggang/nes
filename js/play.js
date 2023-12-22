@@ -38,10 +38,10 @@ if (window.top != window) {
 		// 修改title
 		document.title = gameInfo.n + gnm + ' - ' + '红白机游戏盒';
 		window.gameName = gameInfo.n + gnm;
+		// 联机服务
+		window.netplayUrl = "https://game-online.heheda.top/";
 		// 游戏ID
 		window.gameId = gameInfo.i;
-		// 联机服务
-		// window.netplayUrl = "https://other.heheda.top/gamelib/";
 		// 封面
 		window.backgroundImg = '../../imgs/' + gameInfo.i + '.png';
 		// ROM
@@ -50,7 +50,7 @@ if (window.top != window) {
 		window.EJS_player = "#show_box";
 		window.dataPath = "https://other.heheda.top/gamelib/";
 		// 核心
-		window.system = gameInfo.s ? gameInfo.s : "nes";
+		window.system = "nes";
 		// 广告
 		window.adUrl = "https://other.heheda.top/ad/";
 		// 广告方式
@@ -66,9 +66,7 @@ if (window.top != window) {
 			'fceumm_overscan_v_bottom': '0',
 			'save-state-location': 'browser',
 			'fceumm_sndquality': 'Very High',
-			'fceumm_turbo_enable': 'Both',
-			'nestopia_overscan_v_top': '0',
-			'nestopia_overscan_v_bottom': '0'
+			'fceumm_turbo_enable': 'Both'
 		}
 		// 背景模糊
 		window.backgroundBlur = true;
