@@ -52,7 +52,7 @@ if (window.top != window) {
 		// 核心
 		window.system = "nes";
 		// 广告
-		window.adUrl = "https://other.heheda.top/ad/";
+		window.adUrl = "../ads/";
 		// 广告方式
 		window.adMode = 2;
 		// 广告时间
