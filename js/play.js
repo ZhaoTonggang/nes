@@ -120,6 +120,7 @@ if (window.top != window) {
 			"Decompress Game Core": "解压游戏核心",
 			"Download Game Data": "下载游戏数据",
 			"Decompress Game Data": "解压游戏数据",
+			"Context Menu": "菜单",
 			"Shaders": "着色器",
 			"Disabled": "禁用",
 			"2xScaleHQ": "2xScaleHQ",
