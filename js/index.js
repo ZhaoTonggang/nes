@@ -6,7 +6,7 @@ if (window.top != window) {
 	window.open('https://nes.heheda.top', '_self');
 } else if (window.location.href.indexOf('index') > -1) {
 	window.open('./', '_self');
-};
+}
 // 取得资源
 let timeout = null;
 const search = document.getElementById('search');
@@ -35,8 +35,8 @@ const intdata = () => {
 				if (data.length === 0) {
 					app.innerHTML = '<h1 id="apph">什么东东都没有，换个词试试丫！</h1>';
 					return;
-				};
-			};
+				}
+			}
 			for (let j = 0; j < data.length; j++) {
 				let span1 = data[j].v ? '<span class="item_p2">' + data[j].v + '</span>' : '';
 				let span2 = data[j].c ? '<span class="item_p3">' + data[j].c + '</span>' : '';
@@ -45,7 +45,7 @@ const intdata = () => {
 				item += '<a href="' + purl + '" title="' + data[j].n + '" target="_self"><div class="item">' +
 					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" alt="' + data[j].n + '">' +
 					span1 + span2 + '</div><p class="item_p1">' + data[j].n + '</p></div></a>';
-			};
+			}
 			app.classList.remove('sapp');
 			app.innerHTML = item;
 		})
@@ -53,7 +53,7 @@ const intdata = () => {
 			document.getElementById('apph').innerHTML = '获取数据失败<br />请尝试“异常修复”<br />[错误代码:404]';
 			console.error('[404]错误日志：', err);
 		})
-};
+}
 intdata();
 //标题判断
 window.addEventListener('visibilitychange', () => {
@@ -66,13 +66,13 @@ window.addEventListener('visibilitychange', () => {
 		setTimeout(() => {
 			document.title = title;
 		}, 3000);
-	};
-});
+	}
+})
 //返回顶部
 const cdTop = () => {
 	document.documentElement.scrollTop = 0;
 	document.body.scrollTop = 0;
-};
+}
 // 监听屏幕滚动
 window.addEventListener('scroll', () => {
 	if (timeout !== null) {
@@ -87,13 +87,13 @@ window.addEventListener('scroll', () => {
 			cdtopbt.className = "cdtopHid";
 		};
 	}, 500);
-});
+})
 // 回车搜索
 window.onkeydown = () => {
 	if (window.event && window.event.keyCode == 13 && search == document.activeElement) {
 		intdata();
-	};
-};
+	}
+}
 // 程序修复
 const fixsys = () => {
 	const yesfix = confirm('确认运行修复程序吗？系统将向云端请求最新的数据包，这将有效应对绝大多数异常情况。');
@@ -105,5 +105,5 @@ const fixsys = () => {
 document.onreadystatechange = () => {
 	if (document.readyState === "interactive") {
 		document.body.classList.remove("is-loading");
-	};
-};
+	}
+}

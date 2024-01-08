@@ -707,8 +707,13 @@ const screenshot = () => {
 // 	}
 // }
 //禁止双击缩放
-document.addEventListener('dblclick', (e) => {
-	e.preventDefault()
+window.addEventListener('dblclick', (dbe) => {
+	dbe.preventDefault();
 }, {
-	passive: false
+	passive: true
 })
+// 卸载提示
+window.onbeforeunload = (bfe) => {
+	bfe.returnValue = "退出前，别忘记保存游戏进度哦！";
+	bfe.preventDefault();
+}
