@@ -43,7 +43,7 @@ if (window.top != window) {
 		// 游戏ID
 		window.gameId = gameInfo.i;
 		// 封面
-		window.backgroundImg = '../../imgs/' + gameInfo.i + '.png';
+		window.backgroundImg = '../imgs/' + gameInfo.i + '.png';
 		// ROM
 		window.gameUrl = "../roms/" + gameInfo.i + ".zip";
 		// 初始化
@@ -53,8 +53,8 @@ if (window.top != window) {
 		window.system = "nes";
 		// 广告
 		window.adUrl = "../ads/";
-		// 广告方式
-		window.adMode = 2;
+		// 全屏
+		window.fullscreenOnLoad = true;
 		// 广告时间
 		window.adTimer = 5000;
 		// 音量
@@ -714,6 +714,6 @@ window.addEventListener('dblclick', (dbe) => {
 })
 // 卸载提示
 window.onbeforeunload = (bfe) => {
-	bfe.returnValue = "退出前，别忘记保存游戏进度哦！";
 	bfe.preventDefault();
+	bfe.returnValue = "退出前，别忘记保存游戏进度哦！";
 }
