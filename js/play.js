@@ -45,7 +45,7 @@ if (window.top != window) {
 		// 封面
 		window.backgroundImg = '../imgs/' + gameInfo.i + '.png';
 		// ROM
-		window.gameUrl = "../roms/" + gameInfo.i + ".zip";
+		window.gameUrl = "../roms/" + gameInfo.i + ".7z";
 		// 初始化
 		window.EJS_player = "#show_box";
 		window.dataPath = "https://other.heheda.top/gamelib/";
@@ -581,6 +581,11 @@ if (window.top != window) {
 				}
 			}
 			setgame = true;
+			// 卸载提示
+			window.onbeforeunload = (bfe) => {
+				bfe.preventDefault();
+				bfe.returnValue = "退出前，别忘记保存游戏进度哦！";
+			}
 		})
 		// 监听存档
 		// window.EJS_emulator.on("save", (e) => console.log(e));
@@ -635,7 +640,7 @@ const dowrom = () => {
 	const dorom = confirm('您要下载此游戏的ROM文件吗？');
 	if (dorom == true) {
 		cocoMessage.warning("即将开始下载！", 2000);
-		window.open('../roms/' + gameInfo.i + '.zip');
+		window.open('../roms/' + gameInfo.i + '.7z');
 	} else {
 		cocoMessage.warning("您取消了下载！", 2000);
 	}
@@ -712,8 +717,3 @@ window.addEventListener('dblclick', (dbe) => {
 }, {
 	passive: true
 })
-// 卸载提示
-window.onbeforeunload = (bfe) => {
-	bfe.preventDefault();
-	bfe.returnValue = "退出前，别忘记保存游戏进度哦！";
-}
