@@ -125,7 +125,7 @@ body {
 }
 
 .item {
-	width: 272px;
+	width: 224px;
 	box-shadow: 0 10px 20px -10px aqua;
 	border: 2px solid aqua;
 	text-align: center;
@@ -146,7 +146,7 @@ body {
 
 .item .img_box {
 	display: block;
-	height: 255px;
+	height: 210px;
 	overflow: hidden;
 	position: relative;
 	border-radius: 10px;
@@ -244,11 +244,11 @@ body {
 
 @media (max-width:1400px) {
 	.item {
-		width: 208px;
+		width: 192px;
 	}
 
 	.item .img_box {
-		height: 195px;
+		height: 180px;
 	}
 }
 
