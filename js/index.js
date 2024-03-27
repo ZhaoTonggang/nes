@@ -1,10 +1,11 @@
 // 严格模式
 "use strict";
 // 页面载入
+const url = window.location.href;
 if (window.top != window) {
 	alert('当您看到这条提示意味着：您所访问的网站正在恶意调用本站资源，本站对偷盗资源的行为0容忍，点击确认跳转正版体验。');
-	window.open('https://nes.heheda.top', '_self');
-} else if (window.location.href.indexOf('index') > -1) {
+	window.open(url, '_self');
+} else if (url.indexOf('index') > -1) {
 	window.open('./', '_self');
 }
 // 取得资源
