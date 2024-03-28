@@ -59,6 +59,8 @@ if (window.top != window) {
 		window.adTimer = 5000;
 		// 音量
 		window.volume = 1;
+		// 着色器
+		window.shaders = Object.assign({}, window.EJS_SHADERS, window.EJS_shaders);
 		// 菜单配置
 		window.defaultOptions = {
 			'shader': 'crt-easymode.glslp',

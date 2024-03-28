@@ -99,9 +99,11 @@ window.onkeydown = () => {
 }
 // 程序修复
 const fixsys = () => {
-	const yesfix = confirm('确认运行修复程序吗？系统将向云端请求最新的数据包，这将有效应对绝大多数异常情况。');
+	const yesfix = confirm('确认运行修复程序吗？系统将清除本地缓存并向云端请求最新的数据包，这将有效应对绝大多数异常情况。');
 	if (yesfix == true) {
-		window.location.replace(window.location.href);
+		localStorage.clear();
+		sessionStorage.clear();
+		window.location.reload(true);
 	}
 }
 // 移除遮罩
