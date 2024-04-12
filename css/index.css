@@ -209,6 +209,11 @@ body {
 	cursor: pointer;
 }
 
+#gogad {
+	width: 100%;
+	margin-top: 100px;
+}
+
 /*返回顶部按钮*/
 #cd-top {
 	z-index: 99999;
