@@ -35,10 +35,6 @@
 			</label>
 			<ul class="hul">
 				<li>
-					<input id="search" type="search" maxlength="10" placeholder="请输入关键字" />
-					<input id="searchBt" type="submit" value="搜索" onclick="intdata()" />
-				</li>
-				<li>
 					<a title="游戏盒" target="_blank" rel="noopener noreferrer" href="https://gamebox.heheda.top"><img
 							src="./image/button/gmb.png" alt="游戏盒" />游戏盒</a>
 				</li>
@@ -68,11 +64,21 @@
 					<a title="异常修复" href="javascript:void(0)" onclick="fixsys()"><img src="./image/button/fixsys.svg"
 							alt="异常修复" />修 复</a>
 				</li>
+				<li>
+					<input id="search" type="search" maxlength="10" placeholder="请输入关键字" />
+					<input id="searchBt" type="submit" value="搜索" onclick="intdata()" />
+				</li>
 			</ul>
 		</div>
 		<div id="app" class="sapp">
 			<h1 id="apph">资源正在加载中...</h1>
 		</div>
+		<!-- 谷歌多重广告 -->
+		<ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed"
+			data-ad-client="ca-pub-3670070169085381" data-ad-slot="3835089993"></ins>
+		<script>
+			(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
 		<div id="cd-top" class="cdtopHid" onclick="cdTop()" title="返回顶部">回到顶部</div>
 		<!-- 页面逻辑 -->
 		<script type="text/javascript" src="./js/index.js" charset="UTF-8"></script>
@@ -95,7 +101,6 @@
 				dataLayer.push(arguments);
 			}
 			gtag('js', new Date());
-
 			gtag('config', 'G-H1SGQSDHMR');
 		</script>
 	</body>
