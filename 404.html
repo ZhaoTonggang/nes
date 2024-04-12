@@ -1,55 +1,60 @@
 <!DOCTYPE html>
-<html>
-	<!--head模块-->
+<html lang="zh-CN" onselectstart="return false" oncontextmenu=self.event.returnValue=false>
 	<head>
-		<!--字符编码-->
-		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<!--语言-->
-		<meta http-equiv="Content-Language" contect="zh-CN">
-		<!-- 避免IE使用兼容模式 -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<!--百度禁止转码-->
-		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<!--360浏览器兼容配置-->
-		<!--极速模式-->
-		<meta name="renderer" content="webkit" />
-		<!--QQ手机浏览器兼容配置-->
-		<!--锁定屏幕在特定方向-->
-		<meta name="x5-orientation" content="portrait" />
-		<!-- 全屏显示 -->
-		<meta name="x5-fullscreen" content="true" />
-		<!-- 应用模式 -->
-		<meta name="x5-page-mode" content="app" />
-		<!--UC浏览器兼容配置-->
-		<!-- uc强制竖屏 -->
-		<meta name="screen-orientation" content="portrait" />
-		<!-- UC强制全屏 -->
-		<meta name="full-screen" content="yes" />
-		<!-- UC应用模式 -->
-		<meta name="browsermode" content="application" />
-		<!--安卓Google浏览器兼容配置-->
-		<!--主题颜色-->
-		<meta name="theme-color" content="#CCFFFF" />
-		<!--SEO优化-->
 		<!--标题-->
-		<title>404！</title>
+		<title>404! - 网页不存在</title>
+		<meta charset="UTF-8">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1, maximum-scale=1">
 		<!--关键词-->
 		<meta name="keywords" content="赵彤刚,404,页面不存在,公益,宝贝回家" />
 		<!--描述-->
 		<meta name="description" content="404页面不存在！" />
+		<meta name="theme-color" content="#00ffff">
 		<!--作者 author-->
 		<meta name="author" content="赵彤刚,2585649532@qq.com" />
 		<!--搜索引擎索引方式配置-->
 		<meta name="robots" content="all" />
 		<meta name="robots" content="index,follow" />
-		<!--logo配置-->
-		<link rel="shortcuticon" href="./favicon.ico" />
+		<!--网站图标配置-->
+		<link rel="apple-touch-icon" sizes="192x192" href="./icons/192x192.png">
+		<link rel="icon" type="image/png" sizes="128x128" href="./icons/128x128.png">
+		<link rel="icon" type="image/png" sizes="144x144" href="./icons/144x144.png">
+		<link rel="icon" type="image/png" sizes="384x384" href="./icons/384x384.png">
+		<link rel="icon" type="image/png" sizes="512x512" href="./icons/512x512.png">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+
+			html,
+			body,
+			#div1 {
+				position: fixed;
+				height: 100%;
+				width: 100%;
+				background-color: #00ffff;
+			}
+
+			.h1 {
+				margin: 50px;
+			}
+
+			#div1 {
+				overflow-x: visible !important;
+			}
+		</style>
 	</head>
 	<!--body模块-->
 	<body>
+		<div id="div1">
+			<h1 class="h1">404，网页不存在！</h1>
+		</div>
 		<!--引入核心JS-->
-		<script defer type="text/javascript" src="https://qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js"
-			charset="utf-8" homePageUrl="./" homePageName="返回">
+		<script async type="text/javascript" src="https://volunteer.cdn-go.cn/404/latest/404.js" charset="utf-8"
+			homePageUrl="./" homePageName="返回" rendertarget="div1">
 		</script>
 		<!-- 谷歌广告 -->
 		<script async
