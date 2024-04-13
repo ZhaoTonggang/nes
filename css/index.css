@@ -120,8 +120,10 @@ body {
 }
 
 #app h1 {
-	position: fixed;
-	top: 50%;
+	margin-top: 50px;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: #00ffff;
 }
 
 .item {

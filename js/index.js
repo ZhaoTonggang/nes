@@ -34,7 +34,7 @@ const intdata = () => {
 			} else {
 				data = datas.filter(array => array.n.match(searchV));
 				if (data.length === 0) {
-					app.innerHTML = '<h1 id="apph">什么东东都没有，换个词试试丫！</h1>';
+					app.innerHTML = '<h1 id="apph">什么东东都没有，换个词试试丫!</h1>';
 					return;
 				}
 			}
