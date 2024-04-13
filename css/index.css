@@ -244,17 +244,14 @@ body {
 	top: 85%;
 }
 
-ins.ads1 {
-	padding-top: 60px !important;
-	margin-bottom: -50px !important;
-}
-
-ins.ads2 {
-	padding-top: 10px !important;
-}
-
+ins.ads1,
 ins.gogad {
-	margin-top: 70px !important;
+	padding-top: 60px !important;
+}
+
+ins.ads1,
+ins.ads2 {
+	margin-bottom: -50px !important;
 }
 
 ins.adsbygoogle[data-ad-status="unfilled"] {
