@@ -116,7 +116,7 @@ body {
 	justify-content: space-evenly;
 	align-items: flex-start;
 	top: 60px;
-	padding-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 #app h1 {
@@ -211,11 +211,6 @@ body {
 	cursor: pointer;
 }
 
-#gogad {
-	width: 100%;
-	margin-top: 100px;
-}
-
 /*返回顶部按钮*/
 #cd-top {
 	z-index: 99999;
@@ -250,8 +245,16 @@ body {
 }
 
 ins.ads1 {
-	padding-top: 60px;
-	margin-bottom: -50px;
+	padding-top: 60px !important;
+	margin-bottom: -50px !important;
+}
+
+ins.ads2 {
+	padding-top: 10px !important;
+}
+
+ins.gogad {
+	margin-top: 70px !important;
 }
 
 ins.adsbygoogle[data-ad-status="unfilled"] {
