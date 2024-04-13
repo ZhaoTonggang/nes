@@ -249,6 +249,11 @@ body {
 	top: 85%;
 }
 
+ins.ads1 {
+	padding-top: 60px;
+	margin-bottom: -50px;
+}
+
 ins.adsbygoogle[data-ad-status="unfilled"] {
 	display: none !important;
 }
