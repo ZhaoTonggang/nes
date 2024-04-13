@@ -247,6 +247,10 @@ body {
 	top: 85%;
 }
 
+ins.adsbygoogle[data-ad-status="unfilled"] {
+	display: none !important;
+}
+
 @media (max-width:1400px) {
 	.item {
 		width: 192px;
