@@ -116,7 +116,7 @@ body {
 	justify-content: space-evenly;
 	align-items: flex-start;
 	top: 60px;
-	margin-bottom: 15px;
+	padding-bottom: 10px;
 }
 
 #app h1 {

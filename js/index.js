@@ -49,7 +49,6 @@ const intdata = () => {
 					'">' +
 					span1 + span2 + '</div><p class="item_p1">' + data[j].n + '</p></div></a>';
 			}
-			app.classList.remove('sapp');
 			app.innerHTML = item;
 		})
 		.catch(err => {
