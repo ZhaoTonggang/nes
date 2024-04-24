@@ -106,8 +106,4 @@ const fixsys = () => {
 	}
 }
 // 移除遮罩
-document.onreadystatechange = () => {
-	if (document.readyState === "interactive") {
-		document.body.classList.remove("is-loading");
-	}
-}
+document.body.classList.remove("is-loading");
