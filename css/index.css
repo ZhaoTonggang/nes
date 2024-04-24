@@ -11,21 +11,11 @@
 	letter-spacing: 1px;
 }
 
-html {
-	width: 100%;
-	height: 100%;
-}
-
 body {
-	width: 100%;
-	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
-	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
-	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
-	background: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
-	background-repeat: no-repeat, no-repeat;
-	background-size: cover, cover;
-	background-position: center center, center center;
-	background-attachment: fixed, fixed;
+	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)) no-repeat center/cover fixed, url("../image/bg.jpg") no-repeat center/cover fixed;
+	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)) no-repeat center/cover fixed, url("../image/bg.jpg") no-repeat center/cover fixed;
+	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)) no-repeat center/cover fixed, url("../image/bg.jpg") no-repeat center/cover fixed;
+	background: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)) no-repeat center/cover fixed, url("../image/bg.jpg") no-repeat center/cover fixed;
 	opacity: 1;
 	-moz-transition: opacity 2s ease-out;
 	-webkit-transition: opacity 2s ease-out;
@@ -72,8 +62,7 @@ body {
 }
 
 .hul {
-	display: inline-block;
-	position: fixed;
+	position: absolute;
 	margin: auto;
 	padding: 0;
 	overflow: hidden;
@@ -254,6 +243,19 @@ ins.ads2 {
 	margin-bottom: -50px !important;
 }
 
+ins h1 {
+	background-color: aqua;
+	border-radius: 10px;
+	margin: 0 10px;
+	padding: 10px;
+}
+
+/* 关闭空广告提示 */
+ins.adsbygoogle[data-ad-status="filled"] h1 {
+	display: none;
+}
+
+/* 关闭空广告 */
 ins.adsbygoogle[data-ad-status="unfilled"] {
 	display: none !important;
 }
@@ -385,10 +387,9 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 /* 页面加载遮罩 */
 .is-loading {
 	position: fixed;
-	height: 100%;
 	opacity: 0;
-	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.svg) no-repeat center/20%;
-	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.svg) no-repeat center/20%;
-	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.svg) no-repeat center/20%;
-	background: linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.svg) no-repeat center/20%;
+	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover fixed, url(../image/loader.svg) no-repeat center/20% fixed;
+	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover fixed, url(../image/loader.svg) no-repeat center/20% fixed;
+	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover fixed, url(../image/loader.svg) no-repeat center/20% fixed;
+	background: linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover fixed, url(../image/loader.svg) no-repeat center/20% fixed;
 }
