@@ -243,18 +243,6 @@ ins.ads2 {
 	margin-bottom: -50px !important;
 }
 
-ins h1 {
-	background-color: aqua;
-	border-radius: 10px;
-	margin: 0 10px;
-	padding: 10px;
-}
-
-/* 关闭空广告提示 */
-ins.adsbygoogle[data-ad-status="filled"] h1 {
-	display: none;
-}
-
 /* 关闭空广告 */
 ins.adsbygoogle[data-ad-status="unfilled"] {
 	display: none !important;
