@@ -58,5 +58,16 @@
 		}
 	],
 	"url": "./",
-	"manifestUrl": "./manifest.json"
+	"manifestUrl": "./manifest.json",
+	"shortcuts": [{
+		"name": "更多游戏",
+		"url": "https://gamebox.heheda.top",
+		"description": "就玩与众不同！"
+	}],
+	"categories": [
+		"games"
+	],
+	"edge_side_panel": {
+		"preferred_width": 480
+	}
 }

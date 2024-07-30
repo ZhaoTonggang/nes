@@ -75,25 +75,29 @@ body {
 }
 
 .hul li a {
-	color: black;
+	color: #000000;
 	font-size: 16px;
 	line-height: 40px;
 	transition: all 1s;
 }
 
-.hul li a img {
-	height: 25px;
-	width: 25px;
+.hul li a .iconfont {
+	color: #000000;
 	margin-right: 5px;
-	vertical-align: middle;
 	transition: all 1s;
+	width: 1.5em;
+	height: 1.5em;
+	vertical-align: -0.35em;
+	fill: currentColor;
+	overflow: hidden;
 }
 
 .hul li a:hover,
 .hul li a.selected {
 	color: #008cff;
 
-	& img {
+	& .iconfont {
+		color: #008cff;
 		transform: rotateY(360deg);
 	}
 }
