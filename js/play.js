@@ -68,7 +68,8 @@ if (window.top != window) {
 			'fceumm_overscan_v_bottom': '0',
 			'save-state-location': 'browser',
 			'fceumm_sndquality': 'Very High',
-			'fceumm_turbo_enable': 'Both'
+			'fceumm_turbo_enable': 'Both',
+			'webgl2Enabled': 'enabled'
 		}
 		// 背景模糊
 		window.backgroundBlur = true;
@@ -123,6 +124,10 @@ if (window.top != window) {
 			"Download Game Data": "下载游戏数据",
 			"Decompress Game Data": "解压游戏数据",
 			"Context Menu": "菜单",
+			"Exit EmulatorJS": "退出系统",
+			"Are you sure you want to exit?": "您确定要退出吗？",
+			"Cancel": "取消",
+			"Exit": "退出",
 			"Shaders": "着色器",
 			"Disabled": "禁用",
 			"2xScaleHQ": "2xScaleHQ",
@@ -131,6 +136,10 @@ if (window.top != window) {
 			"CRT aperture": "CRT荫栅式",
 			"CRT geom": "CRT几何",
 			"CRT mattias": "CRT马蒂亚斯",
+			"VSync": "垂直同步",
+			"WebGL2": "WebGL2",
+			"Requires page reload": "需要重新加载页面",
+			"Note that some cheats require a restart to disable": "某些作弊代码需要重新启动才能禁用",
 			"FPS": "FPS",
 			"show": "展示",
 			"hide": "隐藏",
