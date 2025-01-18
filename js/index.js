@@ -42,7 +42,8 @@ const intdata = () => {
 				let span1 = data[j].v ? '<span class="item_p2">' + data[j].v + '</span>' : '';
 				let span2 = data[j].c ? '<span class="item_p3">' + data[j].c + '</span>' : '';
 				let opgamev = data[j].v ? '(' + data[j].v + ')' : '';
-				let purl = encodeURI('./play/?n=' + data[j].n + opgamev + '&i=' + data[j].i);
+				let purl = './play/?' + btoa(encodeURIComponent('n=' + data[j].n + opgamev + '&i=' + data[j]
+				.i));
 				item += '<a href="' + purl + '" title="' + data[j].n + opgamev +
 					'" target="_self"><div class="item">' +
 					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" alt="' + data[j].n + opgamev +
@@ -123,7 +124,7 @@ window._iconfont_svg_string_ =
 				try {
 					document.write(
 						"<style>.svgfont {display: inline-block;width: 1em;height: 1em;fill: currentColor;vertical-align: -0.1em;font-size:16px;}</style>"
-						)
+					)
 				} catch (t) {
 					console && console.log(t)
 				}

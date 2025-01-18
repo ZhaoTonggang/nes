@@ -237,15 +237,6 @@ body {
 	top: 85%;
 }
 
-ins.ads1,
-ins.gogad {
-	padding-top: 60px !important;
-}
-
-ins.ads1 {
-	margin-bottom: -50px !important;
-}
-
 /* 关闭空广告 */
 ins.adsbygoogle[data-ad-status="unfilled"] {
 	display: none !important;

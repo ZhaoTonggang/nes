@@ -15,10 +15,10 @@ const urlerr = () => {
 if (window.top != window) {
 	alert('当您看到这条提示意味着：您所访问的网站正在恶意调用本站资源，本站对偷盗资源的行为0容忍，点击确认跳转正版体验。');
 	window.open(urldata, '_self');
-} else if (urldata.indexOf('?') > -1 && urldata.indexOf('&') > -1 && urldata.indexOf('=') > -1) {
-	const urlarr = decodeURI(urldata).split('?')[1];
+} else if (urldata.indexOf('?') > -1) {
+	const urlarr = decodeURIComponent(atob(urldata.split('?')[1]));
 	if (urldata.indexOf('index') > -1) {
-		window.open('./?' + encodeURI(urlarr), '_self');
+		window.open('./?' + btoa(encodeURIComponent(urlarr)), '_self');
 	} else {
 		const urlarrs = urlarr.split('&');
 		for (let i = 0; i < urlarrs.length; i++) {
