@@ -15,19 +15,15 @@ const urlerr = () => {
 if (window.top != window) {
 	alert('当您看到这条提示意味着：您所访问的网站正在恶意调用本站资源，本站对偷盗资源的行为0容忍，点击确认跳转正版体验。');
 	window.open(urldata, '_self');
-} else if (urldata.indexOf('?') > -1) {
-	const urlarr = decodeURIComponent(atob(urldata.split('?')[1]));
-	if (urldata.indexOf('index') > -1) {
-		window.open('./?' + btoa(encodeURIComponent(urlarr)), '_self');
-	} else {
-		const urlarrs = urlarr.split('&');
-		for (let i = 0; i < urlarrs.length; i++) {
-			let data = urlarrs[i].split('=');
-			if (data == "") {
-				urlerr();
-			} else {
-				gameInfo[data[0]] = data[1];
-			}
+} else if (urldata.indexOf('?') > -1 && urldata.indexOf('.html') > -1) {
+	const urlarr = decodeURIComponent(atob(urldata.substring(urldata.indexOf('?') + 1, urldata.indexOf('.html'))));
+	const urlarrs = urlarr.split('&');
+	for (let i = 0; i < urlarrs.length; i++) {
+		let data = urlarrs[i].split('=');
+		if (data == "") {
+			urlerr();
+		} else {
+			gameInfo[data[0]] = data[1];
 		}
 		cocoMessage.warning("正在配置资源！", 2000);
 		const showload = document.getElementById('btn_load');
@@ -53,8 +49,6 @@ if (window.top != window) {
 		window.adUrl = "../ads/";
 		// 光枪
 		window.EJS_lightgun = true;
-		// 全屏
-		window.fullscreenOnLoad = true;
 		// 广告时间
 		window.adTimer = 5000;
 		// 音量
@@ -617,7 +611,8 @@ if (navigator.share) {
 	console.log("分享功能禁用");
 }
 //获取设备类型
-let isMobile = /(iPhone|iPod|Android|ios|iOS|iPad|WebOS|Symbian|Windows Phone|Phone)/i.test(navigator.userAgent);
+let isMobile = /(iPhone|iPod|Android|ios|iOS|iPad|WebOS|Symbian|Windows Phone|Phone)/i.test(navigator
+	.userAgent);
 //设置操作方式
 const mobile = () => {
 	const player1 = document.getElementById("player1");

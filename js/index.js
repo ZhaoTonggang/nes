@@ -43,7 +43,7 @@ const intdata = () => {
 				let span2 = data[j].c ? '<span class="item_p3">' + data[j].c + '</span>' : '';
 				let opgamev = data[j].v ? '(' + data[j].v + ')' : '';
 				let purl = './play/?' + btoa(encodeURIComponent('n=' + data[j].n + opgamev + '&i=' + data[j]
-				.i));
+					.i)) + '.html';
 				item += '<a href="' + purl + '" title="' + data[j].n + opgamev +
 					'" target="_self"><div class="item">' +
 					'<div class="img_box"><img src="./imgs/' + data[j].i + '.png" alt="' + data[j].n + opgamev +
