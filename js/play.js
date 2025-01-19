@@ -16,7 +16,7 @@ if (window.top != window) {
 	alert('当您看到这条提示意味着：您所访问的网站正在恶意调用本站资源，本站对偷盗资源的行为0容忍，点击确认跳转正版体验。');
 	window.open(urldata, '_self');
 } else if (urldata.indexOf('?') > -1 && urldata.indexOf('.html') > -1) {
-	const urlarr = decodeURIComponent(atob(urldata.substring(urldata.indexOf('?') + 1, urldata.indexOf('.html'))));
+	const urlarr = decodeURI(atob(urldata.substring(urldata.indexOf('?') + 1, urldata.indexOf('.html'))));
 	const urlarrs = urlarr.split('&');
 	for (let i = 0; i < urlarrs.length; i++) {
 		let data = urlarrs[i].split('=');
