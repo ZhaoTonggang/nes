@@ -18,7 +18,7 @@ if (window.top != window) {
 } else if (urldata.indexOf('?') > -1 && urldata.indexOf('.html') > -1) {
 	const urlarr = decodeURI(atob(urldata.substring(urldata.indexOf('?') + 1, urldata.indexOf('.html'))));
 	const urlarrs = urlarr.split('&');
-	for (let i = 0; i < urlarrs.length; i++) {
+	for (let i = 0, len = urlarrs.length; i < len; i++) {
 		let data = urlarrs[i].split('=');
 		if (data == "") {
 			urlerr();
