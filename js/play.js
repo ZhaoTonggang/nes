@@ -32,6 +32,12 @@ if (window.top != window) {
 	document.getElementById('name').innerHTML = gameInfo.n;
 	// 修改title
 	document.title = gameInfo.n + ' - ' + '红白机游戏盒';
+	// 配置下载功能
+	const dlink = document.getElementById('down');
+	dlink.href = '../roms/' + gameInfo.i + '.7z';
+	dlink.download = gameInfo.n + '.7z';
+	dlink.style.display = 'inline-block';
+	// 游戏名称
 	window.gameName = gameInfo.n;
 	// 联机服务
 	window.netplayUrl = "https://game-online.heheda.top/";
@@ -640,16 +646,6 @@ const share = () => {
 		url: urldata,
 		text: '推荐使用电脑，运行更加流畅！在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
 	})
-}
-// 下载rom按钮
-const dowrom = () => {
-	const dorom = confirm('您要下载此游戏的ROM文件吗？');
-	if (dorom == true) {
-		cocoMessage.warning("即将开始下载！", 2000);
-		window.open('../roms/' + gameInfo.i + '.7z');
-	} else {
-		cocoMessage.warning("您取消了下载！", 2000);
-	}
 }
 // 截屏
 const screenshot = () => {

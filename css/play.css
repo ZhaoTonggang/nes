@@ -13,6 +13,7 @@
 	font-weight: bold;
 	font-family: PingFang SC, SimSun, KaiTi, YouYuan;
 	text-align: center;
+	box-sizing: border-box;
 }
 
 html,
@@ -24,24 +25,14 @@ body {
 
 body {
 	opacity: 1;
-	transform: rotateX(0deg);
-	-moz-transition: opacity 2s ease-out, transform 2s ease;
-	-webkit-transition: opacity 2s ease-out, transform 2s ease;
-	-ms-transition: opacity 2s ease-out, transform 2s ease;
-	transition: opacity 2s ease-out, transform 2s ease;
-	box-sizing: border-box;
-}
-
-body,
-.ejs_canvas {
-	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
-	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
-	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
-	background: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)), url("../image/bg.jpg");
-	background-repeat: no-repeat, no-repeat;
-	background-size: cover, cover;
-	background-position: center center, center center;
-	background-attachment: fixed, fixed;
+	-moz-transition: opacity 2s ease-out;
+	-webkit-transition: opacity 2s ease-out;
+	-ms-transition: opacity 2s ease-out;
+	transition: opacity 2s ease-out;
+	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)) no-repeat center/cover fixed, url("../image/bg.jpg") no-repeat center/cover fixed;
+	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)) no-repeat center/cover fixed, url("../image/bg.jpg") no-repeat center/cover fixed;
+	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)) no-repeat center/cover fixed, url("../image/bg.jpg") no-repeat center/cover fixed;
+	background: linear-gradient(60deg, rgba(253, 158, 240, 0.5), rgba(129, 208, 253, 0.5)) no-repeat center/cover fixed, url("../image/bg.jpg") no-repeat center/cover fixed;
 }
 
 /* 标题容器 */
@@ -76,14 +67,18 @@ body,
 	transition: all 1s;
 }
 
-.titbut:hover {
-	& img {
-		transform: rotateZ(360deg);
-	}
+.titbut:hover>a>img,
+.titbut:hover>img {
+	transform: rotateZ(360deg);
+}
 
-	& p {
-		color: #008cff;
-	}
+.titbut:hover>a>p,
+.titbut:hover>p {
+	color: #008cff;
+}
+
+#down {
+	display: none;
 }
 
 .titbut img {
@@ -104,7 +99,7 @@ body,
 
 #name {
 	position: fixed;
-	top: 20px;
+	top: 30px;
 	left: 50%;
 	transform: translate(-50%);
 	padding: 5px;
@@ -118,8 +113,8 @@ body,
 #show_box {
 	height: 100%;
 	width: 100%;
-	background: url(../image/nesico.svg) no-repeat center/50%;
-	position: absolute;
+	background: url('../image/nesico.svg') no-repeat center/50% fixed;
+	position: fixed;
 }
 
 #btn_load {
@@ -139,7 +134,7 @@ body,
 #player1,
 #player2 {
 	display: none;
-	bottom: 50px;
+	bottom: 20px;
 	padding: 10px;
 	position: fixed;
 	z-index: 90;
@@ -245,33 +240,22 @@ hr {
 
 /* 竖屏 */
 @media screen and (orientation: portrait) {
-
-	.titlel,
-	.titler {
-		display: contents;
+	#name {
+		display: none;
 	}
 
 	#show_box {
-		height: 93%;
-	}
-
-	.titbut {
-		margin: 20px auto;
-	}
-
-	#name {
-		display: none;
+		background: url(../image/nesico.svg) no-repeat top/50% fixed;
 	}
 }
 
 /* 页面加载遮罩 */
 .is-loading {
 	opacity: 0;
-	transform: rotateX(360deg);
-	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.svg) no-repeat center/20%;
-	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.svg) no-repeat center/20%;
-	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.svg) no-repeat center/20%;
-	background: linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover, url(../image/loader.svg) no-repeat center/20%;
+	background: -moz-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover fixed, url(../image/loader.svg) no-repeat center/20% fixed;
+	background: -webkit-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover fixed, url(../image/loader.svg) no-repeat center/20% fixed;
+	background: -ms-linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover fixed, url(../image/loader.svg) no-repeat center/20% fixed;
+	background: linear-gradient(60deg, rgba(253, 158, 240, 0.7), rgba(129, 208, 253, 0.7)) no-repeat center/cover fixed, url(../image/loader.svg) no-repeat center/20% fixed;
 }
 
 ins.adsbygoogle[data-ad-status="unfilled"] {
