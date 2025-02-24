@@ -40,9 +40,9 @@ const intdata = () => {
 				let opgamev = data[j].v ? '(' + data[j].v + ')' : '';
 				let purl = './play/?' + btoa(encodeURI('n=' + data[j].n + opgamev + '&i=' + data[j].i)) +
 					'.html';
-				item += '<a target="_blank" rel="noopener noreferrer" href="' + purl + '" title="' + data[j].n +
-					opgamev + '" target="_self"><div class="item">' + '<div class="img_box"><img src="./imgs/' +
-					data[j].i + '.png" alt="' + data[j].n + opgamev + '">' + span1 + span2 +
+				item += '<a href="' + purl + '" title="' + data[j].n + opgamev +
+					'" target="_self"><div class="item">' + '<div class="img_box"><img src="./imgs/' + data[j]
+					.i + '.png" alt="' + data[j].n + opgamev + '">' + span1 + span2 +
 					'</div><p class="item_p1">' + data[j].n + '</p></div></a>';
 			}
 			app.innerHTML = item;
