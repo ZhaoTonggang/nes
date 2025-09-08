@@ -42,7 +42,7 @@ const intdata = () => {
 					'.html';
 				item += '<a href="' + purl + '" title="' + data[j].n + opgamev +
 					'" target="_self"><div class="item">' + '<div class="img_box"><img src="./imgs/' + data[j]
-					.i + '.png" alt="' + data[j].n + opgamev + '">' + span1 + span2 +
+					.i + '.png" alt="' + data[j].n + opgamev + '" loading="lazy">' + span1 + span2 +
 					'</div><p class="item_p1">' + data[j].n + '</p></div></a>';
 			}
 			app.innerHTML = item;
