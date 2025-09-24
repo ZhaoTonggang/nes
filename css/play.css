@@ -134,7 +134,7 @@ body {
 #player1,
 #player2 {
 	display: none;
-	bottom: 20px;
+	bottom: 85px;
 	padding: 10px;
 	position: fixed;
 	z-index: 90;

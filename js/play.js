@@ -1,7 +1,7 @@
 // 严格模式
 "use strict";
 // 必要信息
-let gameInfo = {};
+let gameInfo, gname;
 const urldata = window.location.href;
 //游戏状态
 let setgame = false;
@@ -11,42 +11,44 @@ const urlerr = () => {
 	window.location.href = "/";
 	return;
 }
+// 过滤器
+const pushv = (c) => {
+	const filt = {
+		2: '简体中文',
+		3: '繁体中文',
+		4: '英文'
+	};
+	return (c in filt) ? filt[c] : c;
+}
 // 判断数据合法性
 if (window.top != window) {
 	alert('当您看到这条提示意味着：您所访问的网站正在恶意调用本站资源，本站对偷盗资源的行为0容忍，点击确认跳转正版体验。');
 	window.open(urldata, '_self');
 } else if (urldata.indexOf('?') > -1 && urldata.indexOf('.html') > -1) {
-	const urlarr = decodeURI(atob(urldata.substring(urldata.indexOf('?') + 1, urldata.indexOf('.html'))));
-	const urlarrs = urlarr.split('&');
-	for (let i = 0, len = urlarrs.length; i < len; i++) {
-		let data = urlarrs[i].split('=');
-		if (data == "") {
-			urlerr();
-		} else {
-			gameInfo[data[0]] = data[1];
-		}
-	}
+	gameInfo = decodeURI(atob(urldata.substring(urldata.indexOf('?') + 1, urldata.indexOf('.html')))).split('&');
 	cocoMessage.warning("正在配置资源！", 2000);
 	const showload = document.getElementById('btn_load');
+	// 游戏名称和版本
+	gname = gameInfo[1] + (gameInfo[2] ? '(' + pushv(gameInfo[2]) + ')' : '');
 	//展示游戏名称
-	document.getElementById('name').innerHTML = gameInfo.n;
+	document.getElementById('name').innerHTML = gname;
 	// 修改title
-	document.title = gameInfo.n + ' - ' + '红白机游戏盒';
+	document.title = gname + ' - ' + '红白机游戏盒';
 	// 配置下载功能
 	const dlink = document.getElementById('down');
-	dlink.href = '../roms/' + gameInfo.i + '.7z';
-	dlink.download = gameInfo.n + '.7z';
+	dlink.href = '../roms/' + gameInfo[0] + '.7z';
+	dlink.download = gname + '.7z';
 	dlink.style.display = 'inline-block';
 	// 游戏名称
-	window.gameName = gameInfo.n;
+	window.gameName = gname;
 	// 联机服务
 	window.netplayUrl = "https://game-online.heheda.top/";
 	// 游戏ID
-	window.gameId = gameInfo.i;
+	window.gameId = gameInfo[0];
 	// 封面
-	window.backgroundImg = window.location.origin + '/imgs/' + gameInfo.i + '.png';
+	window.backgroundImg = window.location.origin + '/imgs/' + gameInfo[0] + '.png';
 	// ROM
-	window.gameUrl = "../roms/" + gameInfo.i + ".7z";
+	window.gameUrl = "../roms/" + gameInfo[0] + ".7z";
 	// 初始化
 	window.EJS_player = "#show_box";
 	window.dataPath = "https://other.heheda.top/gamelib/";
@@ -594,9 +596,9 @@ if (window.top != window) {
 		}
 		setgame = true;
 		// 卸载提示
-		window.onbeforeunload = (bfe) => {
-			bfe.preventDefault();
-			bfe.returnValue = "退出前，别忘记保存游戏进度哦！";
+		window.onbeforeunload = (e) => {
+			e.preventDefault();
+			e.returnValue = "退出前，别忘记保存游戏进度哦！";
 		}
 	})
 	// 监听存档
@@ -642,7 +644,7 @@ const chongzai = () => {
 // 分享
 const share = () => {
 	navigator.share({
-		title: '在线玩《' + gameInfo.n + '》',
+		title: '在线玩《' + gname + '》',
 		url: urldata,
 		text: '推荐使用电脑，运行更加流畅！在线免费畅玩或下载红白机游戏，包括魂斗罗，超级玛丽，坦克大战等小霸王经典游戏，让我们一同找回童年的快乐！玩红白机游戏，就认准红白机游戏盒！'
 	})
@@ -668,7 +670,7 @@ const screenshot = () => {
 // 		const hnul = document.getElementById("hnul");
 // 		if (sbts) {
 // 			sbts = false;
-// 			let code = gameInfo.i.toString();
+// 			let code = gameInfo[0].toString();
 // 			HDB.initDB().then(() => {
 // 				HDB.getDataListByCode(code).then((data) => {
 // 					let result = "";

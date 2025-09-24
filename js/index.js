@@ -8,6 +8,27 @@ if (window.top != window) {
 } else if (url.indexOf('index') > -1) {
 	window.open('./', '_self');
 }
+// 过滤器
+const pushv = (c) => {
+	const filt = {
+		2: '简体中文',
+		3: '繁体中文',
+		4: '英文'
+	};
+	return (c in filt) ? filt[c] : c;
+}
+const pushc = (c) => {
+	const filt = {
+		2: '小霸王',
+		3: '晶科泰',
+		4: '巨声电子',
+		5: '全威资讯',
+		6: '外星电脑',
+		7: '南晶科技',
+		8: '恒格电子'
+	};
+	return (c in filt) ? filt[c] : c;
+}
 // 取得资源
 let timeout = null;
 const search = document.getElementById('search');
@@ -34,16 +55,18 @@ const intdata = () => {
 					return;
 				}
 			}
+			console.log(data);
 			for (let j = 0, len = data.length; j < len; j++) {
-				let span1 = data[j].v ? '<span class="item_p2">' + data[j].v + '</span>' : '';
-				let span2 = data[j].c ? '<span class="item_p3">' + data[j].c + '</span>' : '';
-				let opgamev = data[j].v ? '(' + data[j].v + ')' : '';
-				let purl = './play/?' + btoa(encodeURI('n=' + data[j].n + opgamev + '&i=' + data[j].i)) +
-					'.html';
-				item += '<a href="' + purl + '" title="' + data[j].n + opgamev +
-					'" target="_self"><div class="item">' + '<div class="img_box"><img src="./imgs/' + data[j]
-					.i + '.png" alt="' + data[j].n + opgamev + '" loading="lazy">' + span1 + span2 +
-					'</div><p class="item_p1">' + data[j].n + '</p></div></a>';
+				let span1 = data[j][2] ? '<span class="item_p2">' + pushv(data[j][2]) + '</span>' : '';
+				let span2 = data[j][3] ? '<span class="item_p3">' + pushc(data[j][3]) + '</span>' : '';
+				let opgamev = data[j][2] ? '(' + pushv(data[j][2]) + ')' : '';
+				let gamev = data[j][2] ? '&' + data[j][2] : '';
+				let purl = './play/?' + btoa(encodeURI(data[j][0] + '&' + data[j][1] + gamev)) + '.html';
+				item += '<a href="' + purl + '" title="' + data[j][1] + opgamev +
+					'" target="_self"><div class="item">' + '<div class="img_box"><img src="./imgs/' + data[j][
+						0
+					] + '.png" alt="' + data[j][1] + opgamev + '" loading="lazy">' + span1 + span2 +
+					'</div><p class="item_p1">' + data[j][1] + '</p></div></a>';
 			}
 			app.innerHTML = item;
 			// 移除遮罩
