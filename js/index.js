@@ -49,13 +49,12 @@ const intdata = () => {
 			if (searchV === '') {
 				data = datas;
 			} else {
-				data = datas.filter(array => array.n.match(searchV));
+				data = datas.filter(array => array[1].match(searchV));
 				if (data.length === 0) {
 					app.innerHTML = '<h1 id="apph">什么东东都没有，换个词试试丫!</h1>';
 					return;
 				}
 			}
-			console.log(data);
 			for (let j = 0, len = data.length; j < len; j++) {
 				let span1 = data[j][2] ? '<span class="item_p2">' + pushv(data[j][2]) + '</span>' : '';
 				let span2 = data[j][3] ? '<span class="item_p3">' + pushc(data[j][3]) + '</span>' : '';
